@@ -18,14 +18,14 @@ public:
 	//stacken är tom.
 	const T& GetTop() const
 	{
-		assert(!myBuffer.empty(), "Called stack is empty! Shame on you.");
+		assert(!myBuffer.empty() && "[GetTop()] Stack is Empty!");
 		return myBuffer[0];
 	}
 	//Returnerar det översta elementet i stacken. Kraschar med en assert om
 	//stacken är tom.
 	T& GetTop()
 	{
-		assert(!myBuffer.empty(), "Called stack is empty! Shame on you.");
+		assert(!myBuffer.empty() && "[GetTop()] Stack is Empty!");
 		return myBuffer[0];
 	}
 	//Lägger in ett nytt element överst på stacken
@@ -37,7 +37,7 @@ public:
 	//med en assert om stacken är tom.
 	T Pop()
 	{
-		assert(!myBuffer.empty(), "Called stack is empty! Shame on you.");
+		assert(!myBuffer.empty() && "[Pop()] Stack is Empty!");
 		return myBuffer.pop_back();
 	}
 

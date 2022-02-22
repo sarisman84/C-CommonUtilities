@@ -18,14 +18,14 @@ public:
 	//tom
 	const T& GetFront() const
 	{
-		assert(!myBuffer.empty(), "Called queue is empty! To the gulags with you.");
+		assert(!myBuffer.empty() && "[GetFront()] Queue is Empty!");
 		return myBuffer.front();
 	}
 	//Returnerar elementet längst fram i kön. Kraschar med en assert om kön är
 	//tom
 	T& GetFront()
 	{
-		assert(!myBuffer.empty(), "Called queue is empty! To the gulags with you.");
+		assert(!myBuffer.empty() && "[GetFront()] Queue is Empty!");
 		return myBuffer.front();
 	}
 	//Lägger in ett nytt element längst bak i kön
@@ -37,7 +37,7 @@ public:
 	//assert om kön är tom.
 	T Dequeue()
 	{
-		assert(!myBuffer.empty(), "Called queue is empty! To the gulags with you.");
+		assert(!myBuffer.empty() && "[Dequeue()] Queue is Empty!");
 		T val = myBuffer.front();
 		myBuffer.erase(std::remove(myBuffer.begin(), myBuffer.end(), val), myBuffer.end());
 		return val;
