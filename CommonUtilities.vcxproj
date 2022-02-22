@@ -163,12 +163,14 @@
     </Xdcmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="DoublyLinkedList.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Input.h" />
-    <ClInclude Include="LinkedLists.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="ObjectFactory.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Queue.hpp" />
+    <ClInclude Include="Stack.hpp" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="UtilityFunctions.h" />
     <ClInclude Include="Vector.h" />

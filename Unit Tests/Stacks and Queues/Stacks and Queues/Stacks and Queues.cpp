@@ -19,8 +19,6 @@ namespace StacksandQueues
 			Stackf stack = Stackf();
 			Assert::AreEqual(stack.GetSize(), 0, L"[Error] Stack should be empty!");
 
-
-
 		}
 
 		TEST_METHOD(GetTop)

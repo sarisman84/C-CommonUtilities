@@ -51,7 +51,13 @@
     <ClInclude Include="Vector4.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LinkedLists.h">
+    <ClInclude Include="DoublyLinkedList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Stack.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Queue.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
