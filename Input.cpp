@@ -40,7 +40,10 @@ bool CommonUtilities::Input::UpdateEvents(UINT aMessage, WPARAM anWParam, LPARAM
 
 
 
-	myGamepadInput.Refresh();
+	
+	myGamepadLeftStick = Point(myGamepadInput.leftStickX, myGamepadInput.leftStickY);
+	myGamepadRightStick = Point(myGamepadInput.rightStickX, myGamepadInput.rightStickY);
+
 
 	return false;
 
@@ -48,37 +51,41 @@ bool CommonUtilities::Input::UpdateEvents(UINT aMessage, WPARAM anWParam, LPARAM
 
 
 
-bool CommonUtilities::Input::GetButtonDown(KeyCode aKey)
+bool CommonUtilities::Input::GetButtonDown(const KeyCode aKey)
 {
 	if (IsXInput(aKey)) {
 		bool isPressed = myGamepadInput.IsPressed(GetInput(aKey));
-		bool result = isPressed && !myPastGamepadState[static_cast<int>(aKey) - 10];
-		myPastGamepadState[static_cast<int>(aKey) - 10] = isPressed;
+		bool result = isPressed && !myPastGamepadState[static_cast<int>(aKey) + 10];
+		myPastGamepadState[static_cast<int>(aKey) + 10] = isPressed;
+		myGamepadInput.Refresh();
 		return result;
 	}
 
 
-	bool result = myKeyboardState[static_cast<int>(aKey) - 10] && !myPastKeyboardState[static_cast<int>(aKey) - 10];
-	myPastKeyboardState[static_cast<int>(aKey) - 10] = myKeyboardState[static_cast<int>(aKey) - 10];
+	bool result = myKeyboardState[static_cast<int>(aKey)] && !myPastKeyboardState[static_cast<int>(aKey)];
+	myPastKeyboardState[static_cast<int>(aKey)] = myKeyboardState[static_cast<int>(aKey)];
 	return result;
 }
 
-bool CommonUtilities::Input::GetButton(KeyCode aKey)
+bool CommonUtilities::Input::GetButton(const KeyCode aKey)
 {
 	if (IsXInput(aKey)) {
 
-		return  myGamepadInput.IsPressed(GetInput(aKey));
+		bool input = myGamepadInput.IsPressed(GetInput(aKey));
+		myGamepadInput.Refresh();
+		return input;
 	}
 
 	return myKeyboardState[static_cast<int>(aKey)];
 }
 
-bool CommonUtilities::Input::GetButtonUp(KeyCode aKey)
+bool CommonUtilities::Input::GetButtonUp(const KeyCode aKey)
 {
 	if (IsXInput(aKey)) {
 		bool isPressed = myGamepadInput.IsPressed(GetInput(aKey));
-		bool result = !isPressed && myPastGamepadState[static_cast<int>(aKey)];
-		myPastGamepadState[static_cast<int>(aKey)] = isPressed;
+		bool result = !isPressed && myPastGamepadState[static_cast<int>(aKey) + 10];
+		myPastGamepadState[static_cast<int>(aKey) + 10] = isPressed;
+		myGamepadInput.Refresh();
 		return result;
 	}
 
@@ -86,6 +93,19 @@ bool CommonUtilities::Input::GetButtonUp(KeyCode aKey)
 
 	myPastKeyboardState[static_cast<int>(aKey)] = myKeyboardState[static_cast<int>(aKey)];
 	return result;
+}
+
+CommonUtilities::Point CommonUtilities::Input::GetGamepadStick(const Stick aStick)
+{
+	switch (aStick)
+	{
+	default:
+		return Point();
+	case Stick::Left:
+		return myGamepadLeftStick;
+	case Stick::Right:
+		return myGamepadRightStick;
+	}
 }
 
 CommonUtilities::Point CommonUtilities::Input::GetMousePosition()
@@ -121,6 +141,7 @@ float CommonUtilities::Input::GetAxisRaw(Axis anAxis)
 const bool CommonUtilities::Input::IsXInput(const KeyCode akey)
 {
 	return
+		akey == KeyCode::Gamepad_A ||
 		akey == KeyCode::Gamepad_B ||
 		akey == KeyCode::Gamepad_X ||
 		akey == KeyCode::Gamepad_Y ||
