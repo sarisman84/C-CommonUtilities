@@ -47,7 +47,7 @@ namespace CommonUtilities
 		Alt = VK_MENU,
 		Space = VK_SPACE,
 		Control = VK_CONTROL,
-
+		Enter = VK_RETURN,
 
 		LeftMouseButton = VK_LBUTTON,
 		RightMouseButton = VK_RBUTTON,
