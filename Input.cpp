@@ -40,10 +40,10 @@ bool CommonUtilities::Input::UpdateEvents(UINT aMessage, WPARAM anWParam, LPARAM
 
 
 
-	
+
 	myGamepadLeftStick = Point(myGamepadInput.leftStickX, myGamepadInput.leftStickY);
 	myGamepadRightStick = Point(myGamepadInput.rightStickX, myGamepadInput.rightStickY);
-
+	myGamepadInput.Refresh();
 
 	return false;
 
@@ -53,13 +53,7 @@ bool CommonUtilities::Input::UpdateEvents(UINT aMessage, WPARAM anWParam, LPARAM
 
 bool CommonUtilities::Input::GetButtonDown(const KeyCode aKey)
 {
-	if (IsXInput(aKey)) {
-		bool isPressed = myGamepadInput.IsPressed(GetInput(aKey));
-		bool result = isPressed && !myPastGamepadState[static_cast<int>(aKey) + 10];
-		myPastGamepadState[static_cast<int>(aKey) + 10] = isPressed;
-		myGamepadInput.Refresh();
-		return result;
-	}
+	
 
 
 	bool result = myKeyboardState[static_cast<int>(aKey)] && !myPastKeyboardState[static_cast<int>(aKey)];
@@ -69,25 +63,14 @@ bool CommonUtilities::Input::GetButtonDown(const KeyCode aKey)
 
 bool CommonUtilities::Input::GetButton(const KeyCode aKey)
 {
-	if (IsXInput(aKey)) {
-
-		bool input = myGamepadInput.IsPressed(GetInput(aKey));
-		myGamepadInput.Refresh();
-		return input;
-	}
+	
 
 	return myKeyboardState[static_cast<int>(aKey)];
 }
 
 bool CommonUtilities::Input::GetButtonUp(const KeyCode aKey)
 {
-	if (IsXInput(aKey)) {
-		bool isPressed = myGamepadInput.IsPressed(GetInput(aKey));
-		bool result = !isPressed && myPastGamepadState[static_cast<int>(aKey) + 10];
-		myPastGamepadState[static_cast<int>(aKey) + 10] = isPressed;
-		myGamepadInput.Refresh();
-		return result;
-	}
+	
 
 	bool result = !myKeyboardState[static_cast<int>(aKey)] && myPastKeyboardState[static_cast<int>(aKey)];
 
@@ -271,3 +254,23 @@ const int CommonUtilities::Point::GetYPos() const
 	return myYPos;
 }
 
+std::ostream& CommonUtilities::operator<<(std::ostream& aStream, const Point& aPoint)
+{
+	aStream << "(x:" << aPoint.GetXPos() << ", y:" << aPoint.GetYPos() << ")";
+	return aStream;
+}
+
+const UINT CommonUtilities::Input::Gamepad::GetControllerID() const noexcept
+{
+	return 0;
+}
+
+XINPUT_GAMEPAD* const CommonUtilities::Input::Gamepad::GetGamepad()
+{
+	return nullptr;
+}
+
+bool CommonUtilities::Input::Gamepad::IsConnected()
+{
+	return false;
+}

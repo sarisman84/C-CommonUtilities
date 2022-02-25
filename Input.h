@@ -6,7 +6,11 @@
 #include <WinUser.h>
 #include <bitset>
 
-#include <tga2d/input/XInput.h>
+#include <Xinput.h>
+#include <ostream>
+#include <queue>
+#include <string>
+#include <optional>
 
 
 
@@ -169,7 +173,7 @@ dec hex key type def   dec hex key type   dec hex key type   dec hex key type
 	};
 
 	const unsigned int ourKeyboardSize = 500;
-	const unsigned int ourGamepadSize = 12;
+
 	class Input
 	{
 	public:
@@ -182,7 +186,6 @@ dec hex key type def   dec hex key type   dec hex key type   dec hex key type
 		bool GetButton(const KeyCode aKey);
 		bool GetButtonUp(const KeyCode aKey);
 
-		Point GetGamepadStick(const Stick aStick);
 
 		Point GetMousePosition();
 		Point GetMouseDelta();
@@ -198,33 +201,24 @@ dec hex key type def   dec hex key type   dec hex key type   dec hex key type
 
 
 	private:
-		Tga2D::CXInput myGamepadInput;
 
 
-		const bool IsXInput(const KeyCode aKey);
-		const WORD GetInput(const KeyCode aKey);
 
 		Point myMouseScroll;
 		Point myMousePosition;
 		Point myPastMousePosition;
 
-		Point myGamepadLeftStick;
-		Point myGamepadRightStick;
-
 		std::bitset<ourKeyboardSize> myKeyboardState;
 		std::bitset<ourKeyboardSize> myPastKeyboardState;
 
 
-		std::bitset<ourGamepadSize> myPastGamepadState;
+
 
 	};
 
 
 
-	std::ostream& operator<<(std::ostream& aStream, const Point& aPoint) {
-		aStream << "(" << aPoint.GetXPos() << aPoint.GetYPos() << ")";
-		return aStream;
-	}
+	std::ostream& operator<<(std::ostream& aStream, const Point& aPoint);
 
 
 }
