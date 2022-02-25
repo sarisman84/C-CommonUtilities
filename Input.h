@@ -6,14 +6,18 @@
 #include <WinUser.h>
 #include <bitset>
 
+#include <tga2d/input/XInput.h>
+
+
+
 namespace CommonUtilities
 {
 	class Result;
 }
 
 
-#define mousePosition GetMousePosition()
-#define mouseDelta GetMouseDelta()
+#define MOUSEPOSITION GetMousePosition()
+#define MOUSEDELTA GetMouseDelta()
 //#define PRINT KEYEVENT({DebugPrint(aMessage, anWParam); return false;})
 
 namespace CommonUtilities
@@ -75,6 +79,24 @@ namespace CommonUtilities
 		X = 0x58,
 		Y = 0x59,
 		Z = 0x5A,
+
+
+
+		Gamepad_A = 10, //0x1000 - 4096
+		Gamepad_B = 11, //0x2000 - 8192
+		Gamepad_X = 12, //0x4000 - 16384
+		Gamepad_Y = 13, //0x8000 - 32768
+
+		Gamepad_LShoulder = 14, //0x0100 - 256
+		Gamepad_RShoulder = 15, //0x0200 - 512
+
+		Gamepad_LThumb = 16, //0x0040 - 64
+		Gamepad_RThumb = 17, //0x0080 - 128
+
+		Gamepad_Dpad_Up = 18, //0x0001 - 1
+		Gamepad_Dpad_Down = 19, //0x0002 - 2
+		Gamepad_Dpad_Left = 20, //0x0004 - 4
+		Gamepad_Dpad_Right = 21 //0x0008 - 8
 
 
 		/*
@@ -141,7 +163,8 @@ dec hex key type def   dec hex key type   dec hex key type   dec hex key type
 		Horizontal, Vertical
 	};
 
-	const int ourKeyboardSize = 500;
+	const unsigned int ourKeyboardSize = 500;
+	const unsigned int ourGamepadSize = 12;
 	class Input
 	{
 	public:
@@ -159,13 +182,24 @@ dec hex key type def   dec hex key type   dec hex key type   dec hex key type
 		float GetAxisRaw(Axis anAxis);
 
 
+
+
+
 	private:
-		
+		Tga2D::CXInput myGamepadInput;
+
+
+		const bool IsXInput(const KeyCode aKey);
+		const WORD GetInput(const KeyCode aKey);
+
 		Point myMouseScroll;
 		Point myMousePosition;
 		Point myPastMousePosition;
 		std::bitset<ourKeyboardSize> myKeyboardState;
 		std::bitset<ourKeyboardSize> myPastKeyboardState;
+
+
+		std::bitset<ourGamepadSize> myPastGamepadState;
 
 	};
 

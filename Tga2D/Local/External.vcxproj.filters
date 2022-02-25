@@ -1,0 +1,676 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="DirectXTK">
+      <UniqueIdentifier>{F78B7304-63F6-277B-AC34-D92018DE05D0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DirectXTK\Inc">
+      <UniqueIdentifier>{60BAD1EA-CC7A-4D21-95B5-969E013592FD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DirectXTK\Src">
+      <UniqueIdentifier>{6EE5D1EA-DAA5-4D21-A3E0-969E0F6092FD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StackWalker">
+      <UniqueIdentifier>{21FD7E7C-8DB2-F771-16A7-F148825BEE75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assimp">
+      <UniqueIdentifier>{724885F2-5EEA-AFC8-47A5-C31C33E63619}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assimp\Compiler">
+      <UniqueIdentifier>{1C28A7FC-88B3-14C1-91C4-97B5FDCE70C1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assimp\port">
+      <UniqueIdentifier>{2631904E-92E6-0844-1BDB-021B878FFF47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assimp\port\AndroidJNI">
+      <UniqueIdentifier>{B7177319-A311-9C6B-8C7E-327C781702D8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="bass">
+      <UniqueIdentifier>{8E78947C-7AAF-950D-239C-7B100FB2110F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="freetype">
+      <UniqueIdentifier>{89895BD8-7556-B6E3-9E6F-A48B8A9BEB71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="freetype\config">
+      <UniqueIdentifier>{8EE4183F-FA6F-8603-0381-09F86F8BE203}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="freetype\internal">
+      <UniqueIdentifier>{F5F566B3-610C-6549-AA83-F06A16D935D1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="freetype\internal\services">
+      <UniqueIdentifier>{887BCBD6-748B-77A7-DD44-DCC5C9736640}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imgui">
+      <UniqueIdentifier>{0098A80F-6CAC-D0C0-352E-7420A101CDF1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imgui\misc">
+      <UniqueIdentifier>{DBAA57AC-C762-99F9-306A-72551C4134EA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imgui\misc\cpp">
+      <UniqueIdentifier>{2D1AB313-19E8-A619-027C-1740EEE8827E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imgui\misc\fonts">
+      <UniqueIdentifier>{741D18CD-6016-371F-8948-1CA475A0162B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imgui\misc\freetype">
+      <UniqueIdentifier>{EE0F22B7-5A71-FFC4-E3DE-45774F3F3684}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imgui\misc\single_file">
+      <UniqueIdentifier>{4B942DFF-378E-5651-20FB-EC610C94BCBD}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Source\External\DirectXTK\Inc\DDSTextureLoader.h">
+      <Filter>DirectXTK\Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\DirectXTK\Inc\DirectXHelpers.h">
+      <Filter>DirectXTK\Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\DirectXTK\Inc\ScreenGrab.h">
+      <Filter>DirectXTK\Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\DirectXTK\Inc\WICTextureLoader.h">
+      <Filter>DirectXTK\Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\DirectXTK\Src\PlatformHelpers.h">
+      <Filter>DirectXTK\Src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\DirectXTK\Src\dds.h">
+      <Filter>DirectXTK\Src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\StackWalker\StackWalker.h">
+      <Filter>StackWalker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\BaseImporter.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\Bitmap.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\BlobIOSystem.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\ByteSwapper.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\Compiler\poppack1.h">
+      <Filter>assimp\Compiler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\Compiler\pstdint.h">
+      <Filter>assimp\Compiler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\Compiler\pushpack1.h">
+      <Filter>assimp\Compiler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\CreateAnimMesh.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\DefaultIOStream.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\DefaultIOSystem.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\DefaultLogger.hpp">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\Defines.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\Exceptional.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\Exporter.hpp">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\GenericProperty.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\Hash.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\IOStream.hpp">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\IOStreamBuffer.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\IOSystem.hpp">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\Importer.hpp">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\LineSplitter.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\LogAux.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\LogStream.hpp">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\Logger.hpp">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\Macros.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\MathFunctions.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\MemoryIOWrapper.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\NullLogger.hpp">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\ParsingUtils.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\Profiler.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\ProgressHandler.hpp">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\RemoveComments.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\SGSpatialSort.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\SceneCombiner.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\SkeletonMeshBuilder.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\SmoothingGroups.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\SmoothingGroups.inl">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\SpatialSort.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\StandardShapes.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\StreamReader.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\StreamWriter.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\StringComparison.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\StringUtils.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\Subdivision.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\TinyFormatter.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\Vertex.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\XMLTools.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\ai_assert.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\anim.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\camera.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\cexport.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\cfileio.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\cimport.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\color4.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\color4.inl">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\config.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\defs.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\fast_atof.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\importerdesc.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\irrXMLWrapper.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\light.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\material.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\material.inl">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\matrix3x3.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\matrix3x3.inl">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\matrix4x4.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\matrix4x4.inl">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\mesh.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\metadata.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\pbrmaterial.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\port\AndroidJNI\AndroidJNIIOSystem.h">
+      <Filter>assimp\port\AndroidJNI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\postprocess.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\qnan.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\quaternion.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\quaternion.inl">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\scene.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\texture.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\types.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\vector2.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\vector2.inl">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\vector3.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\vector3.inl">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\assimp\version.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\bass\bass.h">
+      <Filter>bass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\config\ftconfig.h">
+      <Filter>freetype\config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\config\ftheader.h">
+      <Filter>freetype\config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\config\ftmodule.h">
+      <Filter>freetype\config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\config\ftoption.h">
+      <Filter>freetype\config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\config\ftstdlib.h">
+      <Filter>freetype\config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\freetype.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\ftadvanc.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\ftautoh.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\ftbbox.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\ftbdf.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\ftbitmap.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\ftbzip2.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\ftcache.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\ftcffdrv.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\ftchapters.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\ftcid.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\fterrdef.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\fterrors.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\ftfntfmt.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\ftgasp.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\ftglyph.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\ftgxval.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\ftgzip.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\ftimage.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\ftincrem.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\ftlcdfil.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\ftlist.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\ftlzw.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\ftmac.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\ftmm.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\ftmodapi.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\ftmoderr.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\ftotval.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\ftoutln.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\ftpfr.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\ftrender.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\ftsizes.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\ftsnames.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\ftstroke.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\ftsynth.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\ftsystem.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\fttrigon.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\ftttdrv.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\fttypes.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\ftwinfnt.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\autohint.h">
+      <Filter>freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\ftcalc.h">
+      <Filter>freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\ftdebug.h">
+      <Filter>freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\ftdriver.h">
+      <Filter>freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\ftgloadr.h">
+      <Filter>freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\fthash.h">
+      <Filter>freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\ftmemory.h">
+      <Filter>freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\ftobjs.h">
+      <Filter>freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\ftpic.h">
+      <Filter>freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\ftrfork.h">
+      <Filter>freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\ftserv.h">
+      <Filter>freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\ftstream.h">
+      <Filter>freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\fttrace.h">
+      <Filter>freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\ftvalid.h">
+      <Filter>freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\internal.h">
+      <Filter>freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\psaux.h">
+      <Filter>freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\pshints.h">
+      <Filter>freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\services\svbdf.h">
+      <Filter>freetype\internal\services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\services\svcid.h">
+      <Filter>freetype\internal\services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\services\svfntfmt.h">
+      <Filter>freetype\internal\services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\services\svgldict.h">
+      <Filter>freetype\internal\services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\services\svgxval.h">
+      <Filter>freetype\internal\services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\services\svkern.h">
+      <Filter>freetype\internal\services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\services\svmm.h">
+      <Filter>freetype\internal\services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\services\svotval.h">
+      <Filter>freetype\internal\services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\services\svpfr.h">
+      <Filter>freetype\internal\services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\services\svpostnm.h">
+      <Filter>freetype\internal\services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\services\svprop.h">
+      <Filter>freetype\internal\services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\services\svpscmap.h">
+      <Filter>freetype\internal\services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\services\svpsinfo.h">
+      <Filter>freetype\internal\services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\services\svsfnt.h">
+      <Filter>freetype\internal\services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\services\svttcmap.h">
+      <Filter>freetype\internal\services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\services\svtteng.h">
+      <Filter>freetype\internal\services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\services\svttglyf.h">
+      <Filter>freetype\internal\services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\services\svwinfnt.h">
+      <Filter>freetype\internal\services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\sfnt.h">
+      <Filter>freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\t1types.h">
+      <Filter>freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\internal\tttypes.h">
+      <Filter>freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\t1tables.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\ttnameid.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\tttables.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\tttags.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\freetype\ttunpat.h">
+      <Filter>freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\ft2build.h" />
+    <ClInclude Include="..\Source\External\imgui\imconfig.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\imgui\imgui.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\imgui\imgui_impl_dx11.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\imgui\imgui_impl_win32.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\imgui\imgui_internal.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\imgui\imstb_rectpack.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\imgui\imstb_textedit.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\imgui\imstb_truetype.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\imgui\misc\cpp\imgui_stdlib.h">
+      <Filter>imgui\misc\cpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\imgui\misc\freetype\imgui_freetype.h">
+      <Filter>imgui\misc\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\imgui\misc\single_file\imgui_single_file.h">
+      <Filter>imgui\misc\single_file</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Source\External\DirectXTK\Src\DDSTextureLoader.cpp">
+      <Filter>DirectXTK\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\External\DirectXTK\Src\ScreenGrab.cpp">
+      <Filter>DirectXTK\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\External\DirectXTK\Src\WICTextureLoader.cpp">
+      <Filter>DirectXTK\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\External\StackWalker\StackWalker.cpp">
+      <Filter>StackWalker</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\External\imgui\imgui.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\External\imgui\imgui_demo.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\External\imgui\imgui_draw.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\External\imgui\imgui_impl_dx11.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\External\imgui\imgui_impl_win32.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\External\imgui\imgui_widgets.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\External\imgui\misc\cpp\imgui_stdlib.cpp">
+      <Filter>imgui\misc\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\External\imgui\misc\fonts\binary_to_compressed_c.cpp">
+      <Filter>imgui\misc\fonts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\External\imgui\misc\freetype\imgui_freetype.cpp">
+      <Filter>imgui\misc\freetype</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
