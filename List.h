@@ -76,6 +76,24 @@ namespace CommonUtilities
 			myBuffer.erase(remove(myBuffer.begin(), myBuffer.end(), anElementToRemove), myBuffer.end());
 		}
 
+		inline void RemoveIf(std::function<bool(T&)> aPredicate)
+		{
+			myBuffer.erase(std::remove_if(myBuffer.begin(), myBuffer.end(), aPredicate), myBuffer.end());
+		}
+
+		inline void RemoveIf(std::function<bool(T&)> aPredicate, std::function<void(T&)> anOnDeletePred)
+		{
+			auto copy = myBuffer;
+			if (anOnDeletePred)
+				for (int i = 0; i < copy.size(); i++)
+				{
+					if (aPredicate(copy[i]))
+						anOnDeletePred(copy[i]);
+				}
+			myBuffer.erase(std::remove_if(myBuffer.begin(), myBuffer.end(), aPredicate), myBuffer.end());
+		}
+
+
 		_inline void RemoveRange(vector<T> someElementsToAdd)
 		{
 			for (auto& element : someElementsToAdd)

@@ -39,12 +39,14 @@ namespace CommonUtilities
 
 		}
 
+
 		//Vectors Magnitude
-		T Length() const
+		float Length() const
 		{
-			T result = sqrt(x * x + y * y);
+			float result = sqrt((float)(x * x + y * y));
 			return result;
 		}
+
 
 		//normalize the current vector
 		void Normalize()
@@ -68,7 +70,7 @@ namespace CommonUtilities
 			return (tempVector / length);
 		}
 
-		//multiplacations
+		//multiplications
 		T Dot(const Vector2<T>& aRHSVector2) const
 		{
 			T result = x * aRHSVector2.x + y * aRHSVector2.y;
