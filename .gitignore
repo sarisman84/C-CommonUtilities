@@ -32,3 +32,33 @@
 *.app
 
 .vs/CommonUtilities/v16/
+
+*.db
+
+Unit Tests/Stacks and Queues/.vs/Stacks and Queues/v16/.suo
+
+Unit Tests/Stacks and Queues/.vs/Stacks and Queues/v16/Browse.VC.db-shm
+
+Unit Tests/Stacks and Queues/.vs/Stacks and Queues/v16/Browse.VC.db-wal
+
+*.opendb
+
+*.ipch
+
+*.manifest
+
+*.testlog
+
+*.exp
+
+*.pdb
+
+*.tlog
+
+*.recipe
+
+*.ilk
+
+*.log
+
+*.idb
