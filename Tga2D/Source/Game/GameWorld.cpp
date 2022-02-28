@@ -12,17 +12,18 @@
 CGameWorld::CGameWorld()
 {}
 
-CGameWorld::~CGameWorld() 
+CGameWorld::~CGameWorld()
 {}
 
-void CGameWorld::Init()  
+void CGameWorld::Init()
 {
 	//myTga2dLogoTexture = Tga2D::CEngine::GetInstance()->GetTextureManager().GetTexture("sprites/tga_logo.dds");
 }
 
 void CGameWorld::Update(float /*aTimeDelta*/)
-{ 	
-	std::cout << CommonUtilities::Mouse::GetMouseDelta() << std::endl;
+{
+	if (CommonUtilities::Mouse::GetButtonDown(CommonUtilities::MouseKey::RightMouseButton))
+		std::cout << "Left Clicked" << std::endl;
 }
 
 void CGameWorld::Render()
