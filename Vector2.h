@@ -200,7 +200,7 @@ namespace CommonUtilities
 
 
 	template <class T>
-	std::ostream operator<<(std::ostream& aOutputStream, const Vector2<T> aVector)
+	std::ostream& operator<<(std::ostream& aOutputStream, const Vector2<T>& aVector)
 	{
 		aOutputStream << "(x:" << aVector.x << ", y:" << aVector.y << ")";
 		return aOutputStream;

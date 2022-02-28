@@ -4,6 +4,9 @@
 
 #include <tga2d/error/error_manager.h>
 
+
+#include <Input.h>
+
 using namespace std::placeholders;
 
 #ifdef _DEBUG
@@ -36,6 +39,11 @@ LRESULT CGame::WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	lParam;
 	wParam;
 	hWnd;
+
+	CommonUtilities::Keyboard::Update(message, wParam, lParam);
+	CommonUtilities::Mouse::Update(message, wParam, lParam);
+	CommonUtilities::Gamepad::Update();
+
 	switch (message)
 	{
 		// this message is read when the window is closed

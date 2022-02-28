@@ -279,14 +279,20 @@ CommonUtilities::Vector2<int> CommonUtilities::Mouse::ourMousePosition;
 
 void CommonUtilities::Mouse::Update(UINT aMessage, WPARAM anWParam, LPARAM anLParam)
 {
-	ourMouseEvents[anWParam] =
-		aMessage == GetButtonEvent(MouseEvent::Down, anWParam) ?
-		true :
-		aMessage == GetButtonEvent(MouseEvent::Up, anWParam) ?
-		false :
-		ourMouseEvents[anWParam];
+	ourMouseDelta = { 0,0 };
+
+	if (anWParam <= 1000) {
+		ourMouseEvents[anWParam] =
+			aMessage == GetButtonEvent(MouseEvent::Down, anWParam) ?
+			true :
+			aMessage == GetButtonEvent(MouseEvent::Up, anWParam) ?
+			false :
+			ourMouseEvents[anWParam];
+	}
 
 
+
+	
 
 	if (aMessage == WM_MOUSEMOVE) {
 		Vector2< int> oldMousePos = ourMousePosition;
@@ -297,6 +303,8 @@ void CommonUtilities::Mouse::Update(UINT aMessage, WPARAM anWParam, LPARAM anLPa
 
 		ourMouseDelta = (newPos - curPos).GetNormalized();
 	}
+
+
 }
 
 const bool CommonUtilities::Mouse::GetButtonDown(const MouseKey aKey)
@@ -337,6 +345,8 @@ std::bitset<1000> CommonUtilities::Keyboard::ourPastKeyboardState;
 
 void CommonUtilities::Keyboard::Update(UINT aMessage, WPARAM anWParam, LPARAM anLParam)
 {
+	if (anWParam > 1000) return;
+
 	ourKeyboardState[anWParam] =
 		aMessage == WM_SYSKEYDOWN ||
 		aMessage == WM_SYSCHAR ||
