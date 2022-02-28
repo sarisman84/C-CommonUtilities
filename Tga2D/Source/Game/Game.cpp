@@ -42,7 +42,7 @@ LRESULT CGame::WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 	CommonUtilities::Keyboard::Update(message, wParam, lParam);
 	CommonUtilities::Mouse::Update(message, wParam, lParam);
-	CommonUtilities::Gamepad::Update();
+	
 
 	switch (message)
 	{

@@ -75,7 +75,7 @@ const bool CommonUtilities::GClient::UpdateClient()
 	myLeftStick.y = ApplyDeadzone(normLY, ourMaxAxisValue, normalize(myDeadzone.y, SHRT_MIN, SHRT_MAX));
 
 	myRightStick.x = ApplyDeadzone(normRX, ourMaxAxisValue, normalize(myDeadzone.x, SHRT_MIN, SHRT_MAX));
-	myRightStick.y = ApplyDeadzone(normRX, ourMaxAxisValue, normalize(myDeadzone.y, SHRT_MIN, SHRT_MAX));
+	myRightStick.y = ApplyDeadzone(normRY, ourMaxAxisValue, normalize(myDeadzone.y, SHRT_MIN, SHRT_MAX));
 
 	return true;
 }
@@ -101,9 +101,24 @@ void CommonUtilities::GClient::ResetVibration()
 	XInputSetState(GetControllerID(), &myVibration);
 }
 
-const bool CommonUtilities::GClient::IsButtonPressed(const Button aButton)
+const bool CommonUtilities::GClient::GetButton(const Button aButton)
 {
+	
 	return (myState.Gamepad.wButtons & static_cast<unsigned short>(aButton)) != 0u;
+}
+
+const bool CommonUtilities::GClient::GetButtonDown(const Button aButton)
+{
+	bool result = (myState.Gamepad.wButtons & static_cast<unsigned int>(aButton)) != 0u && !myPastGamepadState[static_cast<unsigned int>(aButton)];
+	myPastGamepadState[static_cast<unsigned int>(aButton)] = (myState.Gamepad.wButtons & static_cast<unsigned int>(aButton)) != 0u;
+	return result;
+}
+
+const bool CommonUtilities::GClient::GetButtonUp(const Button aButton)
+{
+	bool result = (myState.Gamepad.wButtons & static_cast<unsigned int>(aButton)) == 0u && myPastGamepadState[static_cast<unsigned int>(aButton)];
+	myPastGamepadState[static_cast<unsigned int>(aButton)] = (myState.Gamepad.wButtons & static_cast<unsigned int>(aButton)) != 0u;
+	return result;
 }
 
 std::optional<CommonUtilities::GClient::ButtonEvent> CommonUtilities::GClient::ReadButtonBuffer() noexcept
@@ -223,7 +238,7 @@ CommonUtilities::GClient& CommonUtilities::Gamepad::AddGamepad()
 CommonUtilities::GClient& CommonUtilities::Gamepad::GetGamepad(const unsigned int anIndex)
 {
 
-	return myCurrentGamepads[anIndex];
+	return myCurrentGamepads[anIndex - 1];
 }
 
 #pragma endregion

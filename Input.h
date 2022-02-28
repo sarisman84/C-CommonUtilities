@@ -261,7 +261,10 @@ namespace CommonUtilities
 		void Vibrate(unsigned short aSpeed);
 		void ResetVibration();
 
-		const bool IsButtonPressed(const Button aButton);
+		const bool GetButton(const Button aButton);
+		const bool GetButtonDown(const Button aButton);
+		const bool GetButtonUp(const Button aButton);
+
 		std::optional<ButtonEvent> ReadButtonBuffer() noexcept;
 
 
@@ -298,6 +301,9 @@ namespace CommonUtilities
 		static constexpr float ourMaxAxisValue = 1.0f;
 		static constexpr float ourTriggerThreshold = XINPUT_GAMEPAD_TRIGGER_THRESHOLD / 255.0f;
 
+
+
+		std::bitset<10000> myPastGamepadState;
 
 
 		const unsigned int myControllerID;
