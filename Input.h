@@ -73,68 +73,10 @@ namespace CommonUtilities
 {
 
 
-	enum class KeyboardKey : unsigned int
-	{
-		Num0 = 0x30,
-		Num1 = 0x31,
-		Num2 = 0x32,
-		Num3 = 0x33,
-		Num4 = 0x34,
-		Num5 = 0x35,
-		Num6 = 0x36,
-		Num7 = 0x37,
-		Num8 = 0x38,
-		Num9 = 0x39,
-
-		LeftArrow = VK_LEFT,
-		RightArrow = VK_RIGHT,
-		UpArrow = VK_UP,
-		DownArrow = VK_DOWN,
-		LeftShift = VK_SHIFT,
-		RightShift = VK_SHIFT,
-		Escape = VK_ESCAPE,
-		Alt = VK_MENU,
-		Space = VK_SPACE,
-		Control = VK_CONTROL,
-		Enter = VK_RETURN,
-
-		A = 0x41,
-		B = 0x42,
-		C = 0x43,
-		D = 0x44,
-		E = 0x45,
-		F = 0x46,
-		G = 0x47,
-		H = 0x48,
-		I = 0x49,
-		J = 0x4A,
-		K = 0x4B,
-		L = 0x4C,
-		M = 0x4D,
-		N = 0x4E,
-		O = 0x4F,
-		P = 0x50,
-		Q = 0x51,
-		R = 0x52,
-		S = 0x53,
-		T = 0x54,
-		U = 0x55,
-		V = 0x56,
-		W = 0x57,
-		X = 0x58,
-		Y = 0x59,
-		Z = 0x5A,
-
-	};
 
 
-	enum class MouseKey : unsigned int
-	{
 
-		LeftMouseButton = VK_LBUTTON,
-		RightMouseButton = VK_RBUTTON,
-		MiddleMouseButton = VK_MBUTTON,
-	};
+	
 
 	enum class Stick
 	{
@@ -158,12 +100,66 @@ namespace CommonUtilities
 	class Keyboard
 	{
 	public:
+		enum class Key : unsigned int
+		{
+			Num0 = 0x30,
+			Num1 = 0x31,
+			Num2 = 0x32,
+			Num3 = 0x33,
+			Num4 = 0x34,
+			Num5 = 0x35,
+			Num6 = 0x36,
+			Num7 = 0x37,
+			Num8 = 0x38,
+			Num9 = 0x39,
+
+			LeftArrow = VK_LEFT,
+			RightArrow = VK_RIGHT,
+			UpArrow = VK_UP,
+			DownArrow = VK_DOWN,
+			LeftShift = VK_SHIFT,
+			RightShift = VK_SHIFT,
+			Escape = VK_ESCAPE,
+			Alt = VK_MENU,
+			Space = VK_SPACE,
+			Control = VK_CONTROL,
+			Enter = VK_RETURN,
+
+			A = 0x41,
+			B = 0x42,
+			C = 0x43,
+			D = 0x44,
+			E = 0x45,
+			F = 0x46,
+			G = 0x47,
+			H = 0x48,
+			I = 0x49,
+			J = 0x4A,
+			K = 0x4B,
+			L = 0x4C,
+			M = 0x4D,
+			N = 0x4E,
+			O = 0x4F,
+			P = 0x50,
+			Q = 0x51,
+			R = 0x52,
+			S = 0x53,
+			T = 0x54,
+			U = 0x55,
+			V = 0x56,
+			W = 0x57,
+			X = 0x58,
+			Y = 0x59,
+			Z = 0x5A,
+
+		};
+
 		static void Update(UINT aMessage, WPARAM anWParam, LPARAM anLParam);
 
 
-		static const bool GetButtonDown(const KeyboardKey aKey);
-		static const bool GetButton(const KeyboardKey aKey);
-		static const bool GetButtonUp(const KeyboardKey aKey);
+		static const bool GetButtonDown(const Key aKey);
+		static const bool GetButton(const Key aKey);
+		static const bool GetButtonUp(const Key aKey);
 
 	private:
 		static std::bitset<1000> ourKeyboardState;
@@ -174,20 +170,30 @@ namespace CommonUtilities
 	class Mouse
 	{
 	public:
-		static void Update(UINT aMessage, WPARAM anWParam, LPARAM anLParam);
+		enum class Key : unsigned int
+		{
 
-		static const bool GetButtonDown(const MouseKey aKey);
-		static const bool GetButton(const MouseKey aKey);
-		static const bool GetButtonUp(const MouseKey aKey);
+			LeftMouseButton = VK_LBUTTON,
+			RightMouseButton = VK_RBUTTON,
+			MiddleMouseButton = VK_MBUTTON,
+		};
+		static void UpdateEvents(UINT aMessage, WPARAM anWParam, LPARAM anLParam);
+		static void EndFrame();
+
+		static const bool GetButtonDown(const Key aKey);
+		static const bool GetButton(const Key aKey);
+		static const bool GetButtonUp(const Key aKey);
 
 		static const Vector2<int> GetMousePosition();
 		static const Vector2<float> GetMouseDelta();
 
 	private:
-		static std::bitset<1000> ourMouseEvents;
-		static std::bitset<1000> ourPastMouseEvents;
+		static std::array<UINT, 1000> ourMouseMessages;
+		static std::bitset<1000> ourMouseHeldState;
+
 		static Vector2<float> ourMouseDelta;
 		static Vector2<int> ourMousePosition;
+		static Vector2<int> ourPastMousePosition;
 	};
 
 
@@ -195,6 +201,7 @@ namespace CommonUtilities
 	class GClient
 	{
 	public:
+
 		enum class Button : unsigned int
 		{
 
@@ -339,63 +346,6 @@ namespace CommonUtilities
 
 	};
 
-
-
-
-
-
-	//const unsigned int ourKeyboardSize = 500;
-
-	//class Input
-	//{
-	//public:
-
-
-	//	Input() = default;
-	//	Input(const Input& aRhs) = default;
-	//	bool Update(UINT aMessage, WPARAM anWParam, LPARAM anLParam);
-
-
-	//	template<typename KeyCode>
-	//	const bool GetButtonDown(const KeyCode aKey);
-	//	template<typename KeyCode>
-	//	const bool GetButton(const KeyboardKey aKey);
-	//	template<typename KeyCode>
-	//	const bool GetButtonUp(const KeyboardKey aKey);
-
-
-	//	const Point GetMousePosition();
-	//	const Point GetMouseDelta();
-	//	const Point GetMouseScrollDir();
-
-
-
-
-	//	float GetAxisRaw(Axis anAxis);
-
-
-
-
-
-	//private:
-
-
-
-	//	Point myMouseScroll;
-	//	Point myMousePosition;
-	//	Point myPastMousePosition;
-
-	//	std::bitset<ourKeyboardSize> myKeyboardState;
-	//	std::bitset<ourKeyboardSize> myPastKeyboardState;
-
-
-
-
-	//};
-
-
-
-	//std::ostream& operator<<(std::ostream& aStream, const Point& aPoint);
 
 
 	template<typename buf>

@@ -103,7 +103,7 @@ void CommonUtilities::GClient::ResetVibration()
 
 const bool CommonUtilities::GClient::GetButton(const Button aButton)
 {
-	
+
 	return (myState.Gamepad.wButtons & static_cast<unsigned short>(aButton)) != 0u;
 }
 
@@ -258,7 +258,7 @@ const UINT GetButtonEvent(const MouseEvent aMouseEvent, WPARAM anWParam) {
 		case MouseEvent::Down:
 			return WM_LBUTTONDOWN;
 		case MouseEvent::Up:
-			return WM_LBUTTONUP;
+			return WM_MOUSEFIRST;
 		}
 
 	case VK_RBUTTON:
@@ -267,7 +267,7 @@ const UINT GetButtonEvent(const MouseEvent aMouseEvent, WPARAM anWParam) {
 		case MouseEvent::Down:
 			return WM_RBUTTONDOWN;
 		case MouseEvent::Up:
-			return WM_RBUTTONUP;
+			return WM_MOUSEFIRST;
 		}
 
 	case VK_MBUTTON:
@@ -276,7 +276,7 @@ const UINT GetButtonEvent(const MouseEvent aMouseEvent, WPARAM anWParam) {
 		case MouseEvent::Down:
 			return WM_MBUTTONDOWN;
 		case MouseEvent::Up:
-			return WM_MBUTTONUP;
+			return WM_MOUSEFIRST;
 		}
 
 
@@ -286,59 +286,62 @@ const UINT GetButtonEvent(const MouseEvent aMouseEvent, WPARAM anWParam) {
 }
 
 
-std::bitset<1000> CommonUtilities::Mouse::ourMouseEvents;
-std::bitset<1000> CommonUtilities::Mouse::ourPastMouseEvents;
+std::array<UINT, 1000> CommonUtilities::Mouse::ourMouseMessages;
+std::bitset<1000> CommonUtilities::Mouse::ourMouseHeldState;
+CommonUtilities::Vector2<int> CommonUtilities::Mouse::ourPastMousePosition;
+
 
 CommonUtilities::Vector2<float> CommonUtilities::Mouse::ourMouseDelta;
 CommonUtilities::Vector2<int> CommonUtilities::Mouse::ourMousePosition;
 
-void CommonUtilities::Mouse::Update(UINT aMessage, WPARAM anWParam, LPARAM anLParam)
+void CommonUtilities::Mouse::UpdateEvents(UINT aMessage, WPARAM anWParam, LPARAM anLParam)
 {
-	ourMouseDelta = { 0,0 };
 
-	if (anWParam <= 1000) {
-		ourMouseEvents[anWParam] =
-			aMessage == GetButtonEvent(MouseEvent::Down, anWParam) ?
-			true :
-			aMessage == GetButtonEvent(MouseEvent::Up, anWParam) ?
-			false :
-			ourMouseEvents[anWParam];
+
+	if (anWParam <= 1000 && 
+		aMessage != WM_MOUSEFIRST && 
+		aMessage != WM_CAPTURECHANGED && 
+		aMessage != WM_NCHITTEST && 
+		aMessage != WM_GETICON) {
+		ourMouseMessages[anWParam] = aMessage;
+		std::cout << aMessage << std::endl;
 	}
 
-
-
-	
 
 	if (aMessage == WM_MOUSEMOVE) {
-		Vector2< int> oldMousePos = ourMousePosition;
+		ourPastMousePosition = ourMousePosition;
 		ourMousePosition = { GET_X_LPARAM(anLParam),GET_Y_LPARAM(anLParam) };
-
-		Vector2<float> newPos = { (float)ourMousePosition.x, (float)ourMousePosition.y };
-		Vector2<float> curPos = { (float)oldMousePos.x, (float)oldMousePos.y };
-
-		ourMouseDelta = (newPos - curPos).GetNormalized();
 	}
 
 
 }
 
-const bool CommonUtilities::Mouse::GetButtonDown(const MouseKey aKey)
+void CommonUtilities::Mouse::EndFrame()
 {
-	bool result = ourMouseEvents[static_cast<int>(aKey)] && !ourPastMouseEvents[static_cast<int>(aKey)];
-	ourPastMouseEvents[static_cast<int>(aKey)] = ourMouseEvents[static_cast<int>(aKey)];
-	return result;
+	auto diff = ourMousePosition - ourPastMousePosition;
+	ourMouseDelta = diff.GetNormalized().Cast<float>();
+
+
 }
 
-const bool CommonUtilities::Mouse::GetButton(const MouseKey aKey)
+const bool CommonUtilities::Mouse::GetButtonDown(const Mouse::Key aKey)
 {
-	return ourMouseEvents[static_cast<int>(aKey)];
+	return ourMouseMessages[static_cast<WPARAM>(aKey)] == GetButtonEvent(MouseEvent::Down, static_cast<WPARAM>(aKey));
 }
 
-const bool CommonUtilities::Mouse::GetButtonUp(const MouseKey aKey)
+const bool CommonUtilities::Mouse::GetButton(const Mouse::Key aKey)
 {
-	bool result = !ourMouseEvents[static_cast<int>(aKey)] && ourPastMouseEvents[static_cast<int>(aKey)];
-	ourPastMouseEvents[static_cast<int>(aKey)] = ourMouseEvents[static_cast<int>(aKey)];
-	return result;
+	auto key = static_cast<WPARAM>(aKey);
+	auto message = ourMouseMessages[key];
+
+	ourMouseHeldState[key] =
+		message == GetButtonEvent(MouseEvent::Down, key) && message != GetButtonEvent(MouseEvent::Up, key);
+	return ourMouseHeldState[static_cast<WPARAM>(aKey)];
+}
+
+const bool CommonUtilities::Mouse::GetButtonUp(const Mouse::Key aKey)
+{
+	return ourMouseMessages[static_cast<WPARAM>(aKey)] == GetButtonEvent(MouseEvent::Up, static_cast<WPARAM>(aKey));
 }
 
 const CommonUtilities::Vector2< int> CommonUtilities::Mouse::GetMousePosition()
@@ -372,19 +375,19 @@ void CommonUtilities::Keyboard::Update(UINT aMessage, WPARAM anWParam, LPARAM an
 
 }
 
-const bool CommonUtilities::Keyboard::GetButtonDown(const KeyboardKey aKey)
+const bool CommonUtilities::Keyboard::GetButtonDown(const Keyboard::Key aKey)
 {
 	bool result = ourKeyboardState[static_cast<int>(aKey)] && !ourPastKeyboardState[static_cast<int>(aKey)];
 	ourPastKeyboardState[static_cast<int>(aKey)] = ourKeyboardState[static_cast<int>(aKey)];
 	return result;
 }
 
-const bool CommonUtilities::Keyboard::GetButton(const KeyboardKey aKey)
+const bool CommonUtilities::Keyboard::GetButton(const Keyboard::Key aKey)
 {
 	return ourKeyboardState[static_cast<int>(aKey)];
 }
 
-const bool CommonUtilities::Keyboard::GetButtonUp(const KeyboardKey aKey)
+const bool CommonUtilities::Keyboard::GetButtonUp(const Keyboard::Key aKey)
 {
 	bool result = !ourKeyboardState[static_cast<int>(aKey)] && ourPastKeyboardState[static_cast<int>(aKey)];
 	ourPastKeyboardState[static_cast<int>(aKey)] = ourKeyboardState[static_cast<int>(aKey)];

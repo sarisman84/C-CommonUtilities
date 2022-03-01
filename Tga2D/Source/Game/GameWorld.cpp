@@ -37,8 +37,8 @@ void CGameWorld::Init()
 
 void CGameWorld::Update(float /*aTimeDelta*/)
 {
+	CommonUtilities::Mouse::GetButtonUp(CommonUtilities::Mouse::Key::LeftMouseButton);
 
-	
 
 	auto lStick = CommonUtilities::Gamepad::GetGamepad(1).GetLeftStick();
 	myLeftStick.myObjectInfo.myPosition = { (lStick.x * 0.1f + myLeftStick.myPosition.x) , (-lStick.y * 0.1f + myLeftStick.myPosition.y) };
