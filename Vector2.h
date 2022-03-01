@@ -117,7 +117,25 @@ namespace CommonUtilities
 			return Abs((aLhs - aRhs).Length());
 		}
 
+
+		const bool operator==(Vector2<T> aRhs) {
+			return x == aRhs.x && y == aRhs.y;
+		}
+
+		const bool operator!=(Vector2<T> aRhs) {
+			return x != aRhs.x && y != aRhs.y;
+		}
+
+		template<typename OtherT>
+		Vector2<OtherT> Cast() {
+			return Vector2<OtherT>(static_cast<OtherT>(x), static_cast<OtherT>(y));
+		}
+
 	};
+
+
+
+
 
 	template <class T>
 	Vector2<T> operator+(const Vector2<T>& aVector0, const Vector2<T>& aVector1)
