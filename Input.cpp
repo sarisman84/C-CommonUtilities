@@ -304,7 +304,7 @@ void CommonUtilities::Mouse::UpdateEvents(UINT aMessage, WPARAM anWParam, LPARAM
 		aMessage != WM_NCHITTEST && 
 		aMessage != WM_GETICON) {
 		ourMouseMessages[anWParam] = aMessage;
-		std::cout << aMessage << std::endl;
+		//std::cout << aMessage << std::endl;
 	}
 
 
