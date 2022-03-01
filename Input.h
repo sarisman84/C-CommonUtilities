@@ -1,6 +1,10 @@
 #pragma once
+#define WIN32_LEAN_AND_MEAN
+#define NOMINMAX
 #include <Windows.h>
-#include <Windowsx.h>
+
+#pragma comment(lib, "xinput.lib")
+
 #include <map>
 #include <functional>
 #include <WinUser.h>
@@ -11,6 +15,8 @@
 #include <queue>
 #include <string>
 #include <optional>
+
+#include "Vector2.h"
 
 
 
@@ -24,86 +30,8 @@ namespace CommonUtilities
 #define MOUSEDELTA GetMouseDelta()
 //#define PRINT KEYEVENT({DebugPrint(aMessage, anWParam); return false;})
 
-namespace CommonUtilities
-{
 
-
-	enum class KeyCode
-	{
-		Num0 = 0x30,
-		Num1 = 0x31,
-		Num2 = 0x32,
-		Num3 = 0x33,
-		Num4 = 0x34,
-		Num5 = 0x35,
-		Num6 = 0x36,
-		Num7 = 0x37,
-		Num8 = 0x38,
-		Num9 = 0x39,
-
-		LeftArrow = VK_LEFT,
-		RightArrow = VK_RIGHT,
-		UpArrow = VK_UP,
-		DownArrow = VK_DOWN,
-		LeftShift = VK_SHIFT,
-		RightShift = VK_SHIFT,
-		Escape = VK_ESCAPE,
-		Alt = VK_MENU,
-		Space = VK_SPACE,
-		Control = VK_CONTROL,
-		Enter = VK_RETURN,
-
-		LeftMouseButton = VK_LBUTTON,
-		RightMouseButton = VK_RBUTTON,
-		MiddleMouseButton = VK_MBUTTON,
-
-		A = 0x41,
-		B = 0x42,
-		C = 0x43,
-		D = 0x44,
-		E = 0x45,
-		F = 0x46,
-		G = 0x47,
-		H = 0x48,
-		I = 0x49,
-		J = 0x4A,
-		K = 0x4B,
-		L = 0x4C,
-		M = 0x4D,
-		N = 0x4E,
-		O = 0x4F,
-		P = 0x50,
-		Q = 0x51,
-		R = 0x52,
-		S = 0x53,
-		T = 0x54,
-		U = 0x55,
-		V = 0x56,
-		W = 0x57,
-		X = 0x58,
-		Y = 0x59,
-		Z = 0x5A,
-
-
-
-		Gamepad_A = -10, //0x1000 - 4096
-		Gamepad_B = -11, //0x2000 - 8192
-		Gamepad_X = -12, //0x4000 - 16384
-		Gamepad_Y = -13, //0x8000 - 32768
-
-		Gamepad_LShoulder = -14, //0x0100 - 256
-		Gamepad_RShoulder = -15, //0x0200 - 512
-
-		Gamepad_LThumb = -16, //0x0040 - 64
-		Gamepad_RThumb = -17, //0x0080 - 128
-
-		Gamepad_Dpad_Up = -18, //0x0001 - 1
-		Gamepad_Dpad_Down = -19, //0x0002 - 2
-		Gamepad_Dpad_Left = -20, //0x0004 - 4
-		Gamepad_Dpad_Right = -21 //0x0008 - 8
-
-
-		/*
+/*
 dec hex key type def   dec hex key type   dec hex key type   dec hex key type
   0  00  13 C-@  NULL   32  20  5E space   64  40  13 @       96  60  11 `
   1  01  3C C-A  SOH    33  21  12 !       65  41  3C A       97  61  3C a
@@ -138,24 +66,21 @@ dec hex key type def   dec hex key type   dec hex key type   dec hex key type
  30  1E  17 C-^  RS     62  3E  54 >       94  5E  17 ^      126  7E  11 ~
  31  1F  1C C-_  US     63  3F  55 ?       95  5F  1C _      127  7F  34 delete
 	*/
-	};
 
 
 
-	class Point
+namespace CommonUtilities
+{
+
+
+
+
+
+	
+
+	enum class Stick
 	{
-	public:
-		Point(const int anX, const int anY);
-		Point() = default;
-		Point(const Point& aRhs);
-		const int GetXPos() const;
-		const int GetYPos() const;
-		Point operator-(const Point& aRhs);
-		Point operator+(const Point& aRhs);
-		void operator=(const Point& aRhs);
-	private:
-		int myXPos;
-		int myYPos;
+		Left, Right
 	};
 
 
@@ -167,59 +92,271 @@ dec hex key type def   dec hex key type   dec hex key type   dec hex key type
 		Horizontal, Vertical
 	};
 
-	enum class Stick
+
+
+
+
+
+	class Keyboard
 	{
-		Left, Right
+	public:
+		enum class Key : unsigned int
+		{
+			Num0 = 0x30,
+			Num1 = 0x31,
+			Num2 = 0x32,
+			Num3 = 0x33,
+			Num4 = 0x34,
+			Num5 = 0x35,
+			Num6 = 0x36,
+			Num7 = 0x37,
+			Num8 = 0x38,
+			Num9 = 0x39,
+
+			LeftArrow = VK_LEFT,
+			RightArrow = VK_RIGHT,
+			UpArrow = VK_UP,
+			DownArrow = VK_DOWN,
+			LeftShift = VK_SHIFT,
+			RightShift = VK_SHIFT,
+			Escape = VK_ESCAPE,
+			Alt = VK_MENU,
+			Space = VK_SPACE,
+			Control = VK_CONTROL,
+			Enter = VK_RETURN,
+
+			A = 0x41,
+			B = 0x42,
+			C = 0x43,
+			D = 0x44,
+			E = 0x45,
+			F = 0x46,
+			G = 0x47,
+			H = 0x48,
+			I = 0x49,
+			J = 0x4A,
+			K = 0x4B,
+			L = 0x4C,
+			M = 0x4D,
+			N = 0x4E,
+			O = 0x4F,
+			P = 0x50,
+			Q = 0x51,
+			R = 0x52,
+			S = 0x53,
+			T = 0x54,
+			U = 0x55,
+			V = 0x56,
+			W = 0x57,
+			X = 0x58,
+			Y = 0x59,
+			Z = 0x5A,
+
+		};
+
+		static void Update(UINT aMessage, WPARAM anWParam, LPARAM anLParam);
+
+
+		static const bool GetButtonDown(const Key aKey);
+		static const bool GetButton(const Key aKey);
+		static const bool GetButtonUp(const Key aKey);
+
+	private:
+		static std::bitset<1000> ourKeyboardState;
+		static std::bitset<1000> ourPastKeyboardState;
 	};
 
-	const unsigned int ourKeyboardSize = 500;
 
-	class Input
+	class Mouse
+	{
+	public:
+		enum class Key : unsigned int
+		{
+
+			LeftMouseButton = VK_LBUTTON,
+			RightMouseButton = VK_RBUTTON,
+			MiddleMouseButton = VK_MBUTTON,
+		};
+		static void UpdateEvents(UINT aMessage, WPARAM anWParam, LPARAM anLParam);
+		static void EndFrame();
+
+		static const bool GetButtonDown(const Key aKey);
+		static const bool GetButton(const Key aKey);
+		static const bool GetButtonUp(const Key aKey);
+
+		static const Vector2<int> GetMousePosition();
+		static const Vector2<float> GetMouseDelta();
+
+	private:
+		static std::array<UINT, 1000> ourMouseMessages;
+		static std::bitset<1000> ourMouseHeldState;
+
+		static Vector2<float> ourMouseDelta;
+		static Vector2<int> ourMousePosition;
+		static Vector2<int> ourPastMousePosition;
+	};
+
+
+
+	class GClient
 	{
 	public:
 
+		enum class Button : unsigned int
+		{
 
-		Input() = default;
-		Input(const Input& aRhs) = default;
-		bool UpdateEvents(UINT aMessage, WPARAM anWParam, LPARAM anLParam);
-		bool GetButtonDown(const KeyCode aKey);
-		bool GetButton(const KeyCode aKey);
-		bool GetButtonUp(const KeyCode aKey);
+			DPAD_UP = XINPUT_GAMEPAD_DPAD_UP,
+			DPAD_DOWN = XINPUT_GAMEPAD_DPAD_DOWN,
+			DPAD_LEFT = XINPUT_GAMEPAD_DPAD_LEFT,
+			DPAD_RIGHT = XINPUT_GAMEPAD_DPAD_RIGHT,
+			START = XINPUT_GAMEPAD_START,
+			BACK = XINPUT_GAMEPAD_BACK,
+			LEFT_THUMB = XINPUT_GAMEPAD_LEFT_THUMB,
+			RIGHT_THUMB = XINPUT_GAMEPAD_RIGHT_THUMB,
+			LEFT_SHOULDER = XINPUT_GAMEPAD_LEFT_SHOULDER,
+			RIGHT_SHOULDER = XINPUT_GAMEPAD_RIGHT_SHOULDER,
+			A = XINPUT_GAMEPAD_A,
+			B = XINPUT_GAMEPAD_B,
+			X = XINPUT_GAMEPAD_X,
+			Y = XINPUT_GAMEPAD_Y,
+		};
+
+		class ButtonEvent
+		{
+		public:
+			enum class Type
+			{
+				PRESS,
+				RELEASE,
+			};
+		private:
+			Type myType;
+			Button myButton;
+		public:
+			ButtonEvent(Type aType, Button aButton) noexcept
+				:
+				myType(aType),
+				myButton(aButton)
+			{}
+			bool IsPress() const noexcept
+			{
+				return myType == Type::PRESS;
+			}
+			bool IsRelease() const noexcept
+			{
+				return myType == Type::RELEASE;
+			}
+			Button getButton() const noexcept
+			{
+				return myButton;
+			}
+		};
 
 
-		Point GetMousePosition();
-		Point GetMouseDelta();
-		Point GetMouseScrollDir();
+
+		GClient() = default;
+		GClient(const unsigned int id, Vector2<float> deadzone = { XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE,XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE });
 
 
+		const UINT GetControllerID() const noexcept;
+		XINPUT_GAMEPAD* const GetGamepad();
+
+		const bool IsConnected();
+		const bool UpdateClient();
+
+		void Vibrate(unsigned short aLeftSpeed, unsigned short aRightSpeed);
+		void Vibrate(unsigned short aSpeed);
+		void ResetVibration();
+
+		const bool GetButton(const Button aButton);
+		const bool GetButtonDown(const Button aButton);
+		const bool GetButtonUp(const Button aButton);
+
+		std::optional<ButtonEvent> ReadButtonBuffer() noexcept;
 
 
-		float GetAxisRaw(Axis anAxis);
+		Vector2<float>& GetLeftStick() noexcept;
+		Vector2<float>& GetRightStick() noexcept;
 
 
+		float LeftTrigger() const noexcept;
+		float RightTrigger() const noexcept;
+
+		bool GetAudioDeviceIDs(const std::wstring& aPRenderDeviceId, unsigned int* aPRenderCount,
+			const std::wstring& aPCaptureDeviceId, unsigned int* aPCaptureCount) const;
+
+		XINPUT_CAPABILITIES* const GetCapabilities(const unsigned long someflags = 0u);
+		void SetDeadzone(const Vector2<float> aDeadzone);
+		Vector2<float>& GetDeadzone() noexcept;
+
+		bool ButtonIsEmpty() const noexcept;
+		void Flush() noexcept;
 
 
 
 	private:
+		void OnButtonPressed(Button aButton) noexcept;
+		void OnButtonReleased(Button aButton) noexcept;
+
+		static float ApplyDeadzone(float aValue, const float aMaxValue, const float aDeadzone);
+
+		template<typename buf>
+		static void TrimBuffer(std::queue<buf>& buffer) noexcept;
+
+
+		static constexpr unsigned int ourBufferSize = 16u;
+		static constexpr float ourMaxAxisValue = 1.0f;
+		static constexpr float ourTriggerThreshold = XINPUT_GAMEPAD_TRIGGER_THRESHOLD / 255.0f;
 
 
 
-		Point myMouseScroll;
-		Point myMousePosition;
-		Point myPastMousePosition;
-
-		std::bitset<ourKeyboardSize> myKeyboardState;
-		std::bitset<ourKeyboardSize> myPastKeyboardState;
+		std::bitset<10000> myPastGamepadState;
 
 
+		const unsigned int myControllerID;
 
+		XINPUT_GAMEPAD* myGamepad;
+		XINPUT_STATE myState;
+		XINPUT_VIBRATION myVibration;
+		XINPUT_BATTERY_INFORMATION myBatteryInfo;
+		XINPUT_CAPABILITIES myCapabilities;
+
+		Vector2<float> myLeftStick;
+		Vector2<float> myRightStick;
+
+		Vector2<float> myDeadzone;
+
+
+		float myLeftTrigger;
+		float myRightTrigger;
+
+
+		std::queue<ButtonEvent> myButtonbuffer;
+	};
+
+	class Gamepad
+	{
+	public:
+		static void Update();
+		static GClient& AddGamepad();
+		static GClient& GetGamepad(const unsigned int anIndex);
+
+	private:
+		static std::vector<GClient> myCurrentGamepads;
 
 	};
 
 
 
-	std::ostream& operator<<(std::ostream& aStream, const Point& aPoint);
+	template<typename buf>
+	inline void GClient::TrimBuffer(std::queue<buf>& aBuffer) noexcept
+	{
 
+		while (aBuffer.size() > ourBufferSize)
+		{
+			aBuffer.pop(); // [[yesdiscard]] xD
+		}
+	}
 
 }
 

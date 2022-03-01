@@ -1,276 +1,395 @@
 #include "pch.h"
 #include "Input.h"
+#include <optional>
+#include "windowsx.h"
 
 
 
+static float normalize(const float aValue, const float aMin, const float aMax);
 
 
-
-
-
-
-
-
-bool CommonUtilities::Input::UpdateEvents(UINT aMessage, WPARAM anWParam, LPARAM anLParam)
+static float normalize(const float aValue, const float aMin, const float aMax)
 {
-
-	if (aMessage == WM_MOUSEMOVE)
-	{
-		myMousePosition = Point(GET_X_LPARAM(anLParam), GET_Y_LPARAM(anLParam));
-	}
-	else  if (aMessage == WM_MOUSEWHEEL)
-	{
-		myMouseScroll = Point(0, GET_Y_LPARAM(anLParam));
-	}
-	if (anWParam < myKeyboardState.size())
-	{
-		bool isLPressed = aMessage == WM_LBUTTONDOWN ? true : aMessage == WM_LBUTTONUP ? false : false;
-		bool isRPressed = aMessage == WM_RBUTTONDOWN ? true : aMessage == WM_RBUTTONUP ? false : false;
-		bool isMPressed = aMessage == WM_MBUTTONDOWN ? true : aMessage == WM_MBUTTONUP ? false : false;
-
-		myKeyboardState[anWParam] =
-			anWParam == VK_LBUTTON ? isLPressed :
-			anWParam == VK_RBUTTON ? isRPressed :
-			anWParam == VK_MBUTTON ? isMPressed :
-			aMessage == WM_KEYDOWN || aMessage == WM_SYSKEYDOWN || aMessage == WM_CHAR;
-
-
-		return myKeyboardState[anWParam];
-	}
-
-
-
-
-	myGamepadLeftStick = Point(myGamepadInput.leftStickX, myGamepadInput.leftStickY);
-	myGamepadRightStick = Point(myGamepadInput.rightStickX, myGamepadInput.rightStickY);
-	myGamepadInput.Refresh();
-
-	return false;
-
+	const float average = (aMin + aMax) / 2.0f;
+	const float range = (aMax - aMin) / 2.0f;
+	return (aValue - average) / range;
 }
 
 
 
-bool CommonUtilities::Input::GetButtonDown(const KeyCode aKey)
+#pragma region Gamepad Impl
+
+std::vector<CommonUtilities::GClient> CommonUtilities::Gamepad::myCurrentGamepads;
+
+
+
+CommonUtilities::GClient::GClient(const unsigned int anID, Vector2<float> aDeadzone) : myControllerID(anID), myDeadzone(aDeadzone)
 {
-	
+	ZeroMemory(&myState, sizeof(XINPUT_STATE));
+	ZeroMemory(&myVibration, sizeof(XINPUT_VIBRATION));
+	ZeroMemory(&myBatteryInfo, sizeof(XINPUT_BATTERY_INFORMATION));
+	ZeroMemory(&myCapabilities, sizeof(XINPUT_CAPABILITIES));
+}
+
+const UINT CommonUtilities::GClient::GetControllerID() const noexcept
+{
+	return myControllerID - 1;
+}
+
+XINPUT_GAMEPAD* const CommonUtilities::GClient::GetGamepad()
+{
+	return &this->myState.Gamepad;
+}
+
+const bool CommonUtilities::GClient::IsConnected()
+{
+	return (XInputGetState(this->myControllerID - 1, &myState) == ERROR_SUCCESS);
+}
+
+const bool CommonUtilities::GClient::UpdateClient()
+{
+	if (!IsConnected())
+		return false;
+
+	if (myState.Gamepad.wButtons != 0u) {
+
+		OnButtonPressed(static_cast<Button>(myState.Gamepad.wButtons));
+	}
+	else {
+
+		if (!ButtonIsEmpty()) {
+			OnButtonReleased(myButtonbuffer.front().getButton());
+		}
+	}
 
 
-	bool result = myKeyboardState[static_cast<int>(aKey)] && !myPastKeyboardState[static_cast<int>(aKey)];
-	myPastKeyboardState[static_cast<int>(aKey)] = myKeyboardState[static_cast<int>(aKey)];
+	const float normLX = normalize(static_cast<float>(myState.Gamepad.sThumbLX), SHRT_MIN, SHRT_MAX);
+	const float normLY = normalize(static_cast<float>(myState.Gamepad.sThumbLY), SHRT_MIN, SHRT_MAX);
+
+	const float normRX = normalize(static_cast<float>(myState.Gamepad.sThumbRX), SHRT_MIN, SHRT_MAX);
+	const float normRY = normalize(static_cast<float>(myState.Gamepad.sThumbRY), SHRT_MIN, SHRT_MAX);
+
+
+
+	myLeftStick.x = ApplyDeadzone(normLX, ourMaxAxisValue, normalize(myDeadzone.x, SHRT_MIN, SHRT_MAX));
+	myLeftStick.y = ApplyDeadzone(normLY, ourMaxAxisValue, normalize(myDeadzone.y, SHRT_MIN, SHRT_MAX));
+
+	myRightStick.x = ApplyDeadzone(normRX, ourMaxAxisValue, normalize(myDeadzone.x, SHRT_MIN, SHRT_MAX));
+	myRightStick.y = ApplyDeadzone(normRY, ourMaxAxisValue, normalize(myDeadzone.y, SHRT_MIN, SHRT_MAX));
+
+	return true;
+}
+
+void CommonUtilities::GClient::Vibrate(unsigned short aLeftSpeed, unsigned short aRightSpeed)
+{
+	myVibration.wLeftMotorSpeed = aLeftSpeed;
+	myVibration.wRightMotorSpeed = aRightSpeed;
+	XInputSetState(GetControllerID(), &myVibration);
+}
+
+void CommonUtilities::GClient::Vibrate(unsigned short aSpeed)
+{
+	myVibration.wLeftMotorSpeed = aSpeed;
+	myVibration.wRightMotorSpeed = aSpeed;
+	XInputSetState(GetControllerID(), &myVibration);
+}
+
+void CommonUtilities::GClient::ResetVibration()
+{
+	myVibration.wLeftMotorSpeed = 0u;
+	myVibration.wRightMotorSpeed = 0u;
+	XInputSetState(GetControllerID(), &myVibration);
+}
+
+const bool CommonUtilities::GClient::GetButton(const Button aButton)
+{
+
+	return (myState.Gamepad.wButtons & static_cast<unsigned short>(aButton)) != 0u;
+}
+
+const bool CommonUtilities::GClient::GetButtonDown(const Button aButton)
+{
+	bool result = (myState.Gamepad.wButtons & static_cast<unsigned int>(aButton)) != 0u && !myPastGamepadState[static_cast<unsigned int>(aButton)];
+	myPastGamepadState[static_cast<unsigned int>(aButton)] = (myState.Gamepad.wButtons & static_cast<unsigned int>(aButton)) != 0u;
 	return result;
 }
 
-bool CommonUtilities::Input::GetButton(const KeyCode aKey)
+const bool CommonUtilities::GClient::GetButtonUp(const Button aButton)
 {
-	
-
-	return myKeyboardState[static_cast<int>(aKey)];
-}
-
-bool CommonUtilities::Input::GetButtonUp(const KeyCode aKey)
-{
-	
-
-	bool result = !myKeyboardState[static_cast<int>(aKey)] && myPastKeyboardState[static_cast<int>(aKey)];
-
-	myPastKeyboardState[static_cast<int>(aKey)] = myKeyboardState[static_cast<int>(aKey)];
+	bool result = (myState.Gamepad.wButtons & static_cast<unsigned int>(aButton)) == 0u && myPastGamepadState[static_cast<unsigned int>(aButton)];
+	myPastGamepadState[static_cast<unsigned int>(aButton)] = (myState.Gamepad.wButtons & static_cast<unsigned int>(aButton)) != 0u;
 	return result;
 }
 
-CommonUtilities::Point CommonUtilities::Input::GetGamepadStick(const Stick aStick)
+std::optional<CommonUtilities::GClient::ButtonEvent> CommonUtilities::GClient::ReadButtonBuffer() noexcept
 {
-	switch (aStick)
+	if (myButtonbuffer.size() > 0u)
 	{
-	default:
-		return Point();
-	case Stick::Left:
-		return myGamepadLeftStick;
-	case Stick::Right:
-		return myGamepadRightStick;
+		GClient::ButtonEvent e = myButtonbuffer.front();
+		myButtonbuffer.pop();
+		return e;
+	}
+	return {};
+}
+
+CommonUtilities::Vector2<float>& CommonUtilities::GClient::GetLeftStick() noexcept
+{
+	return myLeftStick;
+}
+
+CommonUtilities::Vector2<float>& CommonUtilities::GClient::GetRightStick() noexcept
+{
+	return myRightStick;
+}
+
+float CommonUtilities::GClient::LeftTrigger() const noexcept
+{
+	return myLeftTrigger;
+}
+
+float CommonUtilities::GClient::RightTrigger() const noexcept
+{
+	return myRightTrigger;
+}
+
+bool CommonUtilities::GClient::GetAudioDeviceIDs(const std::wstring& aPRenderDeviceId, unsigned int* aPRenderCount, const std::wstring& aPCaptureDeviceId, unsigned int* aPCaptureCount) const
+{
+	// I'm not quite sure how to use this one but this should wrap it okay
+	const auto result = XInputGetAudioDeviceIds(GetControllerID(),
+		const_cast<wchar_t*>(aPRenderDeviceId.c_str()), aPRenderCount,
+		const_cast<wchar_t*>(aPCaptureDeviceId.c_str()), aPCaptureCount);
+	if (result != ERROR_SUCCESS)
+		return false;
+	return true;
+}
+
+XINPUT_CAPABILITIES* const CommonUtilities::GClient::GetCapabilities(const unsigned long someflags)
+{
+	const auto result = XInputGetCapabilities(GetControllerID(), someflags,
+		&this->myCapabilities);
+	return &this->myCapabilities;
+}
+
+void CommonUtilities::GClient::SetDeadzone(const Vector2<float> aDeadzone)
+{
+	myDeadzone = aDeadzone;
+}
+
+CommonUtilities::Vector2<float>& CommonUtilities::GClient::GetDeadzone() noexcept
+{
+	return myDeadzone;
+}
+
+bool CommonUtilities::GClient::ButtonIsEmpty() const noexcept
+{
+	return myButtonbuffer.empty();
+}
+
+void CommonUtilities::GClient::Flush() noexcept
+{
+	myButtonbuffer = std::queue<GClient::ButtonEvent>();
+}
+
+void CommonUtilities::GClient::OnButtonPressed(Button aButton) noexcept
+{
+	myButtonbuffer.push(GClient::ButtonEvent(GClient::ButtonEvent::Type::PRESS, aButton));
+	TrimBuffer(myButtonbuffer);
+}
+
+void CommonUtilities::GClient::OnButtonReleased(Button aButton) noexcept
+{
+	myButtonbuffer.push(GClient::ButtonEvent(GClient::ButtonEvent::Type::RELEASE, aButton));
+	TrimBuffer(myButtonbuffer);
+}
+
+float CommonUtilities::GClient::ApplyDeadzone(float aValue, const float aMaxValue, const float aDeadzone)
+{
+	if (aValue < -(aDeadzone))
+	{
+		aValue += aDeadzone; // increase neg vals to remove deadzone discontinuity
+	}
+	else if (aValue > aDeadzone)
+	{
+		aValue -= aDeadzone; // decrease pos vals to remove deadzone discontinuity
+	}
+	else
+	{
+		return 0.0f; // hey values are zero for once
+	}
+	const float normValue = aValue / (aMaxValue - aDeadzone);
+	return std::max(-1.0f, std::min(normValue, 1.0f));
+}
+
+
+void CommonUtilities::Gamepad::Update()
+{
+	for (unsigned int i = 0; i < myCurrentGamepads.size(); i++)
+	{
+		myCurrentGamepads[i].UpdateClient();
 	}
 }
 
-CommonUtilities::Point CommonUtilities::Input::GetMousePosition()
+CommonUtilities::GClient& CommonUtilities::Gamepad::AddGamepad()
 {
-	return myMousePosition;
+	myCurrentGamepads.push_back(GClient(myCurrentGamepads.size() + 1));
+	return myCurrentGamepads[myCurrentGamepads.size() - 1];
 }
 
-CommonUtilities::Point CommonUtilities::Input::GetMouseScrollDir()
+CommonUtilities::GClient& CommonUtilities::Gamepad::GetGamepad(const unsigned int anIndex)
 {
-	return myMouseScroll;
+
+	return myCurrentGamepads[anIndex - 1];
 }
 
-CommonUtilities::Point CommonUtilities::Input::GetMouseDelta()
+#pragma endregion
+
+enum class MouseEvent
 {
-	Point result = myMousePosition - myPastMousePosition;
-	myPastMousePosition = myMousePosition;
+	Down, Up
+};
+
+const UINT GetButtonEvent(const MouseEvent aMouseEvent, WPARAM anWParam) {
+
+	switch (anWParam)
+	{
+	case VK_LBUTTON:
+		switch (aMouseEvent)
+		{
+		case MouseEvent::Down:
+			return WM_LBUTTONDOWN;
+		case MouseEvent::Up:
+			return WM_MOUSEFIRST;
+		}
+
+	case VK_RBUTTON:
+		switch (aMouseEvent)
+		{
+		case MouseEvent::Down:
+			return WM_RBUTTONDOWN;
+		case MouseEvent::Up:
+			return WM_MOUSEFIRST;
+		}
+
+	case VK_MBUTTON:
+		switch (aMouseEvent)
+		{
+		case MouseEvent::Down:
+			return WM_MBUTTONDOWN;
+		case MouseEvent::Up:
+			return WM_MOUSEFIRST;
+		}
+
+
+	}
+
+	return UINT();
+}
+
+
+std::array<UINT, 1000> CommonUtilities::Mouse::ourMouseMessages;
+std::bitset<1000> CommonUtilities::Mouse::ourMouseHeldState;
+CommonUtilities::Vector2<int> CommonUtilities::Mouse::ourPastMousePosition;
+
+
+CommonUtilities::Vector2<float> CommonUtilities::Mouse::ourMouseDelta;
+CommonUtilities::Vector2<int> CommonUtilities::Mouse::ourMousePosition;
+
+void CommonUtilities::Mouse::UpdateEvents(UINT aMessage, WPARAM anWParam, LPARAM anLParam)
+{
+
+
+	if (anWParam <= 1000 && 
+		aMessage != WM_MOUSEFIRST && 
+		aMessage != WM_CAPTURECHANGED && 
+		aMessage != WM_NCHITTEST && 
+		aMessage != WM_GETICON) {
+		ourMouseMessages[anWParam] = aMessage;
+		std::cout << aMessage << std::endl;
+	}
+
+
+	if (aMessage == WM_MOUSEMOVE) {
+		ourPastMousePosition = ourMousePosition;
+		ourMousePosition = { GET_X_LPARAM(anLParam),GET_Y_LPARAM(anLParam) };
+	}
+
+
+}
+
+void CommonUtilities::Mouse::EndFrame()
+{
+	auto diff = ourMousePosition - ourPastMousePosition;
+	ourMouseDelta = diff.GetNormalized().Cast<float>();
+
+
+}
+
+const bool CommonUtilities::Mouse::GetButtonDown(const Mouse::Key aKey)
+{
+	return ourMouseMessages[static_cast<WPARAM>(aKey)] == GetButtonEvent(MouseEvent::Down, static_cast<WPARAM>(aKey));
+}
+
+const bool CommonUtilities::Mouse::GetButton(const Mouse::Key aKey)
+{
+	auto key = static_cast<WPARAM>(aKey);
+	auto message = ourMouseMessages[key];
+
+	ourMouseHeldState[key] =
+		message == GetButtonEvent(MouseEvent::Down, key) && message != GetButtonEvent(MouseEvent::Up, key);
+	return ourMouseHeldState[static_cast<WPARAM>(aKey)];
+}
+
+const bool CommonUtilities::Mouse::GetButtonUp(const Mouse::Key aKey)
+{
+	return ourMouseMessages[static_cast<WPARAM>(aKey)] == GetButtonEvent(MouseEvent::Up, static_cast<WPARAM>(aKey));
+}
+
+const CommonUtilities::Vector2< int> CommonUtilities::Mouse::GetMousePosition()
+{
+	return ourMousePosition;
+}
+
+const CommonUtilities::Vector2<float> CommonUtilities::Mouse::GetMouseDelta()
+{
+	return ourMouseDelta;
+}
+
+
+
+
+std::bitset<1000> CommonUtilities::Keyboard::ourKeyboardState;
+std::bitset<1000> CommonUtilities::Keyboard::ourPastKeyboardState;
+
+
+void CommonUtilities::Keyboard::Update(UINT aMessage, WPARAM anWParam, LPARAM anLParam)
+{
+	if (anWParam > 1000) return;
+
+	ourKeyboardState[anWParam] =
+		aMessage == WM_SYSKEYDOWN ||
+		aMessage == WM_SYSCHAR ||
+		aMessage == WM_KEYDOWN ||
+		aMessage == WM_CHAR;
+
+
+
+}
+
+const bool CommonUtilities::Keyboard::GetButtonDown(const Keyboard::Key aKey)
+{
+	bool result = ourKeyboardState[static_cast<int>(aKey)] && !ourPastKeyboardState[static_cast<int>(aKey)];
+	ourPastKeyboardState[static_cast<int>(aKey)] = ourKeyboardState[static_cast<int>(aKey)];
 	return result;
 }
 
-float CommonUtilities::Input::GetAxisRaw(Axis anAxis)
+const bool CommonUtilities::Keyboard::GetButton(const Keyboard::Key aKey)
 {
-	switch (anAxis)
-	{
-	case CommonUtilities::Axis::Horizontal:
-		return GetButton(KeyCode::A) || GetButton(KeyCode::LeftArrow) ? -1 : GetButton(KeyCode::D) || GetButton(KeyCode::RightArrow) ? 1 : 0;
-	case CommonUtilities::Axis::Vertical:
-		return GetButton(KeyCode::W) || GetButton(KeyCode::UpArrow) ? -1 : GetButton(KeyCode::S) || GetButton(KeyCode::DownArrow) ? 1 : 0;
-
-	}
-	return 0.0f;
+	return ourKeyboardState[static_cast<int>(aKey)];
 }
 
-const bool CommonUtilities::Input::IsXInput(const KeyCode akey)
+const bool CommonUtilities::Keyboard::GetButtonUp(const Keyboard::Key aKey)
 {
-	return
-		akey == KeyCode::Gamepad_A ||
-		akey == KeyCode::Gamepad_B ||
-		akey == KeyCode::Gamepad_X ||
-		akey == KeyCode::Gamepad_Y ||
-		akey == KeyCode::Gamepad_Dpad_Down ||
-		akey == KeyCode::Gamepad_Dpad_Up ||
-		akey == KeyCode::Gamepad_Dpad_Left ||
-		akey == KeyCode::Gamepad_Dpad_Right ||
-		akey == KeyCode::Gamepad_LShoulder ||
-		akey == KeyCode::Gamepad_RShoulder ||
-		akey == KeyCode::Gamepad_LThumb ||
-		akey == KeyCode::Gamepad_RThumb;
-}
-
-const WORD CommonUtilities::Input::GetInput(const KeyCode aKey)
-{
-	switch (aKey)
-	{
-	default:
-		return WORD();
-	case KeyCode::Gamepad_A:
-		return XINPUT_GAMEPAD_A;
-	case KeyCode::Gamepad_B:
-		return XINPUT_GAMEPAD_B;
-	case KeyCode::Gamepad_X:
-		return XINPUT_GAMEPAD_X;
-	case KeyCode::Gamepad_Y:
-		return XINPUT_GAMEPAD_Y;
-	case KeyCode::Gamepad_LShoulder:
-		return XINPUT_GAMEPAD_LEFT_SHOULDER;
-	case KeyCode::Gamepad_RShoulder:
-		return XINPUT_GAMEPAD_RIGHT_SHOULDER;
-	case KeyCode::Gamepad_LThumb:
-		return XINPUT_GAMEPAD_LEFT_THUMB;
-	case KeyCode::Gamepad_RThumb:
-		return XINPUT_GAMEPAD_RIGHT_THUMB;
-	case KeyCode::Gamepad_Dpad_Up:
-		return XINPUT_GAMEPAD_DPAD_UP;
-	case KeyCode::Gamepad_Dpad_Down:
-		return XINPUT_GAMEPAD_DPAD_DOWN;
-	case KeyCode::Gamepad_Dpad_Left:
-		return XINPUT_GAMEPAD_DPAD_LEFT;
-	case KeyCode::Gamepad_Dpad_Right:
-		return XINPUT_GAMEPAD_DPAD_RIGHT;
-	}
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-CommonUtilities::Point::Point(const Point& aRhs)
-{
-	myXPos = aRhs.myXPos;
-	myYPos = aRhs.myYPos;
-}
-
-void CommonUtilities::Point::operator=(const Point& aRhs)
-{
-	myXPos = aRhs.myXPos;
-	myYPos = aRhs.myYPos;
-}
-
-CommonUtilities::Point CommonUtilities::Point::operator+(const Point& aRhs)
-{
-	myXPos += aRhs.myXPos;
-	myYPos += aRhs.myYPos;
-	return *this;
-}
-
-CommonUtilities::Point CommonUtilities::Point::operator-(const Point& aRhs)
-{
-	myXPos -= aRhs.myXPos;
-	myYPos -= aRhs.myYPos;
-	return *this;
-}
-
-CommonUtilities::Point::Point(const int anX, const int anY)
-{
-	myXPos = anX;
-	myYPos = anY;
-}
-
-const int CommonUtilities::Point::GetXPos() const
-{
-	return myXPos;
-}
-
-const int CommonUtilities::Point::GetYPos() const
-{
-	return myYPos;
-}
-
-std::ostream& CommonUtilities::operator<<(std::ostream& aStream, const Point& aPoint)
-{
-	aStream << "(x:" << aPoint.GetXPos() << ", y:" << aPoint.GetYPos() << ")";
-	return aStream;
-}
-
-const UINT CommonUtilities::Input::Gamepad::GetControllerID() const noexcept
-{
-	return 0;
-}
-
-XINPUT_GAMEPAD* const CommonUtilities::Input::Gamepad::GetGamepad()
-{
-	return nullptr;
-}
-
-bool CommonUtilities::Input::Gamepad::IsConnected()
-{
-	return false;
+	bool result = !ourKeyboardState[static_cast<int>(aKey)] && ourPastKeyboardState[static_cast<int>(aKey)];
+	ourPastKeyboardState[static_cast<int>(aKey)] = ourKeyboardState[static_cast<int>(aKey)];
+	return result;
 }
