@@ -76,7 +76,7 @@ namespace CommonUtilities
 
 
 
-
+	
 
 	enum class Stick
 	{
@@ -167,22 +167,15 @@ namespace CommonUtilities
 	};
 
 
-	using InputEvent = std::bitset<1000>;
-
 	class Mouse
 	{
 	public:
 		enum class Key : unsigned int
 		{
 
-			LeftMouseButton,
-			RightMouseButton,
-			MiddleMouseButton,
-		};
-
-		enum class Event : unsigned int
-		{
-			Press, Release
+			LeftMouseButton = VK_LBUTTON,
+			RightMouseButton = VK_RBUTTON,
+			MiddleMouseButton = VK_MBUTTON,
 		};
 		static void UpdateEvents(UINT aMessage, WPARAM anWParam, LPARAM anLParam);
 		static void EndFrame();
@@ -195,12 +188,8 @@ namespace CommonUtilities
 		static const Vector2<float> GetMouseDelta();
 
 	private:
-		static const bool IsAMouseButtonEvent(const UINT aMessage);
-		static const Key GetKeyFromMessage(const UINT aMessage);
-		static const UINT GetMessageFromKey(const Key aKey, const Event anEvent);
-
-		static InputEvent ourMouseState;
-		static InputEvent ourPreviousMouseState;
+		static std::array<UINT, 1000> ourMouseMessages;
+		static std::bitset<1000> ourMouseHeldState;
 
 		static Vector2<float> ourMouseDelta;
 		static Vector2<int> ourMousePosition;

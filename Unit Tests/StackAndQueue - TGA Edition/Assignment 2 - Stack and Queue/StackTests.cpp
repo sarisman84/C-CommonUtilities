@@ -64,7 +64,7 @@ namespace Assignment2StackandQueue
 			{
 				float rng = TestUtility::GetRandomFloat();
 				stack.Push(rng);
-				Assert::AreEqual(constStack.GetTop(), rng, L"GetTop() does not return the correct value.");
+				Assert::AreEqual(stack.GetTop(), rng, L"GetTop() does not return the correct value.");
 			}
 		}
 
