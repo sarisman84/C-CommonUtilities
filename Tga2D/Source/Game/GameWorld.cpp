@@ -37,7 +37,10 @@ void CGameWorld::Init()
 
 void CGameWorld::Update(float /*aTimeDelta*/)
 {
-	CommonUtilities::Mouse::GetButtonUp(CommonUtilities::Mouse::Key::LeftMouseButton);
+	if(CommonUtilities::Mouse::GetButton(CommonUtilities::Mouse::Key::LeftMouseButton))
+	{
+		std::cout << "Left Click Event" << std::endl;
+	}
 
 
 	auto lStick = CommonUtilities::Gamepad::GetGamepad(1).GetLeftStick();

@@ -248,63 +248,109 @@ enum class MouseEvent
 	Down, Up
 };
 
-const UINT GetButtonEvent(const MouseEvent aMouseEvent, WPARAM anWParam) {
-
-	switch (anWParam)
-	{
-	case VK_LBUTTON:
-		switch (aMouseEvent)
-		{
-		case MouseEvent::Down:
-			return WM_LBUTTONDOWN;
-		case MouseEvent::Up:
-			return WM_MOUSEFIRST;
-		}
-
-	case VK_RBUTTON:
-		switch (aMouseEvent)
-		{
-		case MouseEvent::Down:
-			return WM_RBUTTONDOWN;
-		case MouseEvent::Up:
-			return WM_MOUSEFIRST;
-		}
-
-	case VK_MBUTTON:
-		switch (aMouseEvent)
-		{
-		case MouseEvent::Down:
-			return WM_MBUTTONDOWN;
-		case MouseEvent::Up:
-			return WM_MOUSEFIRST;
-		}
 
 
-	}
 
-	return UINT();
-}
+CommonUtilities::InputEvent CommonUtilities::Mouse::ourMouseState;
+CommonUtilities::InputEvent CommonUtilities::Mouse::ourPreviousMouseState;
 
-
-std::array<UINT, 1000> CommonUtilities::Mouse::ourMouseMessages;
-std::bitset<1000> CommonUtilities::Mouse::ourMouseHeldState;
 CommonUtilities::Vector2<int> CommonUtilities::Mouse::ourPastMousePosition;
 
 
 CommonUtilities::Vector2<float> CommonUtilities::Mouse::ourMouseDelta;
 CommonUtilities::Vector2<int> CommonUtilities::Mouse::ourMousePosition;
 
+const bool CommonUtilities::Mouse::IsAMouseButtonEvent(const UINT aMessage)
+{
+	return
+		aMessage == WM_LBUTTONDOWN ||
+		aMessage == WM_LBUTTONUP ||
+		aMessage == WM_LBUTTONDBLCLK ||
+
+		aMessage == WM_RBUTTONDOWN ||
+		aMessage == WM_RBUTTONUP ||
+		aMessage == WM_RBUTTONDBLCLK ||
+
+		aMessage == WM_MBUTTONDOWN ||
+		aMessage == WM_MBUTTONUP ||
+		aMessage == WM_MBUTTONDBLCLK;
+}
+
+const CommonUtilities::Mouse::Key CommonUtilities::Mouse::GetKeyFromMessage(const UINT aMessage)
+{
+	return
+		aMessage == WM_LBUTTONDOWN ||
+		aMessage == WM_LBUTTONUP ||
+		aMessage == WM_LBUTTONDBLCLK ? CommonUtilities::Mouse::Key::LeftMouseButton :
+
+
+		aMessage == WM_RBUTTONDOWN ||
+		aMessage == WM_RBUTTONUP ||
+		aMessage == WM_RBUTTONDBLCLK ? CommonUtilities::Mouse::Key::RightMouseButton :
+
+		aMessage == WM_MBUTTONDOWN ||
+		aMessage == WM_MBUTTONUP ||
+		aMessage == WM_MBUTTONDBLCLK ? CommonUtilities::Mouse::Key::MiddleMouseButton : CommonUtilities::Mouse::Key::LeftMouseButton;
+}
+
+const UINT CommonUtilities::Mouse::GetMessageFromKey(const Key aKey, const Event anEvent)
+{
+
+	switch (aKey)
+	{
+	case Mouse::Key::LeftMouseButton:
+	{
+		switch (anEvent)
+		{
+		case Event::Press:
+			return WM_LBUTTONDOWN;
+		case Event::Release:
+			return WM_LBUTTONUP;
+		}
+	}
+	break;
+
+	case Mouse::Key::MiddleMouseButton:
+	{
+		switch (anEvent)
+		{
+		case Event::Press:
+			return WM_MBUTTONDOWN;
+		case Event::Release:
+			return WM_MBUTTONUP;
+		}
+	}
+	break;
+	case Mouse::Key::RightMouseButton:
+	{
+		switch (anEvent)
+		{
+		case Event::Press:
+			return WM_RBUTTONDOWN;
+		case Event::Release:
+			return WM_RBUTTONUP;
+		}
+	}
+	break;
+	}
+
+
+	return UINT();
+}
+
+
+#define _K(aMsg) static_cast<int>(GetKeyFromMessage(aMsg))
+#define EK(aMsg) GetKeyFromMessage(aMsg)
+
 void CommonUtilities::Mouse::UpdateEvents(UINT aMessage, WPARAM anWParam, LPARAM anLParam)
 {
 
+	if (IsAMouseButtonEvent(aMessage))
+	{
+		ourMouseState[_K(aMessage)] = aMessage == GetMessageFromKey(EK(aMessage), Event::Press) ? true : ourMouseState[_K(aMessage)];
+		ourMouseState[_K(aMessage)] = aMessage == GetMessageFromKey(EK(aMessage), Event::Release) ? false : ourMouseState[_K(aMessage)];
 
-	if (anWParam <= 1000 && 
-		aMessage != WM_MOUSEFIRST && 
-		aMessage != WM_CAPTURECHANGED && 
-		aMessage != WM_NCHITTEST && 
-		aMessage != WM_GETICON) {
-		ourMouseMessages[anWParam] = aMessage;
-		std::cout << aMessage << std::endl;
+		//std::cout << _K(aMessage) << " -> " << ourMouseState[_K(aMessage)] << std::endl;
 	}
 
 
@@ -326,22 +372,21 @@ void CommonUtilities::Mouse::EndFrame()
 
 const bool CommonUtilities::Mouse::GetButtonDown(const Mouse::Key aKey)
 {
-	return ourMouseMessages[static_cast<WPARAM>(aKey)] == GetButtonEvent(MouseEvent::Down, static_cast<WPARAM>(aKey));
+	bool result = ourMouseState[static_cast<int>(aKey)] && !ourPreviousMouseState[static_cast<int>(aKey)];
+	ourPreviousMouseState[static_cast<int>(aKey)] = ourMouseState[static_cast<int>(aKey)];
+	return result;
 }
 
 const bool CommonUtilities::Mouse::GetButton(const Mouse::Key aKey)
 {
-	auto key = static_cast<WPARAM>(aKey);
-	auto message = ourMouseMessages[key];
-
-	ourMouseHeldState[key] =
-		message == GetButtonEvent(MouseEvent::Down, key) && message != GetButtonEvent(MouseEvent::Up, key);
-	return ourMouseHeldState[static_cast<WPARAM>(aKey)];
+	return ourMouseState[static_cast<int>(aKey)];
 }
 
 const bool CommonUtilities::Mouse::GetButtonUp(const Mouse::Key aKey)
 {
-	return ourMouseMessages[static_cast<WPARAM>(aKey)] == GetButtonEvent(MouseEvent::Up, static_cast<WPARAM>(aKey));
+	bool result = !ourMouseState[static_cast<int>(aKey)] && ourPreviousMouseState[static_cast<int>(aKey)];
+	ourPreviousMouseState[static_cast<int>(aKey)] = ourMouseState[static_cast<int>(aKey)];
+	return result;
 }
 
 const CommonUtilities::Vector2< int> CommonUtilities::Mouse::GetMousePosition()
