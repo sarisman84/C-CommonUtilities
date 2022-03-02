@@ -1,8 +1,6 @@
 #pragma once
 #include <Vector2.h>
 #include <tga2d/sprite/sprite.h>
-#include <array>
-#include <tga2d/text/text.h>
 
 namespace Tga2D
 {
@@ -20,37 +18,20 @@ struct Sprite
 
 };
 
-struct Number
-{
-	Number() = default;
-	Number(const int aNumber) {
-		myNumber = aNumber;
-		myLabel = new Tga2D::CText();
-	}
-	int myNumber;
-	Tga2D::CText* myLabel;
-
-	void Draw();
-
-	void operator =(const int aNumber) {
-		myNumber = aNumber;
-	}
-};
-
 
 
 class CGameWorld
 {
 public:
-	CGameWorld();
+	CGameWorld(); 
 	~CGameWorld();
 
 	void Init();
-	void Update(float aTimeDelta);
+	void Update(float aTimeDelta); 
 	void Render();
 private:
 	Tga2D::CSpriteDrawer* mySpriteDrawer;
-	std::array<Number, 81> mySudokuBoard;
+
 
 	Sprite myLeftStick;
 	Sprite myRightStick;
