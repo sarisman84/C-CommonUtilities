@@ -2,7 +2,7 @@
 #include <vector>
 #include <assert.h>
 
-namespace CommonUtilities 
+namespace CommonUtilities
 {
 	template <class T>
 	class Stack
@@ -10,7 +10,6 @@ namespace CommonUtilities
 	public:
 		//Skapar en tom stack
 		Stack() {
-			myTop = T();
 			myBuffer = std::vector<T>();
 		}
 		//Returnerar antal element i stacken
@@ -22,18 +21,16 @@ namespace CommonUtilities
 		const T& GetTop() const
 		{
 			assert(!myBuffer.empty() && "[GetTop()] Stack is Empty!");
-
-			return myTop;
+			if (myBuffer.empty()) return  emptyVar;
+			return myBuffer.back();
 		}
 		//Returnerar det översta elementet i stacken. Kraschar med en assert om
 		//stacken är tom.
 		T& GetTop()
 		{
 			assert(!myBuffer.empty() && "[GetTop()] Stack is Empty!");
-			if (myBuffer.empty()) return myTop;
-
-			myTop = myBuffer[myBuffer.size() - 1];
-			return myTop;
+			if (myBuffer.empty()) return emptyVar;
+			return  myBuffer.back();
 		}
 		//Lägger in ett nytt element överst på stacken
 		void Push(const T& aValue)
@@ -53,7 +50,7 @@ namespace CommonUtilities
 
 
 	private:
-		T myTop;
+		T emptyVar;
 		std::vector<T> myBuffer;
 	};
 }
