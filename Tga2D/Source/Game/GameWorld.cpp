@@ -41,9 +41,9 @@ void CGameWorld::Init()
 	};
 
 
-	CommonUtilities::Board board =
+	std::array<int, 81> board =
 	{
-		5, 3, 0,    0, 7,0,   0, 0, 0,
+		5, 3, 0,    0, 7, 0,   0, 0, 0,
 		6, 0, 0,    1, 9, 5,  0, 0, 0,
 		0, 9, 8,    0, 0, 0,  0, 6, 0,
 
@@ -59,8 +59,8 @@ void CGameWorld::Init()
 
 
 
-	
-		std::cout << (CommonUtilities::SolveSudoku(board) ? "Sudoku board solved!" : "Sudoku board not solved! Sadge") << std::endl;
+	CommonUtilities::SolveSudoku(board);
+		
 	
 
 
