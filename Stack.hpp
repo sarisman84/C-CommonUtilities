@@ -9,11 +9,13 @@ namespace CommonUtilities
 	{
 	public:
 		//Skapar en tom stack
-		Stack() {
+		Stack() 
+		{
 			myBuffer = std::vector<T>();
 		}
 		//Returnerar antal element i stacken
-		int GetSize() const {
+		int GetSize() const 
+		{
 			return static_cast<int>(myBuffer.size());
 		}
 		//Returnerar det översta elementet i stacken. Kraschar med en assert om
@@ -21,7 +23,6 @@ namespace CommonUtilities
 		const T& GetTop() const
 		{
 			assert(!myBuffer.empty() && "[GetTop()] Stack is Empty!");
-			if (myBuffer.empty()) return  emptyVar;
 			return myBuffer.back();
 		}
 		//Returnerar det översta elementet i stacken. Kraschar med en assert om
@@ -29,7 +30,6 @@ namespace CommonUtilities
 		T& GetTop()
 		{
 			assert(!myBuffer.empty() && "[GetTop()] Stack is Empty!");
-			if (myBuffer.empty()) return emptyVar;
 			return  myBuffer.back();
 		}
 		//Lägger in ett nytt element överst på stacken
@@ -42,7 +42,6 @@ namespace CommonUtilities
 		T Pop()
 		{
 			assert(!myBuffer.empty() && "[Pop()] Stack is Empty!");
-			if (myBuffer.empty()) return T();
 			T val = myBuffer.back();
 			myBuffer.pop_back();
 			return val;
@@ -50,7 +49,6 @@ namespace CommonUtilities
 
 
 	private:
-		T emptyVar;
 		std::vector<T> myBuffer;
 	};
 }
