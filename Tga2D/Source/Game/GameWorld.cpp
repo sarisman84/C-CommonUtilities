@@ -43,7 +43,7 @@ void CGameWorld::Init()
 
 	std::array<int, 81> board =
 	{
-		5, 3, 0,    0, 7, 0,   0, 0, 0,
+		5, 3, 0,    0, 7, 0,  0, 0, 0,
 		6, 0, 0,    1, 9, 5,  0, 0, 0,
 		0, 9, 8,    0, 0, 0,  0, 6, 0,
 
@@ -59,7 +59,16 @@ void CGameWorld::Init()
 
 
 
-	CommonUtilities::SolveSudoku(board);
+	if(CommonUtilities::SolveSudoku(board)) 
+	{
+		
+		std::cout << "Solved Sudoku!" << std::endl;
+	
+	}
+	else 
+	{
+		std::cout << "You done fucked up!" << std::endl;
+	}
 		
 	
 

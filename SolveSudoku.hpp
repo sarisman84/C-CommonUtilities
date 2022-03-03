@@ -1,6 +1,7 @@
 #pragma once
 #include <array>
 #include <iostream>
+#include <cmath>
 
 namespace CommonUtilities
 {
@@ -13,106 +14,6 @@ namespace CommonUtilities
 	// No dup in column
 	// No dup in other blocks in same pos
 	// No dup in same block
-
-
-	bool DupeCheckInSameBlock(int& /*aTargetNum*/, const int /*anXPos*/, const int /*anYPos*/)
-	{
-		/*for (int i = 0; i < 9; i++)
-		{
-
-		}*/
-
-		return false;
-	}
-
-
-	const int AssignNumber(Board /*aBoard*/, const int /*anXPos*/, const int /*anYPos*/)
-	{
-
-
-		/*
-
-
-		if (aBoard[anYPos][anXPos] == 0 &&
-		DupeCheckInColumn(anYPos, anXPos) &&
-		DupeCheckInRow(anYPos, anXPos) &&
-		DupeCheckInOtherBlocks(anYPos, anXPos) &&
-		DupeCheckInSameBlock(anYPos, anXPos)
-	{
-
-	}
-
-	*/
-	/*int targetNum;
-
-	int boxRow = anXPos / 3;
-	int boxColumn = anYPos / 3;*/
-
-		return 0;
-	}
-
-
-	bool IsBoardValid(Board& aBoard) {
-
-
-		for (size_t y = 0; y < aBoard.size(); y++)
-		{
-			for (size_t x = 0; x < aBoard[x].size(); x++)
-			{
-				if (aBoard[y][x][0] == 0) return false;
-			}
-		}
-
-
-		return true;
-	}
-
-	bool SolveSudoku(Board& aBoard, int anXPos, int anYPos) {
-
-		if (anXPos >= 9 && anYPos >= 9) return IsBoardValid(aBoard);
-
-
-
-		/*	int number = AssignNumber(aBoard, anXPos, anYPos);
-			if (number != 0) {
-				aBoard[anXPos][anYPos] = number;
-			}*/
-			//Pick a number
-			//Check if pos empty
-
-
-			//Check if number exists in other blocks
-
-			//Check if number exist in block
-			//Check row
-			//Check column
-
-		return SolveSudoku(aBoard, (anXPos + 1) % 9, anXPos >= 9 ? anYPos + 1 : anYPos);
-	}
-
-
-
-
-	Board CreateBoard(std::array<int, 81> aBoard)
-	{
-		Board board = Board();
-
-		for (int block = 0; block < board.size(); block++)
-		{
-			for (int ySlot = 0; ySlot < board[block].size(); ySlot++)
-			{
-				for (int xSlot = 0; xSlot < board[block][ySlot].size(); xSlot++)
-				{
-					int i = (xSlot + (9 * ySlot) + (3 * block)) % aBoard.size();
-
-					board[block][ySlot][xSlot] = aBoard[i];
-				}
-			}
-		}
-
-
-		return board;
-	}
 
 	void PrintBoard(Board aBoard) {
 
@@ -131,11 +32,186 @@ namespace CommonUtilities
 	}
 
 
+	const bool NumExistsAlready(Board& aBoard, int& aBoardPos, int& anXPos, int& anYPos, int& aNumber)
+	{
+
+
+		//Column check for the board
+		for (size_t b = aBoardPos / 3; b < aBoard.size(); b += 3)
+		{
+			for (size_t y = 0; y < aBoard[b].size(); y++)
+			{
+				if (aBoard[b][y][anXPos] == aNumber) return true;
+			}
+		}
+
+
+		//Row check for the board
+		for (size_t b = aBoardPos % 3; b < aBoard.size(); b++)
+		{
+			for (size_t x = 0; x < aBoard[b][anYPos].size(); x++)
+			{
+				if (aBoard[b][anYPos][x] == aNumber) return true;
+			}
+		}
+
+		//Same Block - other slot dup check
+		for (size_t y = 0; y < aBoard[aBoardPos].size(); y++)
+		{
+			for (size_t x = 0; x < aBoard[aBoardPos][y].size(); x++)
+			{
+				if (aBoard[aBoardPos][y][x] == aNumber) {
+					return true;
+				}
+			}
+		}
+
+
+
+
+
+		return false;
+	}
+
+	void GoToNextPos(Board& aBoard, int& aBoardPos, int& anXPos, int& anYPos)
+	{
+		anXPos++;
+		bool isAtLimit = anXPos >= aBoard[aBoardPos][anYPos].size();
+
+		anYPos = isAtLimit ? anYPos + 1 : anYPos;
+
+
+		if (anYPos >= 3 && anXPos >= 3)
+		{
+			anXPos = 0;
+			anYPos = 0;
+			aBoardPos++;
+		}
+
+		anXPos = isAtLimit ? 0 : anXPos;
+
+
+	}
+
+	bool IsSafe(Board& aBoard, int aBoardPos, int anXPos, int anYPos, int& aNumber)
+	{
+
+		if (aBoard[aBoardPos][anYPos][anXPos] != 0)
+		{
+
+			return false;
+		};
+
+		if (NumExistsAlready(aBoard, aBoardPos, anXPos, anYPos, aNumber))
+		{
+			aNumber++;
+			if (aNumber >= 10)
+			{
+				aNumber = 1;
+				return false;
+
+			}
+
+			return IsSafe(aBoard, aBoardPos, anXPos, anYPos, aNumber);
+		}
+
+
+		return true;
+
+	}
+
+
+
+
+	bool IsBoardValid(Board& aBoard)
+	{
+
+		for (size_t b = 0; b < aBoard.size(); b++)
+		{
+			for (size_t y = 0; y < aBoard[b].size(); y++)
+			{
+				for (size_t x = 0; x < aBoard[b][y].size(); x++)
+				{
+					if (aBoard[b][y][x] == 0) return false;
+				}
+			}
+		}
+
+
+
+		return true;
+	}
+
+	bool SolveSudoku(Board& aBoard, int& aBoardPos, int& anXPos, int& anYPos)
+	{
+
+		if (aBoardPos >= aBoard.size()) return IsBoardValid(aBoard);
+
+		int num = 1;
+
+		if (IsSafe(aBoard, aBoardPos, anXPos, anYPos, num))
+		{
+			aBoard[aBoardPos][anYPos][anXPos] = num;
+		}
+
+		GoToNextPos(aBoard, aBoardPos, anXPos, anYPos);
+		std::cout << std::endl;
+		std::cout << "Attempt ----------------------- [" << aBoardPos << "]" << std::endl;
+		PrintBoard(aBoard);
+
+		return SolveSudoku(aBoard, aBoardPos, anXPos, anYPos);
+	}
+
+
+	int Pow(int aVal, int anExp) {
+
+		int result = aVal;
+
+		for (size_t i = 0; i < anExp; i++)
+		{
+			result *= aVal;
+		}
+
+
+		return result;
+	}
+
+
+	Board CreateBoard(std::array<int, 81> aBoard)
+	{
+		Board board = Board();
+		int z = 0;
+		for (int i = 0; i < aBoard.size(); i++)
+		{
+			/*int x = (i % 3);
+			int y = (i / 3) % 3;
+			int z = i / (3 * 3);*/
+
+			if (i % 9 == 0 && i != 0) z++;
+
+			int y = (i / 3) % 3;
+
+
+			int x = i % 3;
+
+
+			board[z][y][x] = aBoard[i];
+		}
+
+
+		return board;
+	}
+
+
+
+
 	bool SolveSudoku(std::array<int, 81>& aBoard)
 	{
 		Board board = CreateBoard(aBoard);
-		PrintBoard(board);
-		return false;
+		int boardPos = 0;
+		int slotXPos = 0;
+		int slotYPos = 0;
+		return SolveSudoku(board, boardPos, slotXPos, slotYPos);
 	}
 
 
