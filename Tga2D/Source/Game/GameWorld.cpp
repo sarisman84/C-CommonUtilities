@@ -63,6 +63,7 @@ void CGameWorld::Init()
 	{
 		
 		std::cout << "Solved Sudoku!" << std::endl;
+		
 	
 	}
 	else 
