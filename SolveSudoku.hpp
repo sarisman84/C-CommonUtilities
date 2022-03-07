@@ -6,7 +6,7 @@
 namespace CommonUtilities
 {
 
-	using Board = std::array<std::array<int, 9>, 9>;
+	using CBoard = std::array<std::array<int, 9>, 9>;
 
 	//Rules
 	//Next tile needs to have: 
@@ -15,7 +15,7 @@ namespace CommonUtilities
 	// No dup in other blocks in same pos
 	// No dup in same block
 
-	void PrintBoard(Board aBoard) {
+	void PrintBoard(CBoard aBoard) {
 
 
 		for (int y = 0; y < aBoard.size(); y++)
@@ -38,7 +38,7 @@ namespace CommonUtilities
 
 
 
-	bool IsSafe(Board& aBoards, int anXPos, int anYPos, int& aNumber)
+	bool IsSafe(CBoard& aBoards, int anXPos, int anYPos, int& aNumber)
 	{
 
 		//Column Check
@@ -78,7 +78,7 @@ namespace CommonUtilities
 
 
 
-	bool SolveSudoku(Board& aBoard, int anXPos, int anYPos)
+	bool SolveSudoku(CBoard& aBoard, int anXPos, int anYPos)
 	{
 
 		if (anYPos == aBoard.size() - 1 && anXPos == aBoard[anYPos].size())
@@ -132,9 +132,9 @@ namespace CommonUtilities
 
 
 
-	Board CreateBoard(std::array<int, 81> aBoard)
+	CBoard CreateBoard(std::array<int, 81> aBoard)
 	{
-		Board board = Board();
+		CBoard board = CBoard();
 
 		for (int i = 0; i < aBoard.size(); i++)
 		{
@@ -154,7 +154,7 @@ namespace CommonUtilities
 
 	bool SolveSudoku(std::array<int, 81>& aBoard)
 	{
-		Board board = CreateBoard(aBoard);
+		CBoard board = CreateBoard(aBoard);
 		std::cout << "Starting Board" << std::endl;
 		PrintBoard(board);
 		std::cout << std::endl;
