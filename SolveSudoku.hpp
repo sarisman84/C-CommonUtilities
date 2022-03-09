@@ -5,17 +5,10 @@
 
 namespace CommonUtilities
 {
-
 	using CBoard = std::array<std::array<int, 9>, 9>;
 
-	//Rules
-	//Next tile needs to have: 
-	// No dup in row
-	// No dup in column
-	// No dup in other blocks in same pos
-	// No dup in same block
-
-	void PrintBoard(CBoard aBoard) {
+	void PrintBoard(CBoard aBoard)
+	{
 
 
 		for (int y = 0; y < aBoard.size(); y++)
@@ -29,14 +22,6 @@ namespace CommonUtilities
 		std::cout << std::endl;
 
 	}
-
-
-
-
-
-
-
-
 
 	bool IsSafe(CBoard& aBoards, int anXPos, int anYPos, int& aNumber)
 	{
@@ -72,20 +57,11 @@ namespace CommonUtilities
 		return true;
 
 	}
-
-
-
-
-
-
 	bool SolveSudoku(CBoard& aBoard, int anXPos, int anYPos)
 	{
 
 		if (anYPos == aBoard.size() - 1 && anXPos == aBoard[anYPos].size())
 		{
-			std::cout << "End Result" << std::endl;
-			PrintBoard(aBoard);
-			std::cout << std::endl;
 			return true;
 		}
 
@@ -105,7 +81,8 @@ namespace CommonUtilities
 		{
 
 
-			if (IsSafe(aBoard, anXPos, anYPos, i)) {
+			if (IsSafe(aBoard, anXPos, anYPos, i))
+			{
 
 
 
@@ -113,8 +90,9 @@ namespace CommonUtilities
 				aBoard[anYPos][anXPos] = i;
 
 
-				if (SolveSudoku(aBoard, anXPos + 1, anYPos)) {
-					
+				if (SolveSudoku(aBoard, anXPos + 1, anYPos))
+				{
+
 					return true;
 				}
 			}
@@ -127,10 +105,6 @@ namespace CommonUtilities
 
 		return false;
 	}
-
-
-
-
 
 	CBoard CreateBoard(std::array<int, 81> aBoard)
 	{
@@ -149,16 +123,32 @@ namespace CommonUtilities
 		return board;
 	}
 
+	void CopyToSingleArray(std::array<int, 81>& aBoard, CBoard aCBoard)
+	{
+		for (int y = 0; y < aCBoard.size(); y++)
+		{
+			for (int x = 0; x < aCBoard[y].size(); x++)
+			{
+				int i = x + aCBoard.size() * y;
+				aBoard[i] = aCBoard[y][x];
+			}
+		}
 
-
+	}
 
 	bool SolveSudoku(std::array<int, 81>& aBoard)
 	{
 		CBoard board = CreateBoard(aBoard);
-		std::cout << "Starting Board" << std::endl;
 		PrintBoard(board);
 		std::cout << std::endl;
-		return SolveSudoku(board, 0, 0);
+		if (SolveSudoku(board, 0, 0))
+		{
+			CopyToSingleArray(aBoard, board);
+			return true;
+		}
+
+		return false;
+
 	}
 
 
