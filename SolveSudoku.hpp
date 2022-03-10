@@ -1,134 +1,154 @@
 #pragma once
 #include <array>
 #include <iostream>
+#include <cmath>
 
 namespace CommonUtilities
 {
+	using CBoard = std::array<std::array<int, 9>, 9>;
 
-	using Board = std::array<int, 81>;
-	using Block = std::array<int, 9>;
-	//Rules
-	//Next tile needs to have: 
-	// No dup in row
-	// No dup in column
-	// No dup in other blocks in same pos
-
-
-	const bool IsNumberInSameColumn(const Block aBlock, const int aNumber, const int aLocalPosition, int aCurrentRow)
+	void PrintBoard(CBoard aBoard)
 	{
-		std::cout << " " << aLocalPosition + aCurrentRow;
-		if (aLocalPosition + aCurrentRow >= 9) return false;
-		if (aLocalPosition + aCurrentRow >= 0 && aBlock[aLocalPosition + aCurrentRow] == aNumber) {
 
-			std::cout << " <Dub detected!> ";
-			return true;
-		}
-		return IsNumberInSameColumn(aBlock, aNumber, aLocalPosition, aCurrentRow + 3);
-	}
 
-	const bool IsNumberInSameRow(const Block aBlock, const int aNumber, const int aLocalPosition, int aCurrentColumn)
-	{
-		std::cout << " " << aLocalPosition + aCurrentColumn;
-		if (aCurrentColumn > 1) return false;
-		if (aLocalPosition + aCurrentColumn >= 0 && aLocalPosition + aCurrentColumn < aBlock.size() && aBlock[aLocalPosition + aCurrentColumn] == aNumber)
+		for (int y = 0; y < aBoard.size(); y++)
 		{
-			std::cout << " <Dub detected!> ";
-			return true;
-		}
-		return IsNumberInSameRow(aBlock, aNumber, aLocalPosition, aCurrentColumn + 1);
-
-	}
-
-
-	const bool IsNumberAlreadyInSamePosOfOtherBlocks(const Board aBoard, const int aNumber, const int aLocalPositions, int aCurrentBlock) {
-		std::cout << " " << aCurrentBlock;
-		if (aCurrentBlock >= 9) return false;
-		if (aBoard[aLocalPositions + (9 * aCurrentBlock)] == aNumber)
-		{
-			std::cout << " <Dub detected!> ";
-			return true;
-		}
-
-		return IsNumberAlreadyInSamePosOfOtherBlocks(aBoard, aNumber, aLocalPositions, aCurrentBlock + 1);
-	}
-
-
-	const int GetFirstAvaliableNumber(const Block aBlock, int aNumber) {
-
-		if (std::find(aBlock.begin(), aBlock.end(), aNumber) == aBlock.end()) {
-			return aNumber;
-		}
-		else if (aNumber <= 9) {
-			return GetFirstAvaliableNumber(aBlock, aNumber + 1);
-		}
-		else {
-			return 0;
-		}
-
-	}
-
-
-
-
-
-	bool SolveSudoku(Board& aBoard, int aCurrentBlockVal) {
-		if (aCurrentBlockVal >= 9) return std::find(aBoard.begin(), aBoard.end(), 0) == aBoard.end();
-
-		Block aBlock;
-
-		int offset = (9 * aCurrentBlockVal);
-
-		std::cout << std::endl;
-		std::cout << "<--------------------------->" << std::endl;
-
-		int localOffset = 0;
-		for (int i = 0; i < aBlock.size(); i++)
-		{
-			if (i != 8)
-				if (i % 3 == 0) localOffset += 6;
-			std::cout << aBoard[i + offset + localOffset] << std::endl;
-			aBlock[i] = aBoard[i + offset + localOffset];
-		}
-
-		std::cout << std::endl;
-		std::cout << "------------------------" << std::endl;
-		std::cout << offset << std::endl;
-
-		for (int i = 0; i < aBlock.size(); i++)
-		{
-			if (aBlock[i] == 0) //Is slot empty
+			for (int x = 0; x < aBoard[y].size(); x++)
 			{
-				int number = GetFirstAvaliableNumber(aBlock, 1);
+				std::cout << aBoard[y][x] << " ";
+			}
+			std::cout << std::endl;
+		}
+		std::cout << std::endl;
 
-				if (number == 0) continue;
-				std::cout << std::endl;
-				std::cout << "Check Dup in other blocks for " << number << ": ";
-				if (IsNumberAlreadyInSamePosOfOtherBlocks(aBoard, number, i, 0)) continue;
-				std::cout << std::endl;
+	}
 
-				std::cout << "Check Dup in same block " << number << " - Column Check: ";
-				if (IsNumberInSameColumn(aBlock, number, i, -1)) continue;
-				std::cout << std::endl;
+	bool IsSafe(CBoard& aBoards, int anXPos, int anYPos, int& aNumber)
+	{
 
-				std::cout << "Check Dup in same block " << number << " - Row Check: ";
-				if (IsNumberInSameRow(aBlock, number, i, -3)) continue;
-				aBoard[i + offset] = number;
+		//Column Check
+		for (int i = 0; i < aBoards.size(); i++)
+		{
+			if (aBoards[i][anXPos] == aNumber) return false;
+		}
+
+		//Row  Check
+		for (int i = 0; i < aBoards[anYPos].size(); i++)
+		{
+			if (aBoards[anYPos][i] == aNumber) return false;
+		}
 
 
+		int startRow = anYPos - anYPos % 3;
+		int	startCol = anXPos - anXPos % 3;
+
+		for (int i = 0; i < 3; i++)
+		{
+			for (int j = 0; j < 3; j++)
+			{
+				if (aBoards[i + startRow][j + startCol] == aNumber)
+				{
+					return false;
+				}
 			}
 		}
 
 
-		return SolveSudoku(aBoard, aCurrentBlockVal + 1);
+		return true;
+
+	}
+	bool SolveSudoku(CBoard& aBoard, int anXPos, int anYPos)
+	{
+
+		if (anYPos == aBoard.size() - 1 && anXPos == aBoard[anYPos].size())
+		{
+			return true;
+		}
+
+		if (anXPos == aBoard[anYPos].size())
+		{
+			anYPos++;
+			anXPos = 0;
+		}
+
+		if (aBoard[anYPos][anXPos] > 0)
+		{
+			return SolveSudoku(aBoard, anXPos + 1, anYPos);
+		}
+
+
+		for (int i = 1; i <= 9; i++)
+		{
+
+
+			if (IsSafe(aBoard, anXPos, anYPos, i))
+			{
+
+
+
+				//Set number
+				aBoard[anYPos][anXPos] = i;
+
+
+				if (SolveSudoku(aBoard, anXPos + 1, anYPos))
+				{
+
+					return true;
+				}
+			}
+
+
+			//reset number if we are wrong
+
+			aBoard[anYPos][anXPos] = 0;
+		}
+
+		return false;
 	}
 
-
-
-
-
-	bool SolveSudoku(Board& aBoard)
+	CBoard CreateBoard(std::array<int, 81> aBoard)
 	{
-		return SolveSudoku(aBoard, 0);
+		CBoard board = CBoard();
+
+		for (int i = 0; i < aBoard.size(); i++)
+		{
+
+			int x = i % 9;
+			int y = i / 9;
+
+			board[y][x] = aBoard[i];
+		}
+
+
+		return board;
+	}
+
+	void CopyToSingleArray(std::array<int, 81>& aBoard, CBoard aCBoard)
+	{
+		for (int y = 0; y < aCBoard.size(); y++)
+		{
+			for (int x = 0; x < aCBoard[y].size(); x++)
+			{
+				int i = x + aCBoard.size() * y;
+				aBoard[i] = aCBoard[y][x];
+			}
+		}
+
+	}
+
+	bool SolveSudoku(std::array<int, 81>& aBoard)
+	{
+		CBoard board = CreateBoard(aBoard);
+		PrintBoard(board);
+		std::cout << std::endl;
+		if (SolveSudoku(board, 0, 0))
+		{
+			CopyToSingleArray(aBoard, board);
+			return true;
+		}
+
+		return false;
+
 	}
 
 
