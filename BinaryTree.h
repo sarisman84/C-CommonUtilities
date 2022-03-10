@@ -8,39 +8,25 @@ namespace CommonUtilities
 	{
 		T myData;
 		Node* myLeftNode;
-		Node* myLeftRight;
+		Node* myRightNode;
 		Node(T val)
 		{
 			myData = val;
 			myLeftNode = { nullptr };
-			myLeftRight = { nullptr };
+			myRightNode = { nullptr };
 		}
 
-		const bool operator==(const T& aRhs)
+
+
+
+
+		Node* GetNextNode(const T& aValue)
 		{
-			return !(myData < aRhs) && !(aRhs < myData);
-		}
-		const bool operator != (const T& aRhs)
-		{
-			return !(myData == aRhs);
-		}
-		const bool operator <(const T& aRhs)
-		{
-			return myData < aRhs;
-		}
-		const bool operator >(const T& aRhs)
-		{
-			return myData > aRhs;
-		}
-		const bool operator <(const Node*& aRhs)
-		{
-			return myData < aRhs->myData;
-		}
-		const bool operator >(const Node*& aRhs)
-		{
-			return myData > aRhs->myData;
+			return myData < aValue ? myLeftNode : myRightNode;
 		}
 	};
+
+
 
 	template <class T>
 	class BinaryTree
@@ -50,80 +36,130 @@ namespace CommonUtilities
 		{
 			myHeadNode = nullptr;
 		}
-		~BinaryTree();
+		~BinaryTree()
+		{
+			if (myHeadNode)
+				delete myHeadNode;
+			myHeadNode = nullptr;
+		}
 		//Return true if the element exist in the tree.s
 		bool HasElement(const T& aValue) const
 		{
-			auto foundElement;
-			return HasCurrentNodeElement(myHeadNode, aValue, foundElement);
-		};
+			return Contains(myHeadNode, aValue);
+		}
 		//Inserts the element into the tree if it doesn't already exist otherwise does nothing.
 		void Insert(const T& aValue)
 		{
-			auto foundNode;
-			if (!HasCurrentNodeElement(myHeadNode, aValue, foundNode))
+			if (!Contains(myHeadNode, aValue))
 			{
-				//The fuck is a scale???? - Spyro * your mom
-				//ADD
-				//1. Create a new node
-				Node* newCurrentNode = new Node(aValue);
-				//2. Find where to place it
+				Node<T>* parentNode;
+				Node<T>* potentialSlot = GetChild(myHeadNode, aValue);
+				while (potentialSlot)
+				{
 
-				//3. Connect so the node above points to new node
+					Node<T>* slot = GetChild(potentialSlot, aValue);
+					if (!slot)
+					{
+						parentNode = potentialSlot;
+						potentialSlot = slot;
+					}
+				}
+
+				SetChild(parentNode, new Node<T>(aValue), parentNode->myData < aValue ? 1 : 0);
+
 
 			}
-			else
-			{
-				std::cout << "Value already exist \n";
-			}
+
 		};
 		//If the element exist in the tree removes it.
 		void Remove(const T& aValue)
 		{
-			auto foundNode;
-			if (HasCurrentNodeElement(myHeadNode, aValue, foundNode))
+			if (Contains(myHeadNode, aValue))
 			{
-				//DELETE
-				//Find the node and call RemoveNode()
-			}
-			else
-			{
-				std::cout << "Value doesn't exist \n";
+				Node<T>* parentNode;
+				Node<T>* targetNodeToRemove = GetChild(myHeadNode, aValue);
+				while (targetNodeToRemove->myData != aValue)
+				{
+
+					Node<T>* slot = GetChild(targetNodeToRemove, aValue);
+					if (slot->myData == aValue)
+					{
+						parentNode = targetNodeToRemove;
+						targetNodeToRemove = slot;
+					}
+				}
+
+				Node<T>* leftChild = targetNodeToRemove->myLeftNode;
+				Node<T>* rightChild = targetNodeToRemove->myRightNode;
+
+
+				delete targetNodeToRemove;
+
+				Insert(leftChild);
+				Insert(rightChild);
+
 			}
 		};
+
+
+
 	private:
-#pragma region RemoveLogic
-		Node* myHeadNode;
 
-		void RemoveNode(Node* aCurrentNode)
+		void Insert(Node<T>*& aNode)
 		{
-			Node* leftChild = aCurrentNode->myLeftNode;
-			Node* rightChild = aCurrentNode->myRightNode;
-			delete aCurrentNode;
+			if (!Contains(myHeadNode, aNode->myData))
+			{
+				Node<T>* parentNode;
+				Node<T>* potentialSlot = GetChild(myHeadNode, aNode->myData);
+				while (potentialSlot)
+				{
 
-		}
-#pragma endregion
-		//Rename or move logic to "Insert" where we actually insert an element
+					Node<T>* slot = GetChild(potentialSlot, aNode->myData);
+					if (!slot)
+					{
+						parentNode = potentialSlot;
+						potentialSlot = slot;
+					}
+				}
 
-		//Check is an element exist in the tree
-		bool HasCurrentNodeElement(Node* aCurrentNode, const T& aValue, Node*& aFoundNode)
+				SetChild(parentNode, aNode, (parentNode->myData < aNode->myData) ? 1 : 0);
+
+
+			}
+
+		};
+
+
+		bool Contains(Node<T>* aNode, const T& aValue) const
 		{
-			if (!aCurrentNode)
+			if (!aNode) return false;
+			if (aNode->myData == aValue) return true;
+
+			if (Contains(GetChild(aNode, aValue), aValue))
 			{
-				return false;
+				return true;
 			}
 
-			if (aCurrentNode < aValue && !aFoundNode)
-			{
-				return HasCurrentNodeElement(aCurrentNode->myRightNode, aValue, aFoundNode);
-			}
-			else if (aCurrentNode > aValue && !aFoundNode)
-			{
-				return HasCurrentNodeElement(aCurrentNode->myLeftNode, aValue, aFoundNode);
-			}
-
-			aFoundNode = aCurrentNode;
-			return true;
+			return false;
 		}
+
+		Node<T>* GetChild(Node<T>* aParent, const T& aValue) const
+		{
+			return aParent->myData > aValue ? aParent->myRightNode : aParent->myLeftNode;
+		}
+
+		void SetChild(Node<T>* aParent, Node<T>* aChild, const int aSide = 0)
+		{
+			if (aSide <= 0)
+				aParent->myLeftNode = aChild;
+			else
+				aParent->myRightNode = aChild;
+		}
+
+
+
+
+
+		Node<T>* myHeadNode;
 	};
 }
