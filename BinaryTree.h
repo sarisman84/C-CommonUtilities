@@ -15,10 +15,6 @@
 
 namespace CommonUtilities
 {
-
-
-
-
 	template <class T>
 	struct Node
 	{
@@ -31,11 +27,7 @@ namespace CommonUtilities
 			myLeftNode = { nullptr };
 			myRightNode = { nullptr };
 		}
-
-
-
 	};
-
 
 	template<class T>
 	struct SearchResults
@@ -44,18 +36,12 @@ namespace CommonUtilities
 		Node<T>* myParentNode;
 	};
 
-
 	template <class T>
 	struct ComparisonResults
 	{
 		SearchResults<T> mySearchResults;
 		int myChildSide;
 	};
-
-
-
-
-
 
 	template <class T>
 	class BinaryTree
@@ -68,7 +54,11 @@ namespace CommonUtilities
 		~BinaryTree()
 		{
 			if (myHeadNode)
+			{
+				myHeadNode->myLeftNode = nullptr;
+				myHeadNode->myRightNode = nullptr;
 				delete myHeadNode;
+			}
 			myHeadNode = nullptr;
 		}
 		//Return true if the element exist in the tree.s
@@ -83,8 +73,6 @@ namespace CommonUtilities
 			Insert(new Node<T>(aValue));
 		};
 
-
-
 		//If the element exist in the tree removes it.
 		void Remove(const T& aValue)
 		{
@@ -95,6 +83,7 @@ namespace CommonUtilities
 			Node<T>* parent = nullptr;
 			Node<T>* node = myHeadNode;
 			bool isLeft = false;
+
 			while (node->myData != aValue)
 			{
 				auto result = GetNextNode(node, aValue);
@@ -103,29 +92,28 @@ namespace CommonUtilities
 				isLeft = result.myChildSide == 1;
 			}
 
-
+			Node<T>* leftChild = node->myLeftNode;
+			Node<T>* rightChild = node->myRightNode;
 			if (parent)
 				if (isLeft)
 					parent->myLeftNode = nullptr;
 				else
 					parent->myRightNode = nullptr;
+			if (node == myHeadNode)
+			{
+				delete node;
+				myHeadNode = nullptr;
+			}
+			else
+			{
+				delete node;
+			}
 
-			Node<T>* leftChild = node->myLeftNode;
-			Node<T>* rightChild = node->myRightNode;
-
-			delete node;
 			if (leftChild)
 				Insert(leftChild);
 			if (rightChild)
 				Insert(rightChild);
-
-
-
-
-
 		};
-
-
 
 	private:
 
@@ -135,13 +123,9 @@ namespace CommonUtilities
 			if (!myHeadNode)
 			{
 				myHeadNode = aNode;
-
 				return;
 			}
-
-
 			DBOUT("Value is not in tree! Inserting!");
-
 
 			Node<T>* parentNode = nullptr;
 			Node<T>* availableNode = myHeadNode;
@@ -149,8 +133,6 @@ namespace CommonUtilities
 
 			while (availableNode)
 			{
-
-
 				ComparisonResults<T> results = GetNextNode(availableNode, aNode->myData);
 
 				availableNode = results.mySearchResults.myTargetNode;
@@ -159,7 +141,6 @@ namespace CommonUtilities
 				isLeft = results.myChildSide == 1;
 
 				DBOUT(availableNode ? "Still trying to find an empty slot" : "Found empty slot, exiting!");
-
 			}
 
 			if (parentNode)
@@ -170,9 +151,6 @@ namespace CommonUtilities
 					parentNode->myRightNode = aNode;
 			}
 		}
-
-
-
 		const bool Contains(Node<T>* aNode, const T& aValue) const
 		{
 			if (!aNode) return false;
@@ -181,13 +159,6 @@ namespace CommonUtilities
 			if (nextNode == aNode) return true;
 			return Contains(nextNode, aValue);
 		}
-
-
-
-
-
-
-
 		ComparisonResults<T> GetNextNode(Node<T>* aParentNode, const T& aValue) const
 		{
 			if (!aParentNode) return ComparisonResults<T>();
@@ -198,7 +169,6 @@ namespace CommonUtilities
 
 			return ComparisonResults<T>{ SearchResults<T>{result, aParentNode}, isLeft ? 1 : isRight ? 2 : 0 };
 		}
-
 		Node<T>* myHeadNode;
 	};
 }
