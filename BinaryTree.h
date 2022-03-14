@@ -95,10 +95,18 @@ namespace CommonUtilities
 			Node<T>* leftChild = node->myLeftNode;
 			Node<T>* rightChild = node->myRightNode;
 			if (parent)
+			{
 				if (isLeft)
+				{
 					parent->myLeftNode = nullptr;
+				}
 				else
+				{
 					parent->myRightNode = nullptr;
+				}
+
+			}
+
 			if (node == myHeadNode)
 			{
 				delete node;
@@ -110,9 +118,15 @@ namespace CommonUtilities
 			}
 
 			if (leftChild)
+			{
 				Insert(leftChild);
+			}
+				
 			if (rightChild)
+			{
 				Insert(rightChild);
+			}
+				
 		};
 
 	private:
@@ -146,9 +160,14 @@ namespace CommonUtilities
 			if (parentNode)
 			{
 				if (isLeft)
+				{
 					parentNode->myLeftNode = aNode;
+				}
 				else
+				{
 					parentNode->myRightNode = aNode;
+				}
+					
 			}
 		}
 		const bool Contains(Node<T>* aNode, const T& aValue) const
