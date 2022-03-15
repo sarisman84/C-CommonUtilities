@@ -29,18 +29,9 @@ namespace CommonUtilities
 		//lägger till elementet i heapen
 		void Enqueue(const T& aElement)
 		{
-			/*myBuffer.emplace_back(aElement);
-			std::sort(myBuffer.begin(), myBuffer.end(), [](T aLhs, T aRhs)->bool { return aLhs < aRhs; });*/
-
-			//aElement = 3
-
-			//0 = 2
-			//1 = 5
-			//2 = 7
-
 			int lastElement = myBuffer.size() - 1;
 
-			for (size_t i = 0; i > myBuffer.size(); i++)
+			for (size_t i = 0; i < myBuffer.size(); i++)
 			{
 
 				if (myBuffer[i] == NULL)
@@ -53,14 +44,13 @@ namespace CommonUtilities
 			}
 
 
-			if (lastElement != 0)
+
+			while (lastElement != 0 && myBuffer[lastElement] <= myBuffer[PARENT(lastElement)])
 			{
-				while (myBuffer[lastElement] <= myBuffer[PARENT(lastElement)])
-				{
-					std::swap(myBuffer[lastElement], myBuffer[PARENT(lastElement)]);
-					lastElement--;
-				}
+				std::swap(myBuffer[lastElement], myBuffer[PARENT(lastElement)]);
+				lastElement = PARENT(lastElement);
 			}
+
 
 		}
 
