@@ -1,4 +1,4 @@
-#include "../Assignment 6 - Heap/stdafx.h"
+#include "stdafx.h"
 #include "UtilityFunctions.hpp"
 
 namespace TestUtility
