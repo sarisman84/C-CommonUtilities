@@ -4,8 +4,8 @@
 #include <vector>
 #include <algorithm>
 #include <limits>
-#include "Student Code\Heap.hpp"
 #include "Common\UtilityFunctions.hpp"
+#include "Heap.hpp"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -21,7 +21,7 @@ namespace Assignment6Heap
 		{
 			Heapi heap;
 
-			Assert::AreEqual(0, heap.Size(), L"A just created heap should have a size of 0.");
+			Assert::AreEqual(0, heap.GetSize(), L"A just created heap should have a size of 0.");
 		}
 
 		TEST_METHOD(Enqueue)
@@ -33,11 +33,11 @@ namespace Assignment6Heap
 
 			for (int i = 0; i < 300; ++i)
 			{
-				Assert::AreEqual(i, heap.Size(), L"The heap has an incorrect size.");
+				Assert::AreEqual(i, heap.GetSize(), L"The heap has an incorrect size.");
 				heap.Enqueue(TestUtility::GetRandomInt(-100, 100));
 			}
 
-			Assert::AreEqual(300, heap.Size(), L"The heap has an incorrect size.");
+			Assert::AreEqual(300, heap.GetSize(), L"The heap has an incorrect size.");
 		}
 
 		TEST_METHOD(GetTop)
@@ -75,29 +75,29 @@ namespace Assignment6Heap
 
 			for (int i = 0; i < 300; ++i)
 			{
-				Assert::AreEqual(static_cast<int>(vec.size()), heap.Size(), L"Heap size does not match size of control sequence.");
+				Assert::AreEqual(static_cast<int>(vec.size()), heap.GetSize(), L"Heap size does not match size of control sequence.");
 				Assert::AreEqual(vec.back(), heap.Dequeue(), L"Heap top element does not match the largest element in the control sequence.");
 				vec.pop_back();
 			}
 		}
 
-		TEST_METHOD(GetSize)
+		TEST_METHOD(Size)
 		{
 			Heapi heap;
 
 			for (int i = 0; i < 300; ++i)
 			{
-				Assert::AreEqual(i, heap.Size(), L"The heap has an incorrect size.");
+				Assert::AreEqual(i, heap.GetSize(), L"The heap has an incorrect size.");
 				heap.Enqueue(TestUtility::GetRandomInt(-100, 100));
 			}
 			
 			for (int i = 300; i > 0; --i)
 			{
-				Assert::AreEqual(i, heap.Size(), L"The heap has an incorrect size.");
+				Assert::AreEqual(i, heap.GetSize(), L"The heap has an incorrect size.");
 				heap.Dequeue();
 			}
 
-			Assert::AreEqual(0, heap.Size(), L"The heap has an incorrect size.");
+			Assert::AreEqual(0, heap.GetSize(), L"The heap has an incorrect size.");
 		}
 	};
 }
