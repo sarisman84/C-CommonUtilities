@@ -43,15 +43,11 @@ namespace CommonUtilities
 				}
 			}
 
-
-
 			while (lastElement != 0 && myBuffer[lastElement] <= myBuffer[PARENT(lastElement)])
 			{
 				std::swap(myBuffer[lastElement], myBuffer[PARENT(lastElement)]);
 				lastElement = PARENT(lastElement);
 			}
-
-
 		}
 
 		//returnerar det största elementet i heapen
@@ -67,7 +63,7 @@ namespace CommonUtilities
 
 			myBuffer[myCurrentSize - 1] = NULL;
 			myCurrentSize--;
-
+			BubbleDown();
 			return topElement;
 		}
 
@@ -75,5 +71,23 @@ namespace CommonUtilities
 	private:
 		int myCurrentSize;
 		std::array<T, aHeapSize> myBuffer;
+
+		void BubbleDown(int index)
+		{
+			T biggest;
+			if (myBuffer[LEFT_CHILD] > myBuffer[biggest])
+			{
+				biggest = myBuffer[LEFT_CHILD];
+			}
+			if (myBuffer[RIGHT_CHILD] > myBuffer[biggest])
+			{
+				biggest = myBuffer[RIGHT_CHILD];
+			}
+			if (biggest != myBuffer[index])
+			{
+				std::swap(myBuffer[index], myBuffer[biggest]);
+				BubbleDown(biggest);
+			}
+		}
 	};
 }
