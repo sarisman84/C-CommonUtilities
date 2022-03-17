@@ -10,7 +10,11 @@
 
 namespace CommonUtilities
 {
-	template <class T, unsigned short aHeapSize = 100>
+	enum class HeapType
+	{
+		Max, Min
+	};
+	template <class T, unsigned short aHeapSize = 100, HeapType aHeapType = HeapType::Max>
 	class Heap
 	{
 	public:
@@ -29,41 +33,55 @@ namespace CommonUtilities
 		//lägger till elementet i heapen
 		void Enqueue(const T& aElement)
 		{
-			int lastElement = myBuffer.size() - 1;
-
 			for (size_t i = 0; i < myBuffer.size(); i++)
 			{
 
 				if (myBuffer[i] == NULL)
 				{
 					myCurrentSize = i + 1;
-					lastElement = i;
 					myBuffer[i] = aElement;
 					break;
 				}
 			}
 
-			while (lastElement != 0 && myBuffer[lastElement] <= myBuffer[PARENT(lastElement)])
+			switch (aHeapType)
 			{
-				std::swap(myBuffer[lastElement], myBuffer[PARENT(lastElement)]);
-				lastElement = PARENT(lastElement);
+			case CommonUtilities::HeapType::Max:
+				BubbleUp(myCurrentSize - 1);
+				break;
+			case CommonUtilities::HeapType::Min:
+				BubbleDown(0);
+				break;
 			}
+			
 		}
 
-		//returnerar det största elementet i heapen
+		//returnerar det första elementet i heapen
 		const T& GetTop() const
 		{
-			return myBuffer[myCurrentSize - 1];
+			return myBuffer[0];
 		}
 
-		//tar bort det största elementet ur heapen och returnerar det
+		//tar bort det första elementet ur heapen och returnerar det
 		T Dequeue()
 		{
 			T topElement = GetTop();
 
-			myBuffer[myCurrentSize - 1] = NULL;
+			for (size_t i =  1; i < myCurrentSize; i++)
+			{
+				myBuffer[i - 1] = myBuffer[i];
+			}
+
 			myCurrentSize--;
-			BubbleDown();
+			switch (aHeapType)
+			{
+			case CommonUtilities::HeapType::Max:
+				BubbleDown(0);
+				break;
+			case CommonUtilities::HeapType::Min:
+				BubbleUp(myCurrentSize - 1);
+				break;
+			}
 			return topElement;
 		}
 
@@ -72,21 +90,36 @@ namespace CommonUtilities
 		int myCurrentSize;
 		std::array<T, aHeapSize> myBuffer;
 
-		void BubbleDown(int index)
+		void BubbleDown(int aIndex)
 		{
-			T biggest;
-			if (myBuffer[LEFT_CHILD] > myBuffer[biggest])
+
+			int lhs = LEFT_CHILD(aIndex);
+			int rhs = RIGHT_CHILD(aIndex);
+			int biggest = aIndex;
+
+			biggest = lhs < myCurrentSize&& myBuffer[lhs] > myBuffer[aIndex] ? lhs : rhs < myCurrentSize&& myBuffer[rhs] > myBuffer[biggest] ? rhs : biggest;
+
+			if (biggest != aIndex)
 			{
-				biggest = myBuffer[LEFT_CHILD];
-			}
-			if (myBuffer[RIGHT_CHILD] > myBuffer[biggest])
-			{
-				biggest = myBuffer[RIGHT_CHILD];
-			}
-			if (biggest != myBuffer[index])
-			{
-				std::swap(myBuffer[index], myBuffer[biggest]);
+				std::swap(myBuffer[aIndex], myBuffer[biggest]);
 				BubbleDown(biggest);
+			}
+		}
+
+
+		void BubbleUp(int aIndex)
+		{
+			int parentIndex = PARENT(aIndex);
+			int biggest = aIndex;
+
+
+
+			biggest = parentIndex >= 0 && myBuffer[aIndex] > myBuffer[parentIndex];
+
+			if (biggest != aIndex)
+			{
+				std::swap(myBuffer[aIndex], myBuffer[biggest]);
+				BubbleUp(biggest);
 			}
 		}
 	};
