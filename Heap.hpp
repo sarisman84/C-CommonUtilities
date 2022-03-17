@@ -1,12 +1,9 @@
 #pragma once
 #include <array>
 #include <algorithm>
-
-
 #define LEFT_CHILD(i)  (2 * i) + 1
 #define RIGHT_CHILD(i) (2 * i) + 2
 #define PARENT(i) (i - 1) / 2
-#define NULL T()
 
 namespace CommonUtilities
 {
@@ -14,20 +11,25 @@ namespace CommonUtilities
 	{
 		Max, Min
 	};
-	template <class T, unsigned short aHeapSize = 100, HeapType aHeapType = HeapType::Max>
+	template <class T, HeapType aHeapType = HeapType::Max>
 	class Heap
 	{
 	public:
 		Heap()
 		{
-			myBuffer = std::array<T, aHeapSize>();
+			myBuffer = std::vector<T>();
 		}
-
-
 		//returnerar antal element i heapen
 		int GetSize() const
 		{
-			return static_cast<int>(myBuffer.size());
+			if (myCurrentSize > 0)
+			{
+				return static_cast<int>(myBuffer.size());
+			}
+			else
+			{
+				return 0;
+			}
 		}
 
 		//lägger till elementet i heapen
@@ -35,15 +37,13 @@ namespace CommonUtilities
 		{
 			for (size_t i = 0; i < myBuffer.size(); i++)
 			{
-
-				if (myBuffer[i] == NULL)
+				if (myBuffer[i] == T())
 				{
 					myCurrentSize = i + 1;
 					myBuffer[i] = aElement;
 					break;
 				}
 			}
-
 			switch (aHeapType)
 			{
 			case CommonUtilities::HeapType::Max:
@@ -53,25 +53,23 @@ namespace CommonUtilities
 				BubbleDown(0);
 				break;
 			}
-			
 		}
 
 		//returnerar det första elementet i heapen
 		const T& GetTop() const
 		{
 			return myBuffer[0];
+			//sda
 		}
 
 		//tar bort det första elementet ur heapen och returnerar det
 		T Dequeue()
 		{
 			T topElement = GetTop();
-
-			for (size_t i =  1; i < myCurrentSize; i++)
+			for (size_t i = 1; i < myCurrentSize; i++)
 			{
 				myBuffer[i - 1] = myBuffer[i];
 			}
-
 			myCurrentSize--;
 			switch (aHeapType)
 			{
@@ -84,15 +82,12 @@ namespace CommonUtilities
 			}
 			return topElement;
 		}
-
-
 	private:
 		int myCurrentSize;
-		std::array<T, aHeapSize> myBuffer;
+		std::vector<T> myBuffer;
 
 		void BubbleDown(int aIndex)
 		{
-
 			int lhs = LEFT_CHILD(aIndex);
 			int rhs = RIGHT_CHILD(aIndex);
 			int biggest = aIndex;
@@ -105,14 +100,10 @@ namespace CommonUtilities
 				BubbleDown(biggest);
 			}
 		}
-
-
 		void BubbleUp(int aIndex)
 		{
 			int parentIndex = PARENT(aIndex);
 			int biggest = aIndex;
-
-
 
 			biggest = parentIndex >= 0 && myBuffer[aIndex] > myBuffer[parentIndex];
 

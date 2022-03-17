@@ -4,8 +4,9 @@
 #include <vector>
 #include <algorithm>
 #include <limits>
-#include "Common\UtilityFunctions.hpp"
 #include "Heap.hpp"
+#include "Common\UtilityFunctions.hpp"
+
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 using Heapi = CommonUtilities::Heap<int>;
