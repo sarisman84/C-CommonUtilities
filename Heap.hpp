@@ -15,102 +15,88 @@ namespace CommonUtilities
 	class Heap
 	{
 	public:
-		Heap()
-		{
-			myBuffer = std::vector<T>();
-		}
+		Heap() = default;
 		//returnerar antal element i heapen
 		int GetSize() const
 		{
-			if (myCurrentSize > 0)
-			{
-				return static_cast<int>(myBuffer.size());
-			}
-			else
-			{
-				return 0;
-			}
+			return static_cast<int>(myBuffer.size());
 		}
-
 		//lägger till elementet i heapen
 		void Enqueue(const T& aElement)
 		{
-			for (size_t i = 0; i < myBuffer.size(); i++)
-			{
-				if (myBuffer[i] == T())
-				{
-					myCurrentSize = i + 1;
-					myBuffer[i] = aElement;
-					break;
-				}
-			}
-			switch (aHeapType)
-			{
-			case CommonUtilities::HeapType::Max:
-				BubbleUp(myCurrentSize - 1);
-				break;
-			case CommonUtilities::HeapType::Min:
-				BubbleDown(0);
-				break;
-			}
-		}
+			myBuffer.push_back(aElement);
 
+			BubbleUp(myBuffer.size() - 1);
+		}
 		//returnerar det första elementet i heapen
 		const T& GetTop() const
 		{
-			return myBuffer[0];
-			//sda
+			return myBuffer.front();
 		}
-
 		//tar bort det första elementet ur heapen och returnerar det
 		T Dequeue()
 		{
+			if (myBuffer.size() == 0) return T();
+
 			T topElement = GetTop();
-			for (size_t i = 1; i < myCurrentSize; i++)
-			{
-				myBuffer[i - 1] = myBuffer[i];
-			}
-			myCurrentSize--;
-			switch (aHeapType)
-			{
-			case CommonUtilities::HeapType::Max:
-				BubbleDown(0);
-				break;
-			case CommonUtilities::HeapType::Min:
-				BubbleUp(myCurrentSize - 1);
-				break;
-			}
+
+			myBuffer[0] = myBuffer.back();
+			myBuffer.pop_back();
+			BubbleDown(0);
+
 			return topElement;
 		}
 	private:
-		int myCurrentSize;
+		int myCurrentSize = 0;
 		std::vector<T> myBuffer;
 
 		void BubbleDown(int aIndex)
 		{
 			int lhs = LEFT_CHILD(aIndex);
 			int rhs = RIGHT_CHILD(aIndex);
-			int biggest = aIndex;
+			int currentElement = aIndex;
 
-			biggest = lhs < myCurrentSize&& myBuffer[lhs] > myBuffer[aIndex] ? lhs : rhs < myCurrentSize&& myBuffer[rhs] > myBuffer[biggest] ? rhs : biggest;
-
-			if (biggest != aIndex)
+			switch (aHeapType)
 			{
-				std::swap(myBuffer[aIndex], myBuffer[biggest]);
-				BubbleDown(biggest);
+			case CommonUtilities::HeapType::Max:
+				if (lhs < myBuffer.size() && myBuffer[lhs] > myBuffer[currentElement])
+					currentElement = lhs;
+				if (rhs < myBuffer.size() && myBuffer[rhs] > myBuffer[currentElement])
+					currentElement = rhs;
+				break;
+			case CommonUtilities::HeapType::Min:
+				if (lhs < myBuffer.size() && myBuffer[lhs] < myBuffer[currentElement])
+					currentElement = lhs;
+				if (rhs < myBuffer.size() && myBuffer[rhs] < myBuffer[currentElement])
+					currentElement = rhs;
+				break;
 			}
+			if (currentElement != aIndex)
+			{
+				std::swap(myBuffer[aIndex], myBuffer[currentElement]);
+				BubbleDown(currentElement);
+			}
+
 		}
 		void BubbleUp(int aIndex)
 		{
 			int parentIndex = PARENT(aIndex);
-			int biggest = aIndex;
+			int currentElement = aIndex;
 
-			biggest = parentIndex >= 0 && myBuffer[aIndex] > myBuffer[parentIndex];
-
-			if (biggest != aIndex)
+			switch (aHeapType)
 			{
-				std::swap(myBuffer[aIndex], myBuffer[biggest]);
-				BubbleUp(biggest);
+			case CommonUtilities::HeapType::Max:
+				currentElement = parentIndex >= 0 && myBuffer[aIndex] > myBuffer[parentIndex] ? parentIndex : currentElement;
+				break;
+			case CommonUtilities::HeapType::Min:
+				currentElement = parentIndex >= 0 && myBuffer[aIndex] < myBuffer[parentIndex] ? parentIndex : currentElement;
+				break;
+			}
+
+			if (currentElement != aIndex)
+			{
+				std::swap(myBuffer[aIndex], myBuffer[currentElement]);
+				BubbleUp(currentElement);
 			}
 		}
 	};
