@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="source">
+      <UniqueIdentifier>{76FF3A1C-62A1-65F2-4B5C-7946379DEC42}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Source\Tutorials\Tutorial6CustomShapes\CMayaObject.h" />
+    <ClInclude Include="..\Source\Tutorials\Tutorial6CustomShapes\SnakeShape.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Source\Tutorials\Tutorial6CustomShapes\CMayaObject.cpp" />
+    <ClCompile Include="..\Source\Tutorials\Tutorial6CustomShapes\SnakeShape.cpp" />
+    <ClCompile Include="..\Source\Tutorials\Tutorial6CustomShapes\source\main.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

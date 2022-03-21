@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="tga2d">
+      <UniqueIdentifier>{17396C10-834D-94C1-4CCF-3721B8A290F2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tga2d\animation">
+      <UniqueIdentifier>{E69A7E24-5226-ECE8-5B37-6FDDC74148E9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tga2d\animation\Math">
+      <UniqueIdentifier>{7FBFAFF9-6B4E-39C3-146D-4DBE00DB4969}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tga2d\audio">
+      <UniqueIdentifier>{780C2EC8-E4C1-A6BD-6DB6-A094D96A9DC1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tga2d\debugging">
+      <UniqueIdentifier>{B27FDA2B-1E0B-48F0-271C-CBE49326A4F0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tga2d\drawers">
+      <UniqueIdentifier>{3E8FA36B-AA4F-1FA2-738A-681FDF09647E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tga2d\error">
+      <UniqueIdentifier>{B00575C8-1CBB-EDBD-A5AF-E7941164E4C1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tga2d\filewatcher">
+      <UniqueIdentifier>{94EE8132-0005-80C8-497C-0BEAB5D15050}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tga2d\graphics">
+      <UniqueIdentifier>{57C75DA4-4395-51AA-2C29-C2D018962D0F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tga2d\imguiinterface">
+      <UniqueIdentifier>{D227457A-BEB6-CE43-67D5-E23E5343DFE9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tga2d\input">
+      <UniqueIdentifier>{762EBBC8-E2E3-33BE-6BD8-2D95D78C2AC2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tga2d\light">
+      <UniqueIdentifier>{1E92EEC8-8A47-67BE-133C-61957FF05DC2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tga2d\loaders">
+      <UniqueIdentifier>{30906BCC-9C50-E702-658B-3080D10A2CDF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tga2d\math">
+      <UniqueIdentifier>{70702E63-5C28-70B0-C52F-490CB1060BA1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tga2d\model">
+      <UniqueIdentifier>{B7E703C9-239D-7CBE-AC91-7695184673C2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tga2d\noise">
+      <UniqueIdentifier>{441716C9-B0CC-8EBE-39C1-8895A57585C2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tga2d\primitives">
+      <UniqueIdentifier>{B29E8BD5-9E97-AA27-C7C9-8FACB3218A33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tga2d\render">
+      <UniqueIdentifier>{C62B7BF4-B28E-0A99-5B14-434F4756D61B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tga2d\shaders">
+      <UniqueIdentifier>{101DEFD6-7CDD-6A0D-4518-B48AB197AFE9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tga2d\sprite">
+      <UniqueIdentifier>{9DAA99F7-890D-299C-3293-61521ED5F41E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tga2d\text">
+      <UniqueIdentifier>{AB583263-9710-74B0-0018-4D0CECEE0EA1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tga2d\texture">
+      <UniqueIdentifier>{971D931E-03DE-0E55-CC18-58D238985331}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tga2d\util">
+      <UniqueIdentifier>{E4223363-D0DA-74B0-39E2-4D0C25B90FA1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tga2d\videoplayer">
+      <UniqueIdentifier>{8AA1039F-F6B7-0135-3F2F-8D56AB84D2BC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tga2d\windows">
+      <UniqueIdentifier>{71A2180E-DD62-9444-A69D-DDC1121DD920}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Source\tga2dcore\resource.h" />
+    <ClInclude Include="..\Source\tga2dcore\stdafx.h" />
+    <ClInclude Include="..\Source\tga2dcore\targetver.h" />
+    <ClInclude Include="..\Source\tga2dcore\tga2d\EngineDefines.h">
+      <Filter>tga2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\StepTimer.h">
+      <Filter>tga2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\Timer.h">
+      <Filter>tga2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\animation\Animation.h">
+      <Filter>tga2d\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\animation\AnimationController.h">
+      <Filter>tga2d\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\animation\Math\MathFunc.h">
+      <Filter>tga2d\animation\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\audio\audio.h">
+      <Filter>tga2d\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\audio\audio_out.h">
+      <Filter>tga2d\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\debugging\MemoryTracker.h">
+      <Filter>tga2d\debugging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\debugging\StackTrace.h">
+      <Filter>tga2d\debugging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\drawers\CustomShapeDrawer.h">
+      <Filter>tga2d\drawers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\drawers\DebugDrawer.h">
+      <Filter>tga2d\drawers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\drawers\DebugPerformanceGraph.h">
+      <Filter>tga2d\drawers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\drawers\LineDrawer.h">
+      <Filter>tga2d\drawers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\drawers\ModelDrawer.h">
+      <Filter>tga2d\drawers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\drawers\SpriteDrawer.h">
+      <Filter>tga2d\drawers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\engine.h">
+      <Filter>tga2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\error\ErrorManager.h">
+      <Filter>tga2d\error</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\filewatcher\FileWatcher.h">
+      <Filter>tga2d\filewatcher</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\graphics\AmbientLight.h">
+      <Filter>tga2d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\graphics\Camera.h">
+      <Filter>tga2d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\graphics\DX11.h">
+      <Filter>tga2d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\graphics\DepthBuffer.h">
+      <Filter>tga2d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\graphics\DirectionalLight.h">
+      <Filter>tga2d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\graphics\ForwardRenderer.h">
+      <Filter>tga2d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\graphics\FullscreenEffect.h">
+      <Filter>tga2d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\graphics\GraphicsEngine.h">
+      <Filter>tga2d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\graphics\HTMLParser.h">
+      <Filter>tga2d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\graphics\Light.h">
+      <Filter>tga2d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\graphics\PointLight.h">
+      <Filter>tga2d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\graphics\RenderStateManager.h">
+      <Filter>tga2d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\graphics\RenderTarget.h">
+      <Filter>tga2d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\graphics\TextureResource.h">
+      <Filter>tga2d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\graphics\Vertex.h">
+      <Filter>tga2d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\imguiinterface\ImGuiInterface.h">
+      <Filter>tga2d\imguiinterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\input\InputManager.h">
+      <Filter>tga2d\input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\input\XInput.h">
+      <Filter>tga2d\input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\light\Light.h">
+      <Filter>tga2d\light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\light\LightManager.h">
+      <Filter>tga2d\light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\loaders\tgaloader.h">
+      <Filter>tga2d\loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\math\CommonMath.h">
+      <Filter>tga2d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\math\FMath.h">
+      <Filter>tga2d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\math\Matrix.h">
+      <Filter>tga2d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\math\Matrix2x2.h">
+      <Filter>tga2d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\math\Matrix3x3.h">
+      <Filter>tga2d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\math\Matrix4x4.h">
+      <Filter>tga2d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\math\Quaternion.h">
+      <Filter>tga2d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\math\Transform.h">
+      <Filter>tga2d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\math\Vector.h">
+      <Filter>tga2d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\math\Vector3.h">
+      <Filter>tga2d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\math\color.h">
+      <Filter>tga2d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\math\vector2.h">
+      <Filter>tga2d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\math\vector4.h">
+      <Filter>tga2d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\model\AnimatedModelInstance.h">
+      <Filter>tga2d\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\model\Model.h">
+      <Filter>tga2d\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\model\ModelFactory.h">
+      <Filter>tga2d\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\model\ModelInstance.h">
+      <Filter>tga2d\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\model\ModelStatus.h">
+      <Filter>tga2d\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\noise\PerlinNoise.h">
+      <Filter>tga2d\noise</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\primitives\CustomShape.h">
+      <Filter>tga2d\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\primitives\LinePrimitive.h">
+      <Filter>tga2d\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\render\RenderCommon.h">
+      <Filter>tga2d\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\render\RenderObject.h">
+      <Filter>tga2d\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\render\renderer.h">
+      <Filter>tga2d\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\shaders\ModelShader.h">
+      <Filter>tga2d\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\shaders\ShaderCommon.h">
+      <Filter>tga2d\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\shaders\SpriteShader.h">
+      <Filter>tga2d\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\shaders\shader.h">
+      <Filter>tga2d\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\sprite\sprite.h">
+      <Filter>tga2d\sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\text\TextService.h">
+      <Filter>tga2d\text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\text\fontfile.h">
+      <Filter>tga2d\text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\text\parser.h">
+      <Filter>tga2d\text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\text\text.h">
+      <Filter>tga2d\text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\text\textfile.h">
+      <Filter>tga2d\text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\text\token.h">
+      <Filter>tga2d\text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\texture\TextureManager.h">
+      <Filter>tga2d\texture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\texture\texture.h">
+      <Filter>tga2d\texture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\util\StringCast.h">
+      <Filter>tga2d\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\videoplayer\VideoAudio.h">
+      <Filter>tga2d\videoplayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\videoplayer\video.h">
+      <Filter>tga2d\videoplayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\videoplayer\videoplayer.h">
+      <Filter>tga2d\videoplayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\tga2d\windows\WindowsWindow.h">
+      <Filter>tga2d\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\version.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Source\tga2dcore\stdafx.cpp" />
+    <ClCompile Include="..\Source\tga2dcore\tga2d\Timer.cpp">
+      <Filter>tga2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\animation\Animation.cpp">
+      <Filter>tga2d\animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\animation\Math\MathFunc.cpp">
+      <Filter>tga2d\animation\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\audio\audio.cpp">
+      <Filter>tga2d\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\audio\audio_out.cpp">
+      <Filter>tga2d\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\debugging\MemoryTracker.cpp">
+      <Filter>tga2d\debugging</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\debugging\StackTrace.cpp">
+      <Filter>tga2d\debugging</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\drawers\CustomShapeDrawer.cpp">
+      <Filter>tga2d\drawers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\drawers\DebugDrawer.cpp">
+      <Filter>tga2d\drawers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\drawers\DebugPerformanceGraph.cpp">
+      <Filter>tga2d\drawers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\drawers\LineDrawer.cpp">
+      <Filter>tga2d\drawers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\drawers\ModelDrawer.cpp">
+      <Filter>tga2d\drawers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\drawers\SpriteDrawer.cpp">
+      <Filter>tga2d\drawers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\engine.cpp">
+      <Filter>tga2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\error\ErrorManager.cpp">
+      <Filter>tga2d\error</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\filewatcher\FileWatcher.cpp">
+      <Filter>tga2d\filewatcher</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\graphics\AmbientLight.cpp">
+      <Filter>tga2d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\graphics\Camera.cpp">
+      <Filter>tga2d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\graphics\DX11.cpp">
+      <Filter>tga2d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\graphics\DepthBuffer.cpp">
+      <Filter>tga2d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\graphics\ForwardRenderer.cpp">
+      <Filter>tga2d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\graphics\FullscreenEffect.cpp">
+      <Filter>tga2d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\graphics\GraphicsEngine.cpp">
+      <Filter>tga2d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\graphics\HTMLParser.cpp">
+      <Filter>tga2d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\graphics\Light.cpp">
+      <Filter>tga2d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\graphics\PointLight.cpp">
+      <Filter>tga2d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\graphics\RenderStateManager.cpp">
+      <Filter>tga2d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\graphics\RenderTarget.cpp">
+      <Filter>tga2d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\graphics\TextureResource.cpp">
+      <Filter>tga2d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\imguiinterface\ImGuiInterface.cpp">
+      <Filter>tga2d\imguiinterface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\input\InputManager.cpp">
+      <Filter>tga2d\input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\input\XInput.cpp">
+      <Filter>tga2d\input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\light\Light.cpp">
+      <Filter>tga2d\light</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\light\LightManager.cpp">
+      <Filter>tga2d\light</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\loaders\tgaloader.cpp">
+      <Filter>tga2d\loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\math\CommonMath.cpp">
+      <Filter>tga2d\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\math\FMath.cpp">
+      <Filter>tga2d\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\math\Transform.cpp">
+      <Filter>tga2d\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\model\AnimatedModelInstance.cpp">
+      <Filter>tga2d\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\model\Model.cpp">
+      <Filter>tga2d\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\model\ModelFactory.cpp">
+      <Filter>tga2d\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\model\ModelInstance.cpp">
+      <Filter>tga2d\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\noise\PerlinNoise.cpp">
+      <Filter>tga2d\noise</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\primitives\CustomShape.cpp">
+      <Filter>tga2d\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\primitives\LinePrimitive.cpp">
+      <Filter>tga2d\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\render\RenderObject.cpp">
+      <Filter>tga2d\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\render\renderer.cpp">
+      <Filter>tga2d\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\shaders\ModelShader.cpp">
+      <Filter>tga2d\shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\shaders\SpriteShader.cpp">
+      <Filter>tga2d\shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\shaders\shader.cpp">
+      <Filter>tga2d\shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\text\TextService.cpp">
+      <Filter>tga2d\text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\text\fontfile.cpp">
+      <Filter>tga2d\text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\text\parser.cpp">
+      <Filter>tga2d\text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\text\text.cpp">
+      <Filter>tga2d\text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\text\textfile.cpp">
+      <Filter>tga2d\text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\text\token.cpp">
+      <Filter>tga2d\text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\texture\TextureManager.cpp">
+      <Filter>tga2d\texture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\texture\texture.cpp">
+      <Filter>tga2d\texture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\videoplayer\VideoAudio.cpp">
+      <Filter>tga2d\videoplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\videoplayer\video.cpp">
+      <Filter>tga2d\videoplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\videoplayer\videoplayer.cpp">
+      <Filter>tga2d\videoplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\tga2d\windows\WindowsWindow.cpp">
+      <Filter>tga2d\windows</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\Source\tga2dcore\tga2d\graphics\AnimatedVertexShaderVS.hlsl">
+      <Filter>tga2d\graphics</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Source\tga2dcore\tga2d\graphics\PixelShaderPS.hlsl">
+      <Filter>tga2d\graphics</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Source\tga2dcore\tga2d\graphics\PostprocessCopyPS.hlsl">
+      <Filter>tga2d\graphics</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Source\tga2dcore\tga2d\graphics\PostprocessGaussianH_PS.hlsl">
+      <Filter>tga2d\graphics</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Source\tga2dcore\tga2d\graphics\PostprocessGaussianV_PS.hlsl">
+      <Filter>tga2d\graphics</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Source\tga2dcore\tga2d\graphics\PostprocessTonemapPS.hlsl">
+      <Filter>tga2d\graphics</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Source\tga2dcore\tga2d\graphics\PostprocessVS.hlsl">
+      <Filter>tga2d\graphics</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Source\tga2dcore\tga2d\graphics\VertexShaderVS.hlsl">
+      <Filter>tga2d\graphics</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Source\tga2dcore\tga2d\shaders\animated_model_shader_VS.hlsl">
+      <Filter>tga2d\shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Source\tga2dcore\tga2d\shaders\custom_shape_PS.hlsl">
+      <Filter>tga2d\shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Source\tga2dcore\tga2d\shaders\custom_shape_VS.hlsl">
+      <Filter>tga2d\shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Source\tga2dcore\tga2d\shaders\instanced_sprite_shader_VS.hlsl">
+      <Filter>tga2d\shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Source\tga2dcore\tga2d\shaders\lineshader_PS.hlsl">
+      <Filter>tga2d\shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Source\tga2dcore\tga2d\shaders\lineshader_VS.hlsl">
+      <Filter>tga2d\shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Source\tga2dcore\tga2d\shaders\model_shader_PS.hlsl">
+      <Filter>tga2d\shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Source\tga2dcore\tga2d\shaders\model_shader_VS.hlsl">
+      <Filter>tga2d\shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Source\tga2dcore\tga2d\shaders\sprite_shader_PS.hlsl">
+      <Filter>tga2d\shaders</Filter>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Source\tga2dcore\tga2d\graphics\Common.hlsli">
+      <Filter>tga2d\graphics</Filter>
+    </None>
+    <None Include="..\Source\tga2dcore\tga2d\graphics\PBRFunctions.hlsli">
+      <Filter>tga2d\graphics</Filter>
+    </None>
+    <None Include="..\Source\tga2dcore\tga2d\graphics\PostprocessStructs.hlsli">
+      <Filter>tga2d\graphics</Filter>
+    </None>
+    <None Include="..\Source\tga2dcore\tga2d\graphics\ShaderStructs.hlsli">
+      <Filter>tga2d\graphics</Filter>
+    </None>
+    <None Include="..\Source\tga2dcore\tga2d\render\common.hlsli">
+      <Filter>tga2d\render</Filter>
+    </None>
+  </ItemGroup>
+</Project>
