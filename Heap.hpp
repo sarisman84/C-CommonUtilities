@@ -11,7 +11,7 @@ namespace CommonUtilities
 	{
 		Max, Min
 	};
-	template <class T, HeapType aHeapType = HeapType::Max>
+	template <class T, HeapType aHeapType = HeapType::Max, bool useStdInstead = false>
 	class Heap
 	{
 	public:
@@ -25,6 +25,7 @@ namespace CommonUtilities
 		void Enqueue(const T& aElement)
 		{
 			myBuffer.push_back(aElement);
+
 
 			BubbleUp(myBuffer.size() - 1);
 		}
@@ -59,16 +60,40 @@ namespace CommonUtilities
 			switch (aHeapType)
 			{
 			case CommonUtilities::HeapType::Max:
-				if (lhs < myBuffer.size() && myBuffer[lhs] > myBuffer[currentElement])
-					currentElement = lhs;
-				if (rhs < myBuffer.size() && myBuffer[rhs] > myBuffer[currentElement])
-					currentElement = rhs;
+				if (!useStdInstead)
+				{
+					if (lhs < myBuffer.size() && myBuffer[lhs] > myBuffer[currentElement])
+						currentElement = lhs;
+					if (rhs < myBuffer.size() && myBuffer[rhs] > myBuffer[currentElement])
+						currentElement = rhs;
+				}
+
+				else
+				{
+					if (lhs < myBuffer.size() && std::greater<>(myBuffer[lhs], myBuffer[currentElement]))
+						currentElement = lhs;
+
+					if (rhs < myBuffer.size() && std::greater<>(myBuffer[rhs], myBuffer[currentElement]))
+						currentElement = rhs;
+				}
+
 				break;
 			case CommonUtilities::HeapType::Min:
-				if (lhs < myBuffer.size() && myBuffer[lhs] < myBuffer[currentElement])
-					currentElement = lhs;
-				if (rhs < myBuffer.size() && myBuffer[rhs] < myBuffer[currentElement])
-					currentElement = rhs;
+				if (!useStdInstead)
+				{
+					if (lhs < myBuffer.size() && myBuffer[lhs] < myBuffer[currentElement])
+						currentElement = lhs;
+					if (rhs < myBuffer.size() && myBuffer[rhs] < myBuffer[currentElement])
+						currentElement = rhs;
+				}
+				else
+				{
+					if (lhs < myBuffer.size() && std::less<>(myBuffer[lhs], myBuffer[currentElement]))
+						currentElement = lhs;
+					if (rhs < myBuffer.size() && std::less<>(myBuffer[rhs], myBuffer[currentElement]))
+						currentElement = rhs;
+				}
+
 				break;
 			}
 			if (currentElement != aIndex)
@@ -86,10 +111,16 @@ namespace CommonUtilities
 			switch (aHeapType)
 			{
 			case CommonUtilities::HeapType::Max:
-				currentElement = parentIndex >= 0 && myBuffer[aIndex] > myBuffer[parentIndex] ? parentIndex : currentElement;
+				if (!useStdInstead)
+					currentElement = parentIndex >= 0 && myBuffer[aIndex] > myBuffer[parentIndex] ? parentIndex : currentElement;
+				else
+					currentElement = parentIndex >= 0 && std::greater<>(myBuffer[aIndex], myBuffer[parentIndex]) ? parentIndex : currentElement;
 				break;
 			case CommonUtilities::HeapType::Min:
-				currentElement = parentIndex >= 0 && myBuffer[aIndex] < myBuffer[parentIndex] ? parentIndex : currentElement;
+				if (!useStdInstead)
+					currentElement = parentIndex >= 0 && myBuffer[aIndex] < myBuffer[parentIndex] ? parentIndex : currentElement;
+				else
+					currentElement = parentIndex >= 0 && std::less<>(myBuffer[aIndex], myBuffer[parentIndex]) ? parentIndex : currentElement;
 				break;
 			}
 

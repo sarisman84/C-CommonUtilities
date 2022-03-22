@@ -62,6 +62,6 @@ const ultralight::String& Tga2D::HTML_Parser::FetchHTML(const char* aPath)
 	// TODO: insert return statement here
 	file >> result;
 
-	return ultralight::String(result);
+	return ultralight::String();
 
 }
