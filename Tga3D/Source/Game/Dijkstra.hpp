@@ -11,7 +11,8 @@ namespace CommonUtilities
 	enum class Tile
 	{
 		Impassable,
-		Passable
+		Passable,
+		Slug
 	};
 
 
@@ -49,8 +50,6 @@ namespace CommonUtilities
 			nodesToCheck.Enqueue(&myNodes.back());
 		}
 
-
-		
 
 
 		int currentNode = aStartIndex;
