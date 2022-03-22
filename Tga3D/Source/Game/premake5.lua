@@ -19,11 +19,10 @@ project "Game"
 	includedirs {
 		"../tga2dcore",
 		"../External/",
-		"../../../",
-		"../../../Ultralight/include/"
+		"../../../"
 	}
 
-	libdirs { "../../Lib/", "../../../Build/", "../../../Ultralight/lib" }
+	libdirs { "../../Lib/", "../../../Build/" }
 
 	defines {
 	}

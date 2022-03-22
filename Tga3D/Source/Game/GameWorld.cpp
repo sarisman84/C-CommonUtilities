@@ -6,7 +6,6 @@
 #include <tga2d/sprite/sprite.h>
 #include <tga2d/drawers/SpriteDrawer.h>
 #include <tga2d/texture/TextureManager.h>
-#include <Ultralight/include/Ultralight/Ultralight.h>
 
 
 

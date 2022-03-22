@@ -193,7 +193,6 @@
     <ClInclude Include="..\Source\tga2dcore\tga2d\graphics\ForwardRenderer.h" />
     <ClInclude Include="..\Source\tga2dcore\tga2d\graphics\FullscreenEffect.h" />
     <ClInclude Include="..\Source\tga2dcore\tga2d\graphics\GraphicsEngine.h" />
-    <ClInclude Include="..\Source\tga2dcore\tga2d\graphics\HTMLParser.h" />
     <ClInclude Include="..\Source\tga2dcore\tga2d\graphics\Light.h" />
     <ClInclude Include="..\Source\tga2dcore\tga2d\graphics\PointLight.h" />
     <ClInclude Include="..\Source\tga2dcore\tga2d\graphics\RenderStateManager.h" />
@@ -277,7 +276,6 @@
     <ClCompile Include="..\Source\tga2dcore\tga2d\graphics\ForwardRenderer.cpp" />
     <ClCompile Include="..\Source\tga2dcore\tga2d\graphics\FullscreenEffect.cpp" />
     <ClCompile Include="..\Source\tga2dcore\tga2d\graphics\GraphicsEngine.cpp" />
-    <ClCompile Include="..\Source\tga2dcore\tga2d\graphics\HTMLParser.cpp" />
     <ClCompile Include="..\Source\tga2dcore\tga2d\graphics\Light.cpp" />
     <ClCompile Include="..\Source\tga2dcore\tga2d\graphics\PointLight.cpp" />
     <ClCompile Include="..\Source\tga2dcore\tga2d\graphics\RenderStateManager.cpp" />

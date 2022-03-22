@@ -4,9 +4,6 @@
 
 namespace CommonUtilities
 {
-
-
-
 	static const int MapWidth = 20;
 	static const int MapHeight = 20;
 	static const int TileCount = MapWidth * MapHeight;
@@ -20,7 +17,7 @@ namespace CommonUtilities
 
 	struct Node
 	{
-		Node(int anIndex, int aDist, bool anIsInGraph) { myIndex = anIndex; myDist = aDist; }
+		Node(int anIndex, int aDist) { myIndex = anIndex; myDist = aDist; }
 		int myIndex;
 		int myDist;
 	};
@@ -48,7 +45,7 @@ namespace CommonUtilities
 
 		for (size_t i = 0; i < range; i++)
 		{
-			myNodes.push_back(Node(aStartIndex + i, INT_MAX, false));
+			myNodes.push_back(Node(aStartIndex + i, INT_MAX));
 			nodesToCheck.Enqueue(&myNodes.back());
 		}
 
