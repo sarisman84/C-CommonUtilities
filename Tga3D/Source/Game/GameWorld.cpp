@@ -6,7 +6,8 @@
 #include <tga2d/sprite/sprite.h>
 #include <tga2d/drawers/SpriteDrawer.h>
 #include <tga2d/texture/TextureManager.h>
-#include <Ultralight/include/Ultralight/Ultralight.h>
+
+#include <tga2d/graphics/HTMLParser.h>
 
 
 
@@ -18,7 +19,7 @@ GameWorld::~GameWorld()
 
 void GameWorld::Init()  
 {
-	myTga2dLogoTexture = Tga2D::Engine::GetInstance()->GetTextureManager().GetTexture(L"sprites/tga_logo.dds");
+	myTga2dLogoTexture = Tga2D::Engine::GetInstance()->GetHTMLParser().ParseHTMLFile(L"Yes");
 }
 void GameWorld::Update(float /*aTimeDelta*/)
 { 	

@@ -158,12 +158,15 @@ namespace Tga2D
 		friend class LineMultiPrimitive;
 		friend class Light;
 		friend class ModelShape;
+        friend class HTML_Parser;
+
     public:
         Engine &operator =( const Engine &anOther ) = delete;
 		static bool Start(const EngineCreateParameters& aCreateParameters);
 		static void Shutdown();
         static Engine* GetInstance() {return myInstance;}
-               
+        
+        HTML_Parser& GetHTMLParser() const { return *myHTMLParser; }
         TextureManager& GetTextureManager() const {return *myTextureManager;}
         DebugDrawer& GetDebugDrawer() const {return *myDebugDrawer;}
 
@@ -232,6 +235,7 @@ namespace Tga2D
         std::unique_ptr<TextureManager> myTextureManager;
         std::unique_ptr<DebugDrawer> myDebugDrawer;
         std::unique_ptr<TextService> myTextService;
+        std::unique_ptr<HTML_Parser> myHTMLParser;
 		Vector2ui myWindowSize;
 		Vector2ui myRenderSize;
 		Vector2ui myTargetSize;

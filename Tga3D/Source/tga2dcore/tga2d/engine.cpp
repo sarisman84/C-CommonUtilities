@@ -13,6 +13,7 @@
 #include <tga2d/texture/TextureManager.h>
 #include <tga2d/model/ModelFactory.h>
 #include <tga2d/windows/WindowsWindow.h>
+#include <tga2d/graphics/HTMLParser.h>
 #define WIN32_LEAN_AND_MEAN 
 #define NOMINMAX 
 #include <windows.h>
@@ -131,6 +132,8 @@ bool Engine::InternalStart()
 	}
 
 	myRenderer = std::make_unique<Renderer>();
+	myHTMLParser = std::make_unique<HTML_Parser>();
+
 	myTextureManager = std::make_unique<TextureManager>();
 	myTextureManager->Init();
 
@@ -194,6 +197,7 @@ void Tga2D::Engine::IdleProcess()
 		BeginFrame(myClearColor);
 
 		myTextureManager->Update();
+		
 		if (myUpdateFunctionToCall)
 		{
 			myUpdateFunctionToCall();
@@ -204,6 +208,8 @@ void Tga2D::Engine::IdleProcess()
 			myDebugDrawer->Update(myDeltaTime);
 			myDebugDrawer->Render();
 		}
+		myHTMLParser->Update();
+		myHTMLParser->Render();
 		myRenderer->Update();
 		myImguiInterFace->Render();
 		EndFrame();

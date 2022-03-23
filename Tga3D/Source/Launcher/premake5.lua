@@ -19,14 +19,13 @@ project "Launcher"
 	includedirs {
 		"../tga2dcore",
 		"../Game/",
-		"../../../",
-		"../../../Ultralight/include/"
+		"../../../"
 	}
 
 	libdirs { 
 	"../../Lib/", 
 	"../../../Build/",
-	"../../../Ultralight/lib"
+	"../External/Ultralight/lib/",
 	}
 
 	links { 
