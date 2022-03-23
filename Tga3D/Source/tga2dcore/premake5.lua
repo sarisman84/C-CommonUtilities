@@ -25,8 +25,7 @@ project "tga2dcore"
 		"../External/DirectXTex/",
 		"../spine/include/", -- what is this? is it used?
 		"../External/ffmpeg-2.0/",
-		"vld", -- what is this? is it used?
-		"../../../Ultralight/include/"
+		"vld" -- what is this? is it used?
 	}
 
 	filter "configurations:Debug"

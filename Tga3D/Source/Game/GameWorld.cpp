@@ -7,8 +7,6 @@
 #include <tga2d/drawers/SpriteDrawer.h>
 #include <tga2d/texture/TextureManager.h>
 
-#include <tga2d/graphics/HTMLParser.h>
-
 
 
 GameWorld::GameWorld()
@@ -19,7 +17,7 @@ GameWorld::~GameWorld()
 
 void GameWorld::Init()  
 {
-	myTga2dLogoTexture = Tga2D::Engine::GetInstance()->GetHTMLParser().ParseHTMLFile(L"Yes");
+	myTga2dLogoTexture = Tga2D::Engine::GetInstance()->GetTextureManager().GetTexture(L"sprites/tga_logo.dds");
 }
 void GameWorld::Update(float /*aTimeDelta*/)
 { 	

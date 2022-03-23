@@ -1,14 +1,10 @@
 #pragma once
-
 #include <Ultralight/Ultralight.h>
 #include <tga2d/graphics/DX11.h>
-#include <tga2d/texture/texture.h>
-#include <tga2d/texture/TextureManager.h>
 #include <tga2d/math/vector2.h>
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <map>
 
 
 
@@ -44,13 +40,11 @@ namespace Tga2D
 
 	public:
 		HTML_Parser();
-		Texture* ParseHTMLFile(const wchar_t* aFilePath, RefPtr<View>* anViewObject = nullptr);
-
+		RefPtr<View> CreateHTMLObject(const char* aFilePath, Vector2f anObjectSize);
+		void Render(const RefPtr<View>& anObject);
+		
 	private:
-		void Update();
-		void Render();
-		Texture* CreateTextureFromHTML(void* aPixelBuffer, uint32_t aWidth, uint32_t aHeight, uint32_t aStride);
-		std::vector<RefPtr<View>> myCurrentViews;
+		const ultralight::String& FetchHTML(const char* aPath);
 		RefPtr<ultralight::Renderer> myRenderer;
 		Config myConfig;
 	};

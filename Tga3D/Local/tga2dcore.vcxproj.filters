@@ -162,9 +162,6 @@
     <ClInclude Include="..\Source\tga2dcore\tga2d\graphics\GraphicsEngine.h">
       <Filter>tga2d\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\tga2dcore\tga2d\graphics\HTMLParser.h">
-      <Filter>tga2d\graphics</Filter>
-    </ClInclude>
     <ClInclude Include="..\Source\tga2dcore\tga2d\graphics\Light.h">
       <Filter>tga2d\graphics</Filter>
     </ClInclude>
@@ -398,9 +395,6 @@
       <Filter>tga2d\graphics</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\tga2dcore\tga2d\graphics\GraphicsEngine.cpp">
-      <Filter>tga2d\graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\tga2dcore\tga2d\graphics\HTMLParser.cpp">
       <Filter>tga2d\graphics</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\tga2dcore\tga2d\graphics\Light.cpp">
