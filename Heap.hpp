@@ -27,7 +27,7 @@ namespace CommonUtilities
 			myBuffer.push_back(aElement);
 
 
-			BubbleUp(myBuffer.size() - 1);
+			BubbleUp((int)myBuffer.size() - 1);
 		}
 		//returnerar det första elementet i heapen
 		const T& GetTop() const
@@ -70,10 +70,10 @@ namespace CommonUtilities
 
 				else
 				{
-					if (lhs < myBuffer.size() && std::greater<>(myBuffer[lhs], myBuffer[currentElement]))
+					if (lhs < myBuffer.size() /*&& std::greater<T>(myBuffer[lhs], myBuffer[currentElement])*/)
 						currentElement = lhs;
 
-					if (rhs < myBuffer.size() && std::greater<>(myBuffer[rhs], myBuffer[currentElement]))
+					if (rhs < myBuffer.size() /*&& std::greater<T>(myBuffer[rhs], myBuffer[currentElement])*/)
 						currentElement = rhs;
 				}
 
@@ -88,9 +88,9 @@ namespace CommonUtilities
 				}
 				else
 				{
-					if (lhs < myBuffer.size() && std::less<>(myBuffer[lhs], myBuffer[currentElement]))
+					if (lhs < myBuffer.size() /*&& std::less<T>(myBuffer[lhs], myBuffer[currentElement])*/)
 						currentElement = lhs;
-					if (rhs < myBuffer.size() && std::less<>(myBuffer[rhs], myBuffer[currentElement]))
+					if (rhs < myBuffer.size() /*&& std::less<T>(myBuffer[rhs], myBuffer[currentElement])*/)
 						currentElement = rhs;
 				}
 
@@ -114,13 +114,13 @@ namespace CommonUtilities
 				if (!useStdInstead)
 					currentElement = parentIndex >= 0 && myBuffer[aIndex] > myBuffer[parentIndex] ? parentIndex : currentElement;
 				else
-					currentElement = parentIndex >= 0 && std::greater<>(myBuffer[aIndex], myBuffer[parentIndex]) ? parentIndex : currentElement;
+					currentElement /*= parentIndex >= 0 && std::greater<T>(myBuffer[aIndex], myBuffer[parentIndex]) ? parentIndex : currentElement*/;
 				break;
 			case CommonUtilities::HeapType::Min:
 				if (!useStdInstead)
 					currentElement = parentIndex >= 0 && myBuffer[aIndex] < myBuffer[parentIndex] ? parentIndex : currentElement;
 				else
-					currentElement = parentIndex >= 0 && std::less<>(myBuffer[aIndex], myBuffer[parentIndex]) ? parentIndex : currentElement;
+					currentElement /*= parentIndex >= 0 && std::less<T>(myBuffer[aIndex], myBuffer[parentIndex]) ? parentIndex : currentElement*/;
 				break;
 			}
 

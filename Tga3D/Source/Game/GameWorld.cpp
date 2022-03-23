@@ -8,31 +8,63 @@
 #include <tga2d/texture/TextureManager.h>
 
 
-
 GameWorld::GameWorld()
-{}
-
-GameWorld::~GameWorld() 
-{}
-
-void GameWorld::Init()  
 {
-	myTga2dLogoTexture = Tga2D::Engine::GetInstance()->GetTextureManager().GetTexture(L"sprites/tga_logo.dds");
+}
+
+GameWorld::~GameWorld()
+{
+}
+
+void GameWorld::Init()
+{
+	myMap = {
+		_TP, _TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,
+		_TP, _TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,
+		_TP, _TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,
+		_TP, _TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,
+		_TP, _TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,
+		_TP, _TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,
+		_TP, _TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,
+		_TP, _TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,
+		_TP, _TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,
+		_TP, _TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,
+		_TP, _TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,
+		_TP, _TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,
+		_TP, _TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,
+		_TP, _TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,
+		_TP, _TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,
+		_TP, _TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,
+		_TP, _TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,
+		_TP, _TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,
+		_TP, _TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,
+		_TP, _TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP ,_TP
+	};
 }
 void GameWorld::Update(float /*aTimeDelta*/)
-{ 	
+{
+
+	
 }
+
+#define INDEX x * MapWidth + y
 
 void GameWorld::Render()
 {
-	Tga2D::SpriteDrawer& spriteDrawer(Tga2D::Engine::GetInstance()->GetGraphicsEngine().GetSpriteDrawer());
-	Tga2D::SpriteSharedData sharedData = {};
-	sharedData.myTexture = myTga2dLogoTexture;
+	for (int y = 0; y < MapHeight; y++)
+	{
+		for (int x = 0; x < MapWidth; x++)
+		{
 
-	// Create instance data. 
-	Tga2D::Sprite2DInstanceData spriteInstance = {};
-	spriteInstance.myPivot = { 0.5f, 0.5f };
-	spriteInstance.myPosition = { 0.5f, 0.5f };
+			Tga2D::Sprite2DInstanceData ins;
+			ins.mySize = { 1.0f / (float)MapWidth, 1.0f / (float)MapHeight };
+			ins.myPosition = { (float)x,(float)y };
 
-	spriteDrawer.Draw(sharedData, spriteInstance);
+
+			bool isElementSelected = Tga2D::Vector2i{ x,y } == myFirstElement || Tga2D::Vector2i{ x, y } == mySecondElement;
+			bool isPath = std::find(myPath.begin(), myPath.end(), 1) != myPath.end();
+			ins.myColor = myMap[INDEX] == _P ? WHITE : myMap[INDEX] == _B ? RED : isElementSelected ? BLUE : isPath ? GREEN : ins.myColor;
+
+		}
+	}
 }

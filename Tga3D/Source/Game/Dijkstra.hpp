@@ -11,8 +11,7 @@ namespace CommonUtilities
 	enum class Tile
 	{
 		Impassable,
-		Passable,
-		Slug
+		Passable
 	};
 
 
@@ -21,30 +20,33 @@ namespace CommonUtilities
 		Node(int anIndex, int aDist) { myIndex = anIndex; myDist = aDist; }
 		int myIndex;
 		int myDist;
+
+		
+
 	};
 
+	inline const bool operator==(Node aNode, Node anOtherNode) { return anOtherNode.myDist == aNode.myDist; }
 
-
-	bool Contains(const std::vector<Node>& someNodes, const Node& aNode)
+	inline bool Contains(const std::vector<Node>& someNodes, const Node& aNode)
 	{
 		return std::find(someNodes.begin(), someNodes.end(), aNode) != someNodes.end();
 	}
 
 
-	std::vector<int> Dijkstra(const std::vector<Tile>& aMap, int aStartIndex, int anEndIndex)
+	inline std::vector<int> Dijkstra(const std::vector<Tile>& aMap, int aStartIndex, int anEndIndex)
 	{
 
-		if (aStartIndex < 0 || aStartIndex >= TileCount || anEndIndex < 0 || anEndIndex >= TileCount) return;
-		if (aMap[anEndIndex] == Tile::Impassable) return;
-		if (aMap[aStartIndex] == Tile::Impassable) return;
+		if (aStartIndex < 0 || aStartIndex >= TileCount || anEndIndex < 0 || anEndIndex >= TileCount) return std::vector<int>();
+		if (aMap[anEndIndex] == Tile::Impassable) return std::vector<int>();
+		if (aMap[aStartIndex] == Tile::Impassable) return std::vector<int>();
 
 		std::vector<Node> myNodes;
 		std::vector<int> result;
 		int range = std::abs(anEndIndex - aStartIndex);
-		CommonUtilities::Heap<Node*, HeapType::Min, true> nodesToCheck;
+		CommonUtilities::Heap<Node*, HeapType::Min> nodesToCheck;
 
 
-		for (size_t i = 0; i < range; i++)
+		for (int i = 0; i < range; i++)
 		{
 			myNodes.push_back(Node(aStartIndex + i, INT_MAX));
 			nodesToCheck.Enqueue(&myNodes.back());
@@ -56,10 +58,10 @@ namespace CommonUtilities
 		myNodes[currentNode].myDist = 0;
 
 
-	
+
 		while (nodesToCheck.GetSize() > 0)
 		{
-			
+
 			int width = currentNode % 9;
 			int height = currentNode / 9;
 
