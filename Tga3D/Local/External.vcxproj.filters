@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <Filter Include="AppCore">
+      <UniqueIdentifier>{EF2D9C9C-5B0D-1B38-6425-A60ED0838199}</UniqueIdentifier>
+    </Filter>
     <Filter Include="DirectXTex">
       <UniqueIdentifier>{A90EE592-95C6-26E0-FECD-FF3BEAA4C1D0}</UniqueIdentifier>
     </Filter>
@@ -13,8 +16,20 @@
     <Filter Include="DirectXTex\WICTextureLoader">
       <UniqueIdentifier>{C3C4F026-2FD2-1E0D-B8B8-1AF824C5EAC3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="JavaScriptCore">
+      <UniqueIdentifier>{85F26289-71C0-568F-5A54-C7B546C132F4}</UniqueIdentifier>
+    </Filter>
     <Filter Include="StackWalker">
       <UniqueIdentifier>{21FD7E7C-8DB2-F771-16A7-F148825BEE75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ultralight">
+      <UniqueIdentifier>{C55215F1-B10A-573E-1A12-309A06E9F12E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ultralight\platform">
+      <UniqueIdentifier>{D9183C9B-457A-19A9-CEE7-5F5B3A485068}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ultralight\private">
+      <UniqueIdentifier>{CF7635D5-BB5A-F62A-24BB-F07D10BEE0AC}</UniqueIdentifier>
     </Filter>
     <Filter Include="WinPixEventRuntime">
       <UniqueIdentifier>{CA3F7E69-B623-3FBF-1F84-39120B872941}</UniqueIdentifier>
@@ -66,6 +81,33 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Source\External\AppCore\App.h">
+      <Filter>AppCore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\AppCore\AppCore.h">
+      <Filter>AppCore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\AppCore\CAPI.h">
+      <Filter>AppCore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\AppCore\Defines.h">
+      <Filter>AppCore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\AppCore\JSHelpers.h">
+      <Filter>AppCore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\AppCore\Monitor.h">
+      <Filter>AppCore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\AppCore\Overlay.h">
+      <Filter>AppCore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\AppCore\Platform.h">
+      <Filter>AppCore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\AppCore\Window.h">
+      <Filter>AppCore</Filter>
+    </ClInclude>
     <ClInclude Include="..\Source\External\DirectXTex\DDSTextureLoader\DDSTextureLoader11.h">
       <Filter>DirectXTex\DDSTextureLoader</Filter>
     </ClInclude>
@@ -75,8 +117,134 @@
     <ClInclude Include="..\Source\External\DirectXTex\WICTextureLoader\WICTextureLoader11.h">
       <Filter>DirectXTex\WICTextureLoader</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\External\JavaScriptCore\JSBase.h">
+      <Filter>JavaScriptCore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\JavaScriptCore\JSContextRef.h">
+      <Filter>JavaScriptCore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\JavaScriptCore\JSObjectRef.h">
+      <Filter>JavaScriptCore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\JavaScriptCore\JSObjectRefPrivate.h">
+      <Filter>JavaScriptCore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\JavaScriptCore\JSRetainPtr.h">
+      <Filter>JavaScriptCore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\JavaScriptCore\JSStringRef.h">
+      <Filter>JavaScriptCore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\JavaScriptCore\JSTypedArray.h">
+      <Filter>JavaScriptCore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\JavaScriptCore\JSValueRef.h">
+      <Filter>JavaScriptCore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\JavaScriptCore\JavaScript.h">
+      <Filter>JavaScriptCore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\JavaScriptCore\WebKitAvailability.h">
+      <Filter>JavaScriptCore</Filter>
+    </ClInclude>
     <ClInclude Include="..\Source\External\StackWalker\StackWalker.h">
       <Filter>StackWalker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\Ultralight\Bitmap.h">
+      <Filter>Ultralight</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\Ultralight\Buffer.h">
+      <Filter>Ultralight</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\Ultralight\CAPI.h">
+      <Filter>Ultralight</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\Ultralight\Defines.h">
+      <Filter>Ultralight</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\Ultralight\Geometry.h">
+      <Filter>Ultralight</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\Ultralight\JavaScript.h">
+      <Filter>Ultralight</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\Ultralight\KeyCodes.h">
+      <Filter>Ultralight</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\Ultralight\KeyEvent.h">
+      <Filter>Ultralight</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\Ultralight\Listener.h">
+      <Filter>Ultralight</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\Ultralight\Matrix.h">
+      <Filter>Ultralight</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\Ultralight\MouseEvent.h">
+      <Filter>Ultralight</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\Ultralight\RefPtr.h">
+      <Filter>Ultralight</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\Ultralight\RenderTarget.h">
+      <Filter>Ultralight</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\Ultralight\Renderer.h">
+      <Filter>Ultralight</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\Ultralight\RequestHandler.h">
+      <Filter>Ultralight</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\Ultralight\ScrollEvent.h">
+      <Filter>Ultralight</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\Ultralight\Session.h">
+      <Filter>Ultralight</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\Ultralight\String.h">
+      <Filter>Ultralight</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\Ultralight\String16.h">
+      <Filter>Ultralight</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\Ultralight\String32.h">
+      <Filter>Ultralight</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\Ultralight\String8.h">
+      <Filter>Ultralight</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\Ultralight\Ultralight.h">
+      <Filter>Ultralight</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\Ultralight\View.h">
+      <Filter>Ultralight</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\Ultralight\platform\Clipboard.h">
+      <Filter>Ultralight\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\Ultralight\platform\Config.h">
+      <Filter>Ultralight\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\Ultralight\platform\FileSystem.h">
+      <Filter>Ultralight\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\Ultralight\platform\FontLoader.h">
+      <Filter>Ultralight\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\Ultralight\platform\GPUDriver.h">
+      <Filter>Ultralight\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\Ultralight\platform\Logger.h">
+      <Filter>Ultralight\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\Ultralight\platform\Platform.h">
+      <Filter>Ultralight\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\Ultralight\platform\Surface.h">
+      <Filter>Ultralight\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\External\Ultralight\private\PlatformFileSystem.h">
+      <Filter>Ultralight\private</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\External\WinPixEventRuntime\PIXEvents.h">
       <Filter>WinPixEventRuntime</Filter>

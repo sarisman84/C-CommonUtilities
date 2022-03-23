@@ -76,7 +76,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <WarningLevel>Level4</WarningLevel>
-      <TreatWarningAsError>false</TreatWarningAsError>
+      <TreatWarningAsError>true</TreatWarningAsError>
       <PreprocessorDefinitions>_DEBUG;TGE_DEBUG;WIN32;_CRT_SECURE_NO_WARNINGS;_LIB;_WIN32_WINNT=0x0601;TGE_SYSTEM_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\Source\tga2dcore;..\Source\External;..\Source\tga2dcore\source;..\Source\External\DirectXTex;..\Source\spine\include;..\Source\External\ffmpeg-2.0;..\Source\tga2dcore\vld;..\..\Ultralight\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
@@ -103,7 +103,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <WarningLevel>Level4</WarningLevel>
-      <TreatWarningAsError>false</TreatWarningAsError>
+      <TreatWarningAsError>true</TreatWarningAsError>
       <PreprocessorDefinitions>TGE_RELEASE;WIN32;_CRT_SECURE_NO_WARNINGS;_LIB;_WIN32_WINNT=0x0601;TGE_SYSTEM_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\Source\tga2dcore;..\Source\External;..\Source\tga2dcore\source;..\Source\External\DirectXTex;..\Source\spine\include;..\Source\External\ffmpeg-2.0;..\Source\tga2dcore\vld;..\..\Ultralight\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -135,7 +135,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <WarningLevel>Level4</WarningLevel>
-      <TreatWarningAsError>false</TreatWarningAsError>
+      <TreatWarningAsError>true</TreatWarningAsError>
       <PreprocessorDefinitions>TGE_DIST;WIN32;_CRT_SECURE_NO_WARNINGS;_LIB;_WIN32_WINNT=0x0601;TGE_SYSTEM_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\Source\tga2dcore;..\Source\External;..\Source\tga2dcore\source;..\Source\External\DirectXTex;..\Source\spine\include;..\Source\External\ffmpeg-2.0;..\Source\tga2dcore\vld;..\..\Ultralight\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -193,6 +193,7 @@
     <ClInclude Include="..\Source\tga2dcore\tga2d\graphics\ForwardRenderer.h" />
     <ClInclude Include="..\Source\tga2dcore\tga2d\graphics\FullscreenEffect.h" />
     <ClInclude Include="..\Source\tga2dcore\tga2d\graphics\GraphicsEngine.h" />
+    <ClInclude Include="..\Source\tga2dcore\tga2d\graphics\HTMLParser.h" />
     <ClInclude Include="..\Source\tga2dcore\tga2d\graphics\Light.h" />
     <ClInclude Include="..\Source\tga2dcore\tga2d\graphics\PointLight.h" />
     <ClInclude Include="..\Source\tga2dcore\tga2d\graphics\RenderStateManager.h" />
@@ -276,6 +277,7 @@
     <ClCompile Include="..\Source\tga2dcore\tga2d\graphics\ForwardRenderer.cpp" />
     <ClCompile Include="..\Source\tga2dcore\tga2d\graphics\FullscreenEffect.cpp" />
     <ClCompile Include="..\Source\tga2dcore\tga2d\graphics\GraphicsEngine.cpp" />
+    <ClCompile Include="..\Source\tga2dcore\tga2d\graphics\HTMLParser.cpp" />
     <ClCompile Include="..\Source\tga2dcore\tga2d\graphics\Light.cpp" />
     <ClCompile Include="..\Source\tga2dcore\tga2d\graphics\PointLight.cpp" />
     <ClCompile Include="..\Source\tga2dcore\tga2d\graphics\RenderStateManager.cpp" />

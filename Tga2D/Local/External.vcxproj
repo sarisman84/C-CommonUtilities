@@ -1,0 +1,364 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Retail|x64">
+      <Configuration>Retail</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{089DB854-F469-1360-1D83-010809AF48EE}</ProjectGuid>
+    <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>External</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Retail|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>..\Lib\</OutDir>
+    <IntDir>..\Temp\External\Debug\</IntDir>
+    <TargetName>External_Debug</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>..\Lib\</OutDir>
+    <IntDir>..\Temp\External\Release\</IntDir>
+    <TargetName>External_Release</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail|x64'">
+    <OutDir>..\Lib\</OutDir>
+    <IntDir>..\Temp\External\Retail\</IntDir>
+    <TargetName>External_Retail</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>_CONSOLE;_DEBUG;TGE_DEBUG;_WIN32_WINNT=0x0601;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\Source\External;..\Source\tga2dcore;..\Source\External\source;..\Source\External\DirectXTK\Inc;..\Source\External\ffmpeg-2.0;..\Source\External\imgui;..\Source\External\spine\include;..\Source\External\vld;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <SDLCheck>true</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>DXGI.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\Source\External\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>_CONSOLE;_RELEASE;_WIN32_WINNT=0x0601;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\Source\External;..\Source\tga2dcore;..\Source\External\source;..\Source\External\DirectXTK\Inc;..\Source\External\ffmpeg-2.0;..\Source\External\imgui;..\Source\External\spine\include;..\Source\External\vld;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <SDLCheck>true</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>DXGI.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\Source\External\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Retail|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>_CONSOLE;_RETAIL;_WIN32_WINNT=0x0601;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\Source\External;..\Source\tga2dcore;..\Source\External\source;..\Source\External\DirectXTK\Inc;..\Source\External\ffmpeg-2.0;..\Source\External\imgui;..\Source\External\spine\include;..\Source\External\vld;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <SDLCheck>true</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>DXGI.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\Source\External\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Source\External\DirectXTK\Inc\DDSTextureLoader.h" />
+    <ClInclude Include="..\Source\External\DirectXTK\Inc\DirectXHelpers.h" />
+    <ClInclude Include="..\Source\External\DirectXTK\Inc\ScreenGrab.h" />
+    <ClInclude Include="..\Source\External\DirectXTK\Inc\WICTextureLoader.h" />
+    <ClInclude Include="..\Source\External\DirectXTK\Src\PlatformHelpers.h" />
+    <ClInclude Include="..\Source\External\DirectXTK\Src\dds.h" />
+    <ClInclude Include="..\Source\External\StackWalker\StackWalker.h" />
+    <ClInclude Include="..\Source\External\assimp\BaseImporter.h" />
+    <ClInclude Include="..\Source\External\assimp\Bitmap.h" />
+    <ClInclude Include="..\Source\External\assimp\BlobIOSystem.h" />
+    <ClInclude Include="..\Source\External\assimp\ByteSwapper.h" />
+    <ClInclude Include="..\Source\External\assimp\Compiler\poppack1.h" />
+    <ClInclude Include="..\Source\External\assimp\Compiler\pstdint.h" />
+    <ClInclude Include="..\Source\External\assimp\Compiler\pushpack1.h" />
+    <ClInclude Include="..\Source\External\assimp\CreateAnimMesh.h" />
+    <ClInclude Include="..\Source\External\assimp\DefaultIOStream.h" />
+    <ClInclude Include="..\Source\External\assimp\DefaultIOSystem.h" />
+    <ClInclude Include="..\Source\External\assimp\DefaultLogger.hpp" />
+    <ClInclude Include="..\Source\External\assimp\Defines.h" />
+    <ClInclude Include="..\Source\External\assimp\Exceptional.h" />
+    <ClInclude Include="..\Source\External\assimp\Exporter.hpp" />
+    <ClInclude Include="..\Source\External\assimp\GenericProperty.h" />
+    <ClInclude Include="..\Source\External\assimp\Hash.h" />
+    <ClInclude Include="..\Source\External\assimp\IOStream.hpp" />
+    <ClInclude Include="..\Source\External\assimp\IOStreamBuffer.h" />
+    <ClInclude Include="..\Source\External\assimp\IOSystem.hpp" />
+    <ClInclude Include="..\Source\External\assimp\Importer.hpp" />
+    <ClInclude Include="..\Source\External\assimp\LineSplitter.h" />
+    <ClInclude Include="..\Source\External\assimp\LogAux.h" />
+    <ClInclude Include="..\Source\External\assimp\LogStream.hpp" />
+    <ClInclude Include="..\Source\External\assimp\Logger.hpp" />
+    <ClInclude Include="..\Source\External\assimp\Macros.h" />
+    <ClInclude Include="..\Source\External\assimp\MathFunctions.h" />
+    <ClInclude Include="..\Source\External\assimp\MemoryIOWrapper.h" />
+    <ClInclude Include="..\Source\External\assimp\NullLogger.hpp" />
+    <ClInclude Include="..\Source\External\assimp\ParsingUtils.h" />
+    <ClInclude Include="..\Source\External\assimp\Profiler.h" />
+    <ClInclude Include="..\Source\External\assimp\ProgressHandler.hpp" />
+    <ClInclude Include="..\Source\External\assimp\RemoveComments.h" />
+    <ClInclude Include="..\Source\External\assimp\SGSpatialSort.h" />
+    <ClInclude Include="..\Source\External\assimp\SceneCombiner.h" />
+    <ClInclude Include="..\Source\External\assimp\SkeletonMeshBuilder.h" />
+    <ClInclude Include="..\Source\External\assimp\SmoothingGroups.h" />
+    <ClInclude Include="..\Source\External\assimp\SmoothingGroups.inl" />
+    <ClInclude Include="..\Source\External\assimp\SpatialSort.h" />
+    <ClInclude Include="..\Source\External\assimp\StandardShapes.h" />
+    <ClInclude Include="..\Source\External\assimp\StreamReader.h" />
+    <ClInclude Include="..\Source\External\assimp\StreamWriter.h" />
+    <ClInclude Include="..\Source\External\assimp\StringComparison.h" />
+    <ClInclude Include="..\Source\External\assimp\StringUtils.h" />
+    <ClInclude Include="..\Source\External\assimp\Subdivision.h" />
+    <ClInclude Include="..\Source\External\assimp\TinyFormatter.h" />
+    <ClInclude Include="..\Source\External\assimp\Vertex.h" />
+    <ClInclude Include="..\Source\External\assimp\XMLTools.h" />
+    <ClInclude Include="..\Source\External\assimp\ai_assert.h" />
+    <ClInclude Include="..\Source\External\assimp\anim.h" />
+    <ClInclude Include="..\Source\External\assimp\camera.h" />
+    <ClInclude Include="..\Source\External\assimp\cexport.h" />
+    <ClInclude Include="..\Source\External\assimp\cfileio.h" />
+    <ClInclude Include="..\Source\External\assimp\cimport.h" />
+    <ClInclude Include="..\Source\External\assimp\color4.h" />
+    <ClInclude Include="..\Source\External\assimp\color4.inl" />
+    <ClInclude Include="..\Source\External\assimp\config.h" />
+    <ClInclude Include="..\Source\External\assimp\defs.h" />
+    <ClInclude Include="..\Source\External\assimp\fast_atof.h" />
+    <ClInclude Include="..\Source\External\assimp\importerdesc.h" />
+    <ClInclude Include="..\Source\External\assimp\irrXMLWrapper.h" />
+    <ClInclude Include="..\Source\External\assimp\light.h" />
+    <ClInclude Include="..\Source\External\assimp\material.h" />
+    <ClInclude Include="..\Source\External\assimp\material.inl" />
+    <ClInclude Include="..\Source\External\assimp\matrix3x3.h" />
+    <ClInclude Include="..\Source\External\assimp\matrix3x3.inl" />
+    <ClInclude Include="..\Source\External\assimp\matrix4x4.h" />
+    <ClInclude Include="..\Source\External\assimp\matrix4x4.inl" />
+    <ClInclude Include="..\Source\External\assimp\mesh.h" />
+    <ClInclude Include="..\Source\External\assimp\metadata.h" />
+    <ClInclude Include="..\Source\External\assimp\pbrmaterial.h" />
+    <ClInclude Include="..\Source\External\assimp\port\AndroidJNI\AndroidJNIIOSystem.h" />
+    <ClInclude Include="..\Source\External\assimp\postprocess.h" />
+    <ClInclude Include="..\Source\External\assimp\qnan.h" />
+    <ClInclude Include="..\Source\External\assimp\quaternion.h" />
+    <ClInclude Include="..\Source\External\assimp\quaternion.inl" />
+    <ClInclude Include="..\Source\External\assimp\scene.h" />
+    <ClInclude Include="..\Source\External\assimp\texture.h" />
+    <ClInclude Include="..\Source\External\assimp\types.h" />
+    <ClInclude Include="..\Source\External\assimp\vector2.h" />
+    <ClInclude Include="..\Source\External\assimp\vector2.inl" />
+    <ClInclude Include="..\Source\External\assimp\vector3.h" />
+    <ClInclude Include="..\Source\External\assimp\vector3.inl" />
+    <ClInclude Include="..\Source\External\assimp\version.h" />
+    <ClInclude Include="..\Source\External\bass\bass.h" />
+    <ClInclude Include="..\Source\External\freetype\config\ftconfig.h" />
+    <ClInclude Include="..\Source\External\freetype\config\ftheader.h" />
+    <ClInclude Include="..\Source\External\freetype\config\ftmodule.h" />
+    <ClInclude Include="..\Source\External\freetype\config\ftoption.h" />
+    <ClInclude Include="..\Source\External\freetype\config\ftstdlib.h" />
+    <ClInclude Include="..\Source\External\freetype\freetype.h" />
+    <ClInclude Include="..\Source\External\freetype\ftadvanc.h" />
+    <ClInclude Include="..\Source\External\freetype\ftautoh.h" />
+    <ClInclude Include="..\Source\External\freetype\ftbbox.h" />
+    <ClInclude Include="..\Source\External\freetype\ftbdf.h" />
+    <ClInclude Include="..\Source\External\freetype\ftbitmap.h" />
+    <ClInclude Include="..\Source\External\freetype\ftbzip2.h" />
+    <ClInclude Include="..\Source\External\freetype\ftcache.h" />
+    <ClInclude Include="..\Source\External\freetype\ftcffdrv.h" />
+    <ClInclude Include="..\Source\External\freetype\ftchapters.h" />
+    <ClInclude Include="..\Source\External\freetype\ftcid.h" />
+    <ClInclude Include="..\Source\External\freetype\fterrdef.h" />
+    <ClInclude Include="..\Source\External\freetype\fterrors.h" />
+    <ClInclude Include="..\Source\External\freetype\ftfntfmt.h" />
+    <ClInclude Include="..\Source\External\freetype\ftgasp.h" />
+    <ClInclude Include="..\Source\External\freetype\ftglyph.h" />
+    <ClInclude Include="..\Source\External\freetype\ftgxval.h" />
+    <ClInclude Include="..\Source\External\freetype\ftgzip.h" />
+    <ClInclude Include="..\Source\External\freetype\ftimage.h" />
+    <ClInclude Include="..\Source\External\freetype\ftincrem.h" />
+    <ClInclude Include="..\Source\External\freetype\ftlcdfil.h" />
+    <ClInclude Include="..\Source\External\freetype\ftlist.h" />
+    <ClInclude Include="..\Source\External\freetype\ftlzw.h" />
+    <ClInclude Include="..\Source\External\freetype\ftmac.h" />
+    <ClInclude Include="..\Source\External\freetype\ftmm.h" />
+    <ClInclude Include="..\Source\External\freetype\ftmodapi.h" />
+    <ClInclude Include="..\Source\External\freetype\ftmoderr.h" />
+    <ClInclude Include="..\Source\External\freetype\ftotval.h" />
+    <ClInclude Include="..\Source\External\freetype\ftoutln.h" />
+    <ClInclude Include="..\Source\External\freetype\ftpfr.h" />
+    <ClInclude Include="..\Source\External\freetype\ftrender.h" />
+    <ClInclude Include="..\Source\External\freetype\ftsizes.h" />
+    <ClInclude Include="..\Source\External\freetype\ftsnames.h" />
+    <ClInclude Include="..\Source\External\freetype\ftstroke.h" />
+    <ClInclude Include="..\Source\External\freetype\ftsynth.h" />
+    <ClInclude Include="..\Source\External\freetype\ftsystem.h" />
+    <ClInclude Include="..\Source\External\freetype\fttrigon.h" />
+    <ClInclude Include="..\Source\External\freetype\ftttdrv.h" />
+    <ClInclude Include="..\Source\External\freetype\fttypes.h" />
+    <ClInclude Include="..\Source\External\freetype\ftwinfnt.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\autohint.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\ftcalc.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\ftdebug.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\ftdriver.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\ftgloadr.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\fthash.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\ftmemory.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\ftobjs.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\ftpic.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\ftrfork.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\ftserv.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\ftstream.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\fttrace.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\ftvalid.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\internal.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\psaux.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\pshints.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\services\svbdf.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\services\svcid.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\services\svfntfmt.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\services\svgldict.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\services\svgxval.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\services\svkern.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\services\svmm.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\services\svotval.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\services\svpfr.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\services\svpostnm.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\services\svprop.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\services\svpscmap.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\services\svpsinfo.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\services\svsfnt.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\services\svttcmap.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\services\svtteng.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\services\svttglyf.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\services\svwinfnt.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\sfnt.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\t1types.h" />
+    <ClInclude Include="..\Source\External\freetype\internal\tttypes.h" />
+    <ClInclude Include="..\Source\External\freetype\t1tables.h" />
+    <ClInclude Include="..\Source\External\freetype\ttnameid.h" />
+    <ClInclude Include="..\Source\External\freetype\tttables.h" />
+    <ClInclude Include="..\Source\External\freetype\tttags.h" />
+    <ClInclude Include="..\Source\External\freetype\ttunpat.h" />
+    <ClInclude Include="..\Source\External\ft2build.h" />
+    <ClInclude Include="..\Source\External\imgui\imconfig.h" />
+    <ClInclude Include="..\Source\External\imgui\imgui.h" />
+    <ClInclude Include="..\Source\External\imgui\imgui_impl_dx11.h" />
+    <ClInclude Include="..\Source\External\imgui\imgui_impl_win32.h" />
+    <ClInclude Include="..\Source\External\imgui\imgui_internal.h" />
+    <ClInclude Include="..\Source\External\imgui\imstb_rectpack.h" />
+    <ClInclude Include="..\Source\External\imgui\imstb_textedit.h" />
+    <ClInclude Include="..\Source\External\imgui\imstb_truetype.h" />
+    <ClInclude Include="..\Source\External\imgui\misc\cpp\imgui_stdlib.h" />
+    <ClInclude Include="..\Source\External\imgui\misc\freetype\imgui_freetype.h" />
+    <ClInclude Include="..\Source\External\imgui\misc\single_file\imgui_single_file.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Source\External\DirectXTK\Src\DDSTextureLoader.cpp" />
+    <ClCompile Include="..\Source\External\DirectXTK\Src\ScreenGrab.cpp" />
+    <ClCompile Include="..\Source\External\DirectXTK\Src\WICTextureLoader.cpp" />
+    <ClCompile Include="..\Source\External\StackWalker\StackWalker.cpp" />
+    <ClCompile Include="..\Source\External\imgui\imgui.cpp" />
+    <ClCompile Include="..\Source\External\imgui\imgui_demo.cpp" />
+    <ClCompile Include="..\Source\External\imgui\imgui_draw.cpp" />
+    <ClCompile Include="..\Source\External\imgui\imgui_impl_dx11.cpp" />
+    <ClCompile Include="..\Source\External\imgui\imgui_impl_win32.cpp" />
+    <ClCompile Include="..\Source\External\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="..\Source\External\imgui\misc\cpp\imgui_stdlib.cpp" />
+    <ClCompile Include="..\Source\External\imgui\misc\fonts\binary_to_compressed_c.cpp" />
+    <ClCompile Include="..\Source\External\imgui\misc\freetype\imgui_freetype.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

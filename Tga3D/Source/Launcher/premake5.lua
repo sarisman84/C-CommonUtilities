@@ -24,7 +24,8 @@ project "Launcher"
 
 	libdirs { 
 	"../../Lib/", 
-	"../../../Build/"
+	"../../../Build/",
+	"../External/Ultralight/lib/",
 	}
 
 	links { 
@@ -37,7 +38,11 @@ project "Launcher"
 		"swresample.lib",
 		"swscale.lib",
 		"Game",
-		"tga2dcore"
+		"tga2dcore",
+		"AppCore.lib",
+		"Ultralight.lib",
+		"UltralightCore.lib",
+		"WebCore.lib"
 	}
 
 	defines {"_CONSOLE"}

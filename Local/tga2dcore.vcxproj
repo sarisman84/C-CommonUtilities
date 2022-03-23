@@ -1,0 +1,271 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Retail|x64">
+      <Configuration>Retail</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{601DB96F-CC87-6DE6-15C6-1E8C816F4B3B}</ProjectGuid>
+    <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>tga2dcore</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Retail|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>..\Tga2D\Lib\</OutDir>
+    <IntDir>..\Tga2D\Temp\tga2dcore\Debug\</IntDir>
+    <TargetName>tga2dcore_Debug</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>..\Tga2D\Lib\</OutDir>
+    <IntDir>..\Tga2D\Temp\tga2dcore\Release\</IntDir>
+    <TargetName>tga2dcore_Release</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail|x64'">
+    <OutDir>..\Tga2D\Lib\</OutDir>
+    <IntDir>..\Tga2D\Temp\tga2dcore\Retail\</IntDir>
+    <TargetName>tga2dcore_Retail</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <WarningLevel>Level4</WarningLevel>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <PreprocessorDefinitions>_DEBUG;TGE_DEBUG;WIN32;_CRT_SECURE_NO_WARNINGS;_LIB;_WIN32_WINNT=0x0601;TGE_SYSTEM_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\Tga2D\Source\tga2dcore;..\Tga2D\Source\External;..\Tga2D\Source\tga2dcore\source;..\Tga2D\Source\External\DirectXTK\Inc;..\Tga2D\Source\spine\include;..\Tga2D\Source\External\ffmpeg-2.0;..\Tga2D\Source\tga2dcore\vld;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <SDLCheck>true</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>DXGI.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <WarningLevel>Level4</WarningLevel>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <PreprocessorDefinitions>_RELEASE;WIN32;_CRT_SECURE_NO_WARNINGS;_LIB;_WIN32_WINNT=0x0601;TGE_SYSTEM_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\Tga2D\Source\tga2dcore;..\Tga2D\Source\External;..\Tga2D\Source\tga2dcore\source;..\Tga2D\Source\External\DirectXTK\Inc;..\Tga2D\Source\spine\include;..\Tga2D\Source\External\ffmpeg-2.0;..\Tga2D\Source\tga2dcore\vld;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <SDLCheck>true</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>DXGI.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Retail|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <WarningLevel>Level4</WarningLevel>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <PreprocessorDefinitions>_RETAIL;WIN32;_CRT_SECURE_NO_WARNINGS;_LIB;_WIN32_WINNT=0x0601;TGE_SYSTEM_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\Tga2D\Source\tga2dcore;..\Tga2D\Source\External;..\Tga2D\Source\tga2dcore\source;..\Tga2D\Source\External\DirectXTK\Inc;..\Tga2D\Source\spine\include;..\Tga2D\Source\External\ffmpeg-2.0;..\Tga2D\Source\tga2dcore\vld;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <SDLCheck>true</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>DXGI.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\resource.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\stdafx.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\targetver.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\StepTimer.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\animation\AnimationController.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\animation\CAnimation.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\animation\Math\MathFunc.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\audio\audio.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\audio\audio_out.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\common_converters.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\d3d\direct_3d.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\debugging\memory_tracker.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\debugging\stack_trace.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\drawers\custom_shape_drawer.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\drawers\debug_drawer.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\drawers\debug_performancegraph.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\drawers\line_drawer.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\drawers\sprite_drawer.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\engine.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\engine_defines.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\error\error_manager.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\filewatcher\file_watcher.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\imguiinterface\CImGuiInterface.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\input\XInput.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\light\light.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\light\light_manager.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\loaders\FBXLoader.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\loaders\tgaloader.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\math\color.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\math\common_math.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\math\matrix44.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\math\vector2.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\math\vector2imp.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\math\vector4.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\model\FBXModel.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\model\ModelStatus.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\noise\perlin_noise.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\primitives\custom_shape.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\primitives\line_primitive.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\primitives\model_shape.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\render\render_common.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\render\render_object.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\render\renderer.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\shaders\shader.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\shaders\shader_common.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\shaders\shader_model.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\shaders\sprite_shader.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\sprite\sprite.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\text\fontfile.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\text\parser.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\text\text.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\text\text_service.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\text\textfile.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\text\token.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\texture\texture.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\texture\texture_manager.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\videoplayer\video.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\videoplayer\video_audio.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\videoplayer\videoplayer.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\tga2d\windows\windows_window.h" />
+    <ClInclude Include="..\Tga2D\Source\tga2dcore\version.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\stdafx.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\animation\CAnimation.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\animation\Math\MathFunc.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\audio\audio.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\audio\audio_out.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\d3d\direct_3d.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\debugging\memory_tracker.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\debugging\stack_trace.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\drawers\custom_shape_drawer.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\drawers\debug_drawer.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\drawers\debug_performancegraph.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\drawers\line_drawer.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\drawers\sprite_drawer.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\engine.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\error\error_manager.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\filewatcher\file_watcher.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\imguiinterface\CImGuiInterface.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\input\XInput.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\light\light.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\light\light_manager.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\loaders\FBXLoader.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\loaders\tgaloader.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\math\common_math.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\model\FBXModel.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\noise\perlin_noise.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\primitives\custom_shape.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\primitives\line_primitive.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\primitives\model_shape.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\render\render_object.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\render\renderer.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\shaders\shader.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\shaders\shader_model.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\shaders\sprite_shader.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\text\fontfile.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\text\parser.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\text\text.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\text\text_service.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\text\textfile.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\text\token.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\texture\texture.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\texture\texture_manager.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\videoplayer\video.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\videoplayer\video_audio.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\videoplayer\videoplayer.cpp" />
+    <ClCompile Include="..\Tga2D\Source\tga2dcore\tga2d\windows\windows_window.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
