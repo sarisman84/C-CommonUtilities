@@ -1,7 +1,8 @@
 #pragma once
 #include "Dijkstra.hpp"
-//#include <tga2d/math/vector2.h>
+#include <tga2d/math/vector2.h>
 #include <array>
+#include <tga2d/sprite/sprite.h>
 namespace Tga2D
 {
 	class Texture;
@@ -19,6 +20,13 @@ using namespace CommonUtilities;
 #define WHITE Tga2D::Color(1, 1, 1, 1)
 
 
+struct SpriteTile
+{
+	Tga2D::Vector2f myPos;
+	Tga2D::Vector2f mySize;
+};
+
+
 class GameWorld
 {
 public:
@@ -30,6 +38,8 @@ public:
 	void Render();
 private:
 	std::vector<Tile> myMap;
+	std::vector<SpriteTile> myPhysMap;
 	std::vector<int> myPath;
-	Tga2D::Vector2i myFirstElement, mySecondElement;
+	int myFirstElement, mySecondElement;
+	Tga2D::SpriteSharedData myTileMat;
 };

@@ -31,6 +31,9 @@ LRESULT Game::WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	lParam;
 	wParam;
 	hWnd;
+
+	Mouse::UpdateEvents(hWnd, message, wParam, lParam);
+
 	switch (message)
 	{
 		// this message is read when the window is closed
@@ -82,4 +85,5 @@ void Game::UpdateCallBack()
 {
 	myGameWorld.Update(Tga2D::Engine::GetInstance()->GetDeltaTime());
 	myGameWorld.Render();
+	Mouse::EndFrame();
 }

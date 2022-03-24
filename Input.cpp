@@ -51,13 +51,16 @@ const bool CommonUtilities::GClient::UpdateClient()
 	if (!IsConnected())
 		return false;
 
-	if (myState.Gamepad.wButtons != 0u) {
+	if (myState.Gamepad.wButtons != 0u)
+	{
 
 		OnButtonPressed(static_cast<Button>(myState.Gamepad.wButtons));
 	}
-	else {
+	else
+	{
 
-		if (!ButtonIsEmpty()) {
+		if (!ButtonIsEmpty())
+		{
 			OnButtonReleased(myButtonbuffer.front().getButton());
 		}
 	}
@@ -342,7 +345,7 @@ const UINT CommonUtilities::Mouse::GetMessageFromKey(const Key aKey, const Event
 #define _K(aMsg) static_cast<int>(GetKeyFromMessage(aMsg))
 #define EK(aMsg) GetKeyFromMessage(aMsg)
 
-void CommonUtilities::Mouse::UpdateEvents(UINT aMessage, WPARAM anWParam, LPARAM anLParam)
+void CommonUtilities::Mouse::UpdateEvents(HWND aWindowsIns, UINT aMessage, WPARAM anWParam, LPARAM anLParam)
 {
 
 	if (IsAMouseButtonEvent(aMessage))
@@ -354,9 +357,17 @@ void CommonUtilities::Mouse::UpdateEvents(UINT aMessage, WPARAM anWParam, LPARAM
 	}
 
 
-	if (aMessage == WM_MOUSEMOVE) {
+	if (aMessage == WM_MOUSEMOVE)
+	{
 		ourPastMousePosition = ourMousePosition;
-		ourMousePosition = { GET_X_LPARAM(anLParam),GET_Y_LPARAM(anLParam) };
+		POINT point;
+		if (GetCursorPos(&point))
+		{
+			ScreenToClient(aWindowsIns, &point);
+
+		}
+
+		ourMousePosition = { point.x, point.y };
 	}
 
 

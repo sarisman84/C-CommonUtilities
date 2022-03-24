@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
 #include "Heap.hpp"
+#include <array>
+#include <tga2d/math/vector2.h>
 
 namespace CommonUtilities
 {
@@ -14,23 +16,23 @@ namespace CommonUtilities
 		Passable
 	};
 
-
 	struct Node
 	{
-		Node(int anIndex, int aDist) { myIndex = anIndex; myDist = aDist; }
 		int myIndex;
-		int myDist;
+		int* myDist;
 
-		
+		inline bool operator >(Node anOtherNode)
+		{
+			return myDist > anOtherNode.myDist;
+		}
 
+
+		inline bool operator <(Node anOtherNode)
+		{
+			return myDist < anOtherNode.myDist;
+		}
 	};
 
-	inline const bool operator==(Node aNode, Node anOtherNode) { return anOtherNode.myDist == aNode.myDist; }
-
-	inline bool Contains(const std::vector<Node>& someNodes, const Node& aNode)
-	{
-		return std::find(someNodes.begin(), someNodes.end(), aNode) != someNodes.end();
-	}
 
 
 	inline std::vector<int> Dijkstra(const std::vector<Tile>& aMap, int aStartIndex, int anEndIndex)
@@ -40,50 +42,88 @@ namespace CommonUtilities
 		if (aMap[anEndIndex] == Tile::Impassable) return std::vector<int>();
 		if (aMap[aStartIndex] == Tile::Impassable) return std::vector<int>();
 
-		std::vector<Node> myNodes;
+		std::array<int, TileCount> myNodeDist;
 		std::vector<int> result;
-		int range = std::abs(anEndIndex - aStartIndex);
-		CommonUtilities::Heap<Node*, HeapType::Min> nodesToCheck;
+		CommonUtilities::Heap<Node, HeapType::Min> nodesToCheck;
 
 
-		for (int i = 0; i < range; i++)
+		for (int i = 0; i < TileCount; i++)
 		{
-			myNodes.push_back(Node(aStartIndex + i, INT_MAX));
-			nodesToCheck.Enqueue(&myNodes.back());
+			myNodeDist[i] = INT_MAX;
+			nodesToCheck.Enqueue(Node{ i, &myNodeDist[i] });
 		}
 
 
 
-		int currentNode = aStartIndex;
-		myNodes[currentNode].myDist = 0;
+	
+		myNodeDist[aStartIndex] = 0;
 
 
-
+		bool isPathFound = false;
+		int currentNode;
 		while (nodesToCheck.GetSize() > 0)
 		{
+			currentNode = nodesToCheck.Dequeue().myIndex;
 
-			int width = currentNode % 9;
-			int height = currentNode / 9;
-
-			for (size_t y = 0; y < height; y++)
+			if (currentNode == anEndIndex)
 			{
-				for (size_t x = 0; x < width; x++)
+				isPathFound = true;
+				break;
+			}
+
+
+			Tga2D::Vector2i twoDCoord = {};
+			twoDCoord.x = currentNode % MapWidth;
+			twoDCoord.y = currentNode / MapHeight;
+
+			//int startPos = currentNode - currentNode % 3;
+
+			for (int x = -1; x < 2; x++)
+			{
+				for (int y = -1; y < 2; y++)
 				{
-					if (x == 2 && y == 2 || x + currentNode * y >= myNodes.size() || aMap[x + currentNode * y] == Tile::Impassable) continue;
-					if (myNodes[x + currentNode * y].myDist > myNodes[currentNode].myDist + std::abs(myNodes[x + currentNode * y].myIndex - myNodes[currentNode].myIndex))
+					if (x == 0 && y == 0) continue;
+
+					Tga2D::Vector2i neighbour = twoDCoord + Tga2D::Vector2i(x, y);
+
+					//int neighbourNode = currentNode + x + (MapWidth * y); //i = x + width * y
+					if (neighbour.x < 0 || neighbour.x >= MapWidth || neighbour.y < 0 || neighbour.y >= MapHeight) continue;
+
+					int neighbourIndex = neighbour.x + MapWidth * neighbour.y;
+					if (aMap[neighbourIndex] == Tile::Impassable) continue;
+
+					if (myNodeDist[neighbourIndex] > myNodeDist[currentNode])
 					{
-						myNodes[x + currentNode * y].myDist = myNodes[currentNode].myDist + std::abs(myNodes[x + currentNode * y].myIndex - myNodes[currentNode].myIndex);
-						result.push_back(currentNode);
+						myNodeDist[neighbourIndex] = myNodeDist[currentNode];
+						result.push_back(neighbourIndex);
 					}
 
+
+
+
+					result.push_back(neighbourIndex);
 				}
 			}
 
-			currentNode = nodesToCheck.Dequeue()->myIndex;
 
+
+
+
+			
 		}
 
+
+
+
+
+
+		if (!isPathFound) result.clear();
+
 		return result;
+
 	}
 
+
+
 }
+

@@ -184,7 +184,7 @@ namespace CommonUtilities
 		{
 			Press, Release
 		};
-		static void UpdateEvents(UINT aMessage, WPARAM anWParam, LPARAM anLParam);
+		static void UpdateEvents(HWND aWindowsIns,UINT aMessage, WPARAM anWParam, LPARAM anLParam);
 		static void EndFrame();
 
 		static const bool GetButtonDown(const Key aKey);

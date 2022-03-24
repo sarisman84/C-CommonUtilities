@@ -1,6 +1,7 @@
 #pragma once
 #include <fstream>
 #include "GameWorld.h"
+#include <Input.h>
 
 class Game
 {
@@ -14,5 +15,4 @@ private:
 	LRESULT WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 	GameWorld myGameWorld;
-
 };
