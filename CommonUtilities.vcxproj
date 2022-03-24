@@ -175,7 +175,6 @@
     <ClInclude Include="ObjectFactory.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Queue.hpp" />
-    <ClInclude Include="SolveSudoku.hpp" />
     <ClInclude Include="Stack.hpp" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="UtilityFunctions.h" />
