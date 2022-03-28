@@ -49,14 +49,14 @@ namespace CommonUtilities
 
 		for (int i = 0; i < TileCount; i++)
 		{
-			myNodeDist[i] = INT_MAX;
+			myNodeDist[i] = i == aStartIndex ? 0 : INT_MAX;
+
 			nodesToCheck.Enqueue(Node{ i, &myNodeDist[i] });
 		}
 
 
 
-	
-		myNodeDist[aStartIndex] = 0;
+
 
 
 		bool isPathFound = false;
@@ -64,7 +64,7 @@ namespace CommonUtilities
 		while (nodesToCheck.GetSize() > 0)
 		{
 			currentNode = nodesToCheck.Dequeue().myIndex;
-
+			std::cout << currentNode << std::endl;
 			if (currentNode == anEndIndex)
 			{
 				isPathFound = true;
@@ -90,18 +90,14 @@ namespace CommonUtilities
 					if (neighbour.x < 0 || neighbour.x >= MapWidth || neighbour.y < 0 || neighbour.y >= MapHeight) continue;
 
 					int neighbourIndex = neighbour.x + MapWidth * neighbour.y;
-					if (aMap[neighbourIndex] == Tile::Impassable) continue;
+					if (aMap[neighbourIndex] == Tile::Impassable || std::find(result.begin(), result.end(), neighbourIndex) != result.end()) continue;
 
-					if (myNodeDist[neighbourIndex] > myNodeDist[currentNode])
+					if (myNodeDist[neighbourIndex] > myNodeDist[currentNode] + 1)
 					{
-						myNodeDist[neighbourIndex] = myNodeDist[currentNode];
+						myNodeDist[neighbourIndex] = myNodeDist[currentNode] + 1;
 						result.push_back(neighbourIndex);
 					}
 
-
-
-
-					result.push_back(neighbourIndex);
 				}
 			}
 
@@ -109,7 +105,7 @@ namespace CommonUtilities
 
 
 
-			
+
 		}
 
 
