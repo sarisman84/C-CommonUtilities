@@ -23,8 +23,6 @@ namespace CommonUtilities
 		std::vector<int> myConnections;
 	};
 
-
-
 	inline std::vector<int> Dijkstra(const std::vector<Tile>& aMap, int aStartIndex, int anEndIndex)
 	{
 
@@ -36,25 +34,16 @@ namespace CommonUtilities
 		std::vector<int> nodesToCheck;
 		std::vector<int> result;
 
-
-
 		for (int i = 0; i < TileCount; i++)
 		{
 			myNodeDist[i] = Node{ i,  i == aStartIndex ? 0 : INT_MAX };
 			nodesToCheck.push_back(i);
 		}
 
-
-
-
-
-
-
 		bool isPathFound = false;
 		int currentNode = 0;
 		while (nodesToCheck.size() > 0)
 		{
-
 			std::sort(nodesToCheck.begin(), nodesToCheck.end(), [&](int aLhs, int aRhs)->bool { return myNodeDist[aLhs].myDist < myNodeDist[aRhs].myDist; });
 
 			currentNode = nodesToCheck.front();
@@ -68,12 +57,9 @@ namespace CommonUtilities
 				break;
 			}
 
-
 			Tga2D::Vector2i twoDCoord = {};
 			twoDCoord.x = currentNode % MapWidth;
 			twoDCoord.y = currentNode / MapHeight;
-
-			//int startPos = currentNode - currentNode % 3;
 
 			for (int x = -1; x < 2; x++)
 			{
@@ -83,10 +69,7 @@ namespace CommonUtilities
 					if (y == -1 && x != 0) continue;
 					if (y == 1 && x != 0) continue;
 
-
 					Tga2D::Vector2i neighbour = twoDCoord + Tga2D::Vector2i(x, y);
-
-					//int neighbourNode = currentNode + x + (MapWidth * y); //i = x + width * y
 					if (neighbour.x < 0 || neighbour.x >= MapWidth || neighbour.y < 0 || neighbour.y >= MapHeight) continue;
 
 					int neighbourIndex = neighbour.x + MapWidth * neighbour.y;
@@ -97,31 +80,13 @@ namespace CommonUtilities
 						myNodeDist[neighbourIndex].myDist = myNodeDist[currentNode].myDist + std::abs(anEndIndex - currentNode);
 						myNodeDist[neighbourIndex].myConnections.push_back(currentNode);
 					}
-
 				}
 			}
-
-
-
-
-
-
 		}
-
-
-
-
-
-
 		if (!isPathFound) result.clear();
 
-
 		std::vector<int> path;
-
-
-
 		currentNode = anEndIndex;
-
 		while (currentNode != aStartIndex)
 		{
 			int dist = INT_MAX;
@@ -140,25 +105,9 @@ namespace CommonUtilities
 					currentNode = connection;
 				}
 			}
-
 			path.push_back(currentNode);
-
-
-
-
 		}
-
-
-
-
-
-
-
 		return path;
-
 	}
-
-
-
 }
 
