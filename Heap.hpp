@@ -38,7 +38,6 @@ namespace CommonUtilities
 		T Dequeue()
 		{
 			if (myBuffer.size() == 0) return T();
-
 			T topElement = GetTop();
 
 			myBuffer[0] = myBuffer.back();
