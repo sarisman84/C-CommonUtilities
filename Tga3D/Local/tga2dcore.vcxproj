@@ -163,6 +163,13 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Source\tga2dcore\customutilities\Input.h" />
+    <ClInclude Include="..\Source\tga2dcore\customutilities\UtilityFunctions.h" />
+    <ClInclude Include="..\Source\tga2dcore\customutilities\Vector.h" />
+    <ClInclude Include="..\Source\tga2dcore\customutilities\Vector2.h" />
+    <ClInclude Include="..\Source\tga2dcore\customutilities\Vector3.h" />
+    <ClInclude Include="..\Source\tga2dcore\customutilities\Vector4.h" />
+    <ClInclude Include="..\Source\tga2dcore\customutilities\VectorOnStack.h" />
     <ClInclude Include="..\Source\tga2dcore\resource.h" />
     <ClInclude Include="..\Source\tga2dcore\stdafx.h" />
     <ClInclude Include="..\Source\tga2dcore\targetver.h" />
@@ -250,6 +257,7 @@
     <ClInclude Include="..\Source\tga2dcore\version.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Source\tga2dcore\customutilities\Input.cpp" />
     <ClCompile Include="..\Source\tga2dcore\stdafx.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>

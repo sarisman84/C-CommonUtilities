@@ -1,8 +1,8 @@
 #pragma once
 #include <vector>
-#include "Heap.hpp"
 #include <array>
 #include <tga2d/math/vector2.h>
+#include <algorithm>
 
 namespace CommonUtilities
 {
@@ -32,7 +32,7 @@ namespace CommonUtilities
 
 		std::array<Node, TileCount> myNodeDist;
 		std::vector<int> nodesToCheck;
-		std::vector<int> result;
+		std::vector<int> checkedNodes;
 
 		for (int i = 0; i < TileCount; i++)
 		{
@@ -40,7 +40,6 @@ namespace CommonUtilities
 			nodesToCheck.push_back(i);
 		}
 
-		bool isPathFound = false;
 		int currentNode = 0;
 		while (nodesToCheck.size() > 0)
 		{
@@ -50,10 +49,9 @@ namespace CommonUtilities
 			nodesToCheck[0] = nodesToCheck.back();
 			nodesToCheck.pop_back();
 
-			result.push_back(currentNode);
+			checkedNodes.push_back(currentNode);
 			if (currentNode == anEndIndex)
 			{
-				isPathFound = true;
 				break;
 			}
 
@@ -73,7 +71,7 @@ namespace CommonUtilities
 					if (neighbour.x < 0 || neighbour.x >= MapWidth || neighbour.y < 0 || neighbour.y >= MapHeight) continue;
 
 					int neighbourIndex = neighbour.x + MapWidth * neighbour.y;
-					if (aMap[neighbourIndex] == Tile::Impassable || std::find(result.begin(), result.end(), neighbourIndex) != result.end()) continue;
+					if (aMap[neighbourIndex] == Tile::Impassable || std::find(checkedNodes.begin(), checkedNodes.end(), neighbourIndex) != checkedNodes.end()) continue;
 
 					if (myNodeDist[neighbourIndex].myDist > myNodeDist[currentNode].myDist + std::abs(anEndIndex - currentNode))
 					{
@@ -83,7 +81,7 @@ namespace CommonUtilities
 				}
 			}
 		}
-		if (!isPathFound) result.clear();
+	
 
 		std::vector<int> path;
 		currentNode = anEndIndex;

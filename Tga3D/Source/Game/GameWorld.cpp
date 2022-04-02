@@ -5,7 +5,8 @@
 #include <tga2d/graphics/GraphicsEngine.h>
 #include <tga2d/drawers/SpriteDrawer.h>
 #include <tga2d/texture/TextureManager.h>
-#include <Input.h>
+#include <customutilities/Vector2.h>
+#include <customutilities/Input.h>
 
 GameWorld::GameWorld()
 {
@@ -158,7 +159,7 @@ void GameWorld::Render()
 		if (isElementSelected)
 			ins.myColor = GREEN;
 
-		if (isPath)
+		if (isPath && !isElementSelected)
 			ins.myColor = BLUE;
 
 

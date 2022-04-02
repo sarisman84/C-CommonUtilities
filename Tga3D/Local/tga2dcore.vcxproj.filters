@@ -76,6 +76,9 @@
     <Filter Include="tga2d\windows">
       <UniqueIdentifier>{71A2180E-DD62-9444-A69D-DDC1121DD920}</UniqueIdentifier>
     </Filter>
+    <Filter Include="commonutilities">
+      <UniqueIdentifier>{cf39d67a-7438-4f19-9558-7caa4a1ec17a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Source\tga2dcore\resource.h" />
@@ -325,6 +328,27 @@
       <Filter>tga2d\windows</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\tga2dcore\version.h" />
+    <ClInclude Include="..\Source\tga2dcore\customutilities\Input.h">
+      <Filter>commonutilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\customutilities\UtilityFunctions.h">
+      <Filter>commonutilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\customutilities\Vector.h">
+      <Filter>commonutilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\customutilities\Vector2.h">
+      <Filter>commonutilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\customutilities\Vector3.h">
+      <Filter>commonutilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\customutilities\Vector4.h">
+      <Filter>commonutilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\tga2dcore\customutilities\VectorOnStack.h">
+      <Filter>commonutilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\tga2dcore\stdafx.cpp" />
@@ -510,6 +534,9 @@
     </ClCompile>
     <ClCompile Include="..\Source\tga2dcore\tga2d\windows\WindowsWindow.cpp">
       <Filter>tga2d\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\tga2dcore\customutilities\Input.cpp">
+      <Filter>commonutilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
