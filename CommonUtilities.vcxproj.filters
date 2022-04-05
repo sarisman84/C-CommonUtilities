@@ -19,6 +19,9 @@
     <Filter Include="Header Files\Containers">
       <UniqueIdentifier>{06ded903-16ba-4450-bded-72b1068b7b68}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Algorithms\Sorting">
+      <UniqueIdentifier>{cb94fb80-ea89-4420-b632-3c22ce4c5b0a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -74,6 +77,9 @@
     </ClInclude>
     <ClInclude Include="Heap.hpp">
       <Filter>Header Files\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="Sort.hpp">
+      <Filter>Header Files\Algorithms\Sorting</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
