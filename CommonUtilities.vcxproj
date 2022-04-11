@@ -170,6 +170,7 @@
     <ClInclude Include="BinaryTree.h" />
     <ClInclude Include="DoublyLinkedList.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="HashMap.h" />
     <ClInclude Include="Heap.hpp" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="List.h" />
