@@ -175,6 +175,7 @@
     <ClInclude Include="Input.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="ObjectFactory.h" />
+    <ClInclude Include="Parser.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Queue.hpp" />
     <ClInclude Include="SolveSudoku.hpp" />
