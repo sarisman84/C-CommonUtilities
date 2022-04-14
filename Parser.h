@@ -11,59 +11,55 @@
 class Parser
 {
 public:
-	enum class Token : char
+	enum class Token
 	{
 		Identifier,
-		Keyword = '=',
-		NewLine = ';' | '\n',
-		Separator = '(' | ')',
-		Operator = '+' | '-',
-		Literal = '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '0',
-		Comment = '//',
+		NewLine,
+		BeginExp,
+		EndExp,
+		Operator,
+		Literal,
 		Exit
 	};
 
+	Parser() = default;
 
 
 private:
-	struct DataInfo
+	struct TokenResult
 	{
-		std::any myValue;
+		size_t myTokenPos;
+		size_t myStartingPos;
+		Token myType;
 	};
-
-	struct  TokenInfo
-	{
-		size_t myLineSize;
-		size_t myStartingIndex;
-		size_t myIndex = -1;
-		bool myIsValid;
-	};
-
-
 public:
-	Parser() = default;
-
 
 
 
 	std::any Evaluate(const char* someInput)
 	{
-		std::vector<TokenInfo> availableLines;
-		TokenInfo info = { 0,0,0, true };
-		for (; info.myIsValid;)
+		std::vector<size_t> availableLines;
+		size_t pos = 0;
+		size_t inputLength = std::strlen(someInput);
+		while (true)
 		{
+			size_t size = pos + 1;
+			if (size >= inputLength)
+				break;
 
-			info = GetToken(info.myLineSize, GetTokenID(Token::NewLine), someInput);
-			if (info.myIsValid)
-				availableLines.push_back(info);
+			auto result = GetToken(Token::NewLine, someInput, pos + availableLines.size());
+			pos = result.myTokenPos;
+
+
+			availableLines.push_back(result.myStartingPos);
 		}
 
 		for (size_t i = 0; i < availableLines.size(); i++)
 		{
-
-			if (ReturnStatementFound(availableLines[i]))
+			auto line = availableLines[i] - (i % 2 == 0 ? 1 : 0);
+			if (ReturnStatementFound(line))
 			{
-				return EvaluateReturn(availableLines[i]);
+				return EvaluateReturn(line);
 			}
 
 
@@ -78,14 +74,16 @@ public:
 			//Return Contains: 'return', Expression
 
 
-			std::string varName = GetVariableName(availableLines[i], someInput);
+			std::string varName = GetVariableName(line, someInput);
 
 			std::cout << varName;
 
-			DataInfo varValue = EvaluateExpression(availableLines[i], someInput);
-			std::cout << "= " << std::any_cast<int>(varValue.myValue) << ";" << std::endl;
-
-			myData[varName.c_str()] = varValue.myValue;
+			std::any varValue = EvaluateExpression(line, someInput);
+			if (varValue.has_value())
+				std::cout << "= " << std::any_cast<int>(varValue) << ";" << std::endl;
+			else
+				std::cout << std::endl;
+			myData[varName.c_str()] = varValue;
 
 		}
 
@@ -97,36 +95,43 @@ public:
 
 
 private:
-	inline static char ourTokenID[2];
-	char* GetTokenID(Token aToken)
+	char GetTokenID(Token aToken)
 	{
-		ourTokenID[0] = (char)aToken;
-		ourTokenID[1] = '\0';
-		return ourTokenID;
+		return (char)aToken;
 	}
 
 
-	bool ReturnStatementFound(TokenInfo someTokenInfo)
+	bool ReturnStatementFound(size_t someTokenInfo)
 	{
 		return false;
 	}
 
 
-	std::any EvaluateReturn(TokenInfo someTokenInfo)
+	std::any EvaluateReturn(size_t someTokenInfo)
 	{
 		return std::any();
 	}
 
-	std::string GetVariableName(TokenInfo someTokenInfo, const char* anInput)
+	std::string GetVariableName(size_t aPos, const char* anInput)
 	{
 
-		TokenInfo equalsKeyword = GetToken(someTokenInfo.myStartingIndex, GetTokenID(Token::Keyword), anInput);
+		auto equalsKeyword = GetToken(Token::Operator, anInput, aPos);
 
 		std::string name = "";
 
-		for (size_t i = equalsKeyword.myStartingIndex; i < equalsKeyword.myIndex; i++)
+
+		for (size_t i = equalsKeyword.myStartingPos;;)
 		{
+
+
+			if (CheckChar(&anInput[i]) == Token::Operator && anInput[i] != 32 && anInput[i] != ' ')
+			{
+				break;
+			}
 			name += anInput[i];
+
+
+			++i;
 		}
 
 		return name;
@@ -134,69 +139,129 @@ private:
 
 
 
-	size_t GetVariable(TokenInfo someTokenInfo, const char* anInput)
+	std::vector<char> GetVariable(size_t aPos, const char* anInput)
 	{
-		TokenInfo lit = GetToken(someTokenInfo.myStartingIndex, GetTokenID(Token::Literal), anInput); //Get Literal Token info
-		return lit.myIndex;
+		std::vector<char> output;
+		
+		auto equalsOp = GetToken(Token::Operator, anInput, aPos);
+		TokenResult result = GetToken(Token::Literal, anInput, equalsOp.myTokenPos);
+		//make sure that the number is after the = operator
+		bool isValidType = true;
+		for (size_t i = aPos; (result = GetToken(Token::Literal, anInput, ++i)).myType == Token::Literal;)
+		{
+			isValidType = CheckChar(&anInput[result.myTokenPos]) == Token::Literal;
+			if (isValidType)
+				output.push_back(anInput[result.myTokenPos]);
+		}
+
+		return output; //Get Literal Token info
 	}
 
 
 
-	DataInfo EvaluateExpression(TokenInfo someTokenInfo, const char* anInput)
+	std::any EvaluateExpression(size_t aPos, const char* anInput)
 	{
+		auto o = GetVariable(aPos, anInput);
+		char val[20] = "\0";
 
 
-		return DataInfo{ std::any(anInput[GetVariable(someTokenInfo, anInput)] - '0') };
+		for (size_t i = 0; i < o.size(); i++)
+		{
+			strcat_s(val, 20, &o[i]);
+		}
+		char r;
+		if (o.size() > 1)
+			r = *val - '0' + ((*(val + 1) - '0') << 4);
+		else
+			r = *val - '0';
+		return  std::any((int)r);
 	}
 
 
 
 
 
-	TokenInfo GetToken(const size_t aCurLine, const char* aTarget, const char* someContext, std::function<bool(const char* someInput)> anCondition = nullptr)
+	TokenResult GetToken(Token aToken, const char* someContext, size_t aStartPos = 0)
 	{
-		bool isValid = false;
-		size_t size = 0;
-		size_t endPoint = 0;
-		std::vector<char> charResult = std::vector<char>();
-		charResult.reserve(std::strlen(aTarget) + 1);
-		charResult.resize(std::strlen(aTarget) + 1);
+		TokenResult result;
 
-		size_t length = std::strlen(aTarget);
-		size_t contextLength = std::strlen(someContext);
-		for (size_t i = aCurLine; i < contextLength; i += length)
+		result.myStartingPos = aStartPos;
+
+		bool exit = false;
+
+		size_t i = aStartPos;
+
+		//Set start point here
+		someContext += aStartPos;
+
+		while (true)
 		{
 
-			charResult.clear();
-
-
-			if (length <= contextLength)
+			if (CheckChar(someContext) == aToken)
 			{
-				for (size_t x = 0; x < length; ++x)
-				{
-					charResult.push_back(someContext[i + x]);
 
-				}
-				//charResult.push_back('\0');
+				result.myTokenPos = i;
+				result.myType = aToken;
+				return result;
 			}
 
-			const char* result = charResult.data();
-			bool extraCondition = anCondition ? anCondition(result) : true;
-			bool haveFoundTarget = *aTarget == *result;
-			if (haveFoundTarget && extraCondition)
-			{
-				size = i + 1;
-				endPoint = i;
-				isValid = true;
-				break;
-			}
+			++someContext;
+			++i;
+		}
+
+		return result;
+
+	}
+
+	Token CheckChar(const char* anInput)
+	{
+		if (std::isdigit(*anInput))
+		{
+			return Token::Literal;
+		}
+
+		if (std::isalpha(*anInput))
+		{
+			return  Token::Identifier;
+		}
+
+		if (*anInput == '+' || *anInput == '-' || *anInput == '=')
+		{
+			return Token::Operator;
+		}
+		if (*anInput == ';')
+		{
+			return Token::NewLine;
+		}
+
+		if (*anInput == '(')
+		{
+			return Token::BeginExp;
+		}
+
+		if (*anInput == ')')
+		{
+			return Token::EndExp;
 		}
 
 
-		return TokenInfo{ size, aCurLine, endPoint, isValid };
+		if (anInput == "return")
+		{
+			return Token::Exit;
+		}
 	}
-	//Map order>> Map(Type, SubMap(Name, Value)) myData
+
+
+
+
+
+
+
+
+private:
 	std::map<const char*, std::any> myData;
+
+
 };
 
 
@@ -205,6 +270,9 @@ int EvaluateProgram(const char* anInputText)
 {
 
 	Parser parser;
+
+
+
 
 	return std::any_cast<int>(parser.Evaluate(anInputText));
 };
