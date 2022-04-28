@@ -1,8 +1,31 @@
 #pragma once
 #include <vector>
 #include <array>
-#include <tga2d/math/vector2.h>
 #include <algorithm>
+
+
+
+
+
+struct Vector2i
+{
+	Vector2i() = default;
+	Vector2i(int anX, int anY)
+	{
+		x = anX;
+		y = anY;
+	}
+	int x, y;
+
+	Vector2i operator+(Vector2i someOtherVector)
+	{
+		Vector2i result(0, 0);
+		result.x = x + someOtherVector.x;
+		result.y = y + someOtherVector.y;
+		return result;
+	}
+
+};
 
 namespace CommonUtilities
 {
@@ -55,7 +78,7 @@ namespace CommonUtilities
 				break;
 			}
 
-			Tga2D::Vector2i twoDCoord = {};
+			Vector2i twoDCoord = {};
 			twoDCoord.x = currentNode % MapWidth;
 			twoDCoord.y = currentNode / MapHeight;
 
@@ -67,7 +90,7 @@ namespace CommonUtilities
 					if (y == -1 && x != 0) continue;
 					if (y == 1 && x != 0) continue;
 
-					Tga2D::Vector2i neighbour = twoDCoord + Tga2D::Vector2i(x, y);
+					Vector2i neighbour = twoDCoord + Vector2i(x, y);
 					if (neighbour.x < 0 || neighbour.x >= MapWidth || neighbour.y < 0 || neighbour.y >= MapHeight) continue;
 
 					int neighbourIndex = neighbour.x + MapWidth * neighbour.y;
@@ -81,7 +104,7 @@ namespace CommonUtilities
 				}
 			}
 		}
-	
+
 
 		std::vector<int> path;
 		currentNode = anEndIndex;
