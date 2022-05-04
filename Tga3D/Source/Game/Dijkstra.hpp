@@ -108,6 +108,7 @@ namespace CommonUtilities
 
 		std::vector<int> path;
 		currentNode = anEndIndex;
+		path.push_back(anEndIndex);
 		while (currentNode != aStartIndex)
 		{
 			int dist = INT_MAX;
@@ -128,6 +129,7 @@ namespace CommonUtilities
 			}
 			path.push_back(currentNode);
 		}
+		std::reverse(path.begin(), path.end());
 		return path;
 	}
 }
